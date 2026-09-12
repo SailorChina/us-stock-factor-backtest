@@ -322,6 +322,32 @@ def is_dst(d):
     e = nth_weekday(d.year, 11, 6, 1)
     return s <= d < e
 
+def dw(s):
+    """字符串的【终端显示宽度】: CJK / 全角 / emoji 占 2 列, 其余占 1 列。
+
+    Python 的 f-string 对齐按【字符数】算, 但终端按【显示宽度】渲染 ——
+    中文标头("现价"=2 字符但 4 列宽)与数字("88.35"=5 字符 5 列)用同一格式串
+    就必然错位。所有含中文标头的表格必须走 pad(), 不能用 f"{x:>11}"。
+    """
+    n = 0
+    for ch in str(s):
+        o = ord(ch)
+        if (0x1100 <= o <= 0x115F) or (0x2E80 <= o <= 0xA4CF) or (0xAC00 <= o <= 0xD7A3) \
+           or (0xF900 <= o <= 0xFAFF) or (0xFE30 <= o <= 0xFE6F) or (0xFF00 <= o <= 0xFF60) \
+           or (0xFFE0 <= o <= 0xFFE6) or (0x1F300 <= o <= 0x1FAFF):
+            n += 2
+        else:
+            n += 1
+    return n
+
+def pad(s, w, align="l"):
+    """按显示宽度填充到 w 列 (align: 'l' 左对齐 / 'r' 右对齐)"""
+    s = str(s)
+    n = w - dw(s)
+    if n <= 0:
+        return s
+    return (" " * n + s) if align == "r" else (s + " " * n)
+
 def open_time(d):
     """返回常规时段开盘的北京时间字符串"""
     return "21:30" if is_dst(d) else "22:30"
@@ -850,6 +876,14 @@ def main():
         past_td = N - 1 - RB[-1]
         print(f"  最近调仓 {last_reb_date}（{past_td} 个交易日前）-> 当前【无需操作】")
         print(f"  下次调仓约 {exec_d}（{days_to_next} 个交易日后, 按交易日历推算）")
+        # 最常被问: "为什么不是下一个交易日 / 下周一?" —— 周期是【交易日栅格】,
+        # 不是自然日、也不是"每周一"。从 anchor 起每 REBAL 个交易日一格, 中间一律不动。
+        print(f"     = 上次调仓 {last_reb_date} + {REBAL} 个交易日"
+              f"（已过 {past_td} + 还需 {days_to_next} = {REBAL}）")
+        _nd = next_trading_day(last_d)
+        print(f"     为什么不是最近一个交易日 {_nd}: 调仓日是 anchor({dp[anchor_i].date()}) 起"
+              f" 每 {REBAL} 个交易日一格的固定栅格 —— 周期数的是【交易日】不是自然日, "
+              f"也不是\"每周一\"。栅格外的日子一律不动。")
     if not act_next_open:
         print("     (下面 [4] 的选票是【最新一根】的信号, 仅供预览; "
               "真正下单要等 ⚡ 那一天重跑本工具)")
@@ -878,20 +912,30 @@ def main():
     names = [UNI[j].replace("US.","") for j in pick]
     print(f"  策略 {STRAT} Top{TOPK}: {', '.join(names)}")
     print(f"  （选股仅由因子得分排序决定, 与本金/价格/佣金无关; 本金只影响下面每只买多少股）")
-    print(f"\n  {'标的':<8}{'现价':>11}{'目标金额':>11}{'整股':>7}{'整股金额':>11}{'碎股股数':>11}{'建议':>10}")
+    # 佣金必须【先扣】: 目标金额若按 净值/TOPK 算, 碎股方案合计正好等于净值,
+    # 再付佣金就超支了($1,500 下超 $4; 本金越小/票数越多越明显)。
+    n_sell, n_buy = (TOPK if POSITIONS else 0), TOPK
+    fee = (n_sell + n_buy) * COMM
+    avail = max(0.0, NET - fee)            # 真正能投出去的钱
+    print(f"\n  可投 ${avail:,.0f} = 净值 ${NET:,.0f} − 预留佣金 ${fee:.0f}"
+          f"（{n_sell} 卖 + {n_buy} 买 x ${COMM:.0f}）")
+    print("  " + pad("标的", 8) + pad("现价", 11, "r") + pad("目标金额", 11, "r")
+          + pad("整股", 7, "r") + pad("整股金额", 11, "r")
+          + pad("碎股股数", 11, "r") + pad("建议", 10, "r"))
     print("  " + "-" * 72)
     tot = 0.0
-    bud = NET / TOPK
+    bud = avail / TOPK
     for j in pick:
         c = UNI[j].replace("US.",""); p = float(C.values[N-1, j])
         sh = int(bud // p) if p > 0 else 0
         tot += sh * p
-        print(f"  {c:<8}${p:>10.2f}${bud:>10.0f}{sh:>7}${sh*p:>10.2f}{bud/p:>11.4f}"
-              f"{'碎股' if sh==0 else '整股OK':>10}")
-    cash_left = NET - tot
-    n_sell, n_buy = (TOPK if POSITIONS else 0), TOPK
-    fee = (n_sell + n_buy) * COMM
-    print(f"\n  整股投入 ${tot:,.0f} (占净值 {tot/NET*100:.0f}%), 闲置 ${cash_left:,.0f}")
+        print("  " + pad(c, 8) + pad(f"${p:,.2f}", 11, "r") + pad(f"${bud:,.0f}", 11, "r")
+              + pad(str(sh), 7, "r") + pad(f"${sh*p:,.2f}", 11, "r")
+              + pad(f"{bud/p:.4f}" if p > 0 else "-", 11, "r")
+              + pad("碎股" if sh == 0 else "整股OK", 10, "r"))
+    cash_left = avail - tot
+    print(f"\n  整股投入 ${tot:,.0f} (占净值 {tot/NET*100:.0f}%), 闲置 ${cash_left:,.0f}"
+          f" (其中已含未投出的佣金预留)")
     print(f"  佣金 卖 {n_sell}x${COMM:.0f} + 买 {n_buy}x${COMM:.0f} = ${fee:.0f} (占净值 {fee/NET*100:.2f}%)")
     if tot / NET < 0.6:
         print(f"  ❌ 整股买不动 -> 必须用碎股(富途支持按金额下单), 否则 {cash_left/NET*100:.0f}% 本金空转")
@@ -930,7 +974,14 @@ def main():
             p = px_now.get(k, 0.0); cb = COSTBASIS.get(k, np.nan)
             pl = f"{(p/cb-1)*100:+.1f}%" if np.isfinite(cb) and cb > 0 else "-"
             print(f"     {k:<7}{q:>9.4f}股  现价 ${p:>9.2f}  市值 ${q*p:>9,.0f}  盈亏 {pl:>8}")
-    tgt_amt = NET / TOPK
+    else:
+        # 没持仓时下面一律按"首次建仓"算 —— 若用户其实已在上次调仓日买入却没录入,
+        # 就会算出【重复买入同一只票】。这不会报错, 只会悄悄把仓位加倍, 必须显式提醒。
+        print("  ⚠ 未检测到持仓(portfolio.json 缺失/为空) -> 下面按【首次建仓】计算。")
+        print("     若你已在上次调仓日建仓, 请先录入, 否则这里会让你把同一只票再买一遍:")
+        print("     python _update_signal.py --bought \"SWKS:8.4663@88.35,META:1.1543@648.03\"")
+        print("     (格式 CODE:股数@成本价, 逗号分隔; 录入后自动算盈亏与最小换手)")
+    tgt_amt = avail / TOPK        # 与 [4] 同口径: 已预留佣金, 否则两处加总都超净值
     orders = []
     for j in pick:
         c = UNI[j].replace("US.","")
@@ -947,17 +998,22 @@ def main():
     for c in POSITIONS:
         if c not in names and c in px_now:
             orders.append((c, "清仓", 0.0, POSITIONS[c] * px_now[c], POSITIONS[c], ""))
-    print(f"  {'标的':<8}{'动作':>6}{'股数':>12}{'金额':>12}{'现持':>10}  备注")
+    print("  " + pad("标的", 8) + pad("动作", 6, "r") + pad("股数", 12, "r")
+          + pad("金额", 12, "r") + pad("现持", 12, "r") + "   备注")
     print("  " + "-" * 76)
     fee_est = 0.0; act = 0
     for c, side, sh, amt, cur, note in orders:
         if side != "持有": act += 1; fee_est += COMM
         s = f"{sh:.4f}" if side != "持有" else f"{cur:.4f}"
-        print(f"  {c:<8}{side:>6}{s:>12}{('$%.0f' % abs(amt)) if amt else '-':>12}"
-              f"{cur:>10.4f}  {note}")
+        print("  " + pad(c, 8) + pad(side, 6, "r") + pad(s, 12, "r")
+              + pad(("$%.0f" % abs(amt)) if amt else "-", 12, "r")
+              + pad(f"{cur:.4f}", 12, "r") + "   " + note)
     lab = "首次建仓" if not POSITIONS else "最小换手"
     print(f"  预计佣金 ${fee_est:.0f}（{lab} 方案）")
     print(f"  对比: 无脑全卖全买 = ${TOPK*COMM*2:.0f}; 最小换手省下 ${TOPK*COMM*2-fee_est:.0f}")
+    _buy_tot = sum(amt for _, side, _, amt, _, _ in orders if side == "买入")
+    print(f"  买入合计 ${_buy_tot:,.0f} + 佣金 ${fee_est:.0f} = ${_buy_tot+fee_est:,.0f} "
+          f"≤ 净值 ${NET:,.0f}" + ("  ✅" if _buy_tot + fee_est <= NET + 1e-9 else "  ❌ 超支!"))
 
     if BOUGHT:
         rec = parse_bought(BOUGHT)
@@ -978,6 +1034,10 @@ def main():
           f"{_cur:.2f}pp CAGR")
     print(f"      （对照 {_oth} 日 {EXEC_TIME_COST[_oth]:.2f}pp）。每「晚 1/4 个交易日」约 "
           f"{_pq:.2f}pp。拖到收盘 = 白丢这么多收益。")
+    # 两段是独立实测, 不是同一个数的 4 等分: 4 x 1/4 日累计与"整日"差 ~1.2pp(非线性)。
+    # 不明说会被当成数字打架 —— 按 4.21/4=1.05 反推是错的, 1.36 才是实测值。
+    print(f"      注: 两者是独立实测而非四等分, 4×1/4 日累计 {-_pq*4:.2f}pp vs 整日 "
+          f"{_cur:.2f}pp（差 {abs(_pq*4+_cur):.2f}pp, 非线性）。")
     print(f"      滑点反而无所谓：$745 订单只占成交额 0.0009%（order/ADV < 0.1% 即可忽略）。")
     # v30: 相位纪律 —— 周期是个"相位", 不是参数; 换 anchor 会让结果不可比。
     _pm = PHASE_MEDIAN.get(int(REBAL), PHASE_MEDIAN[10])
@@ -1503,6 +1563,24 @@ def self_test():
         m = np.isfinite(h) & np.isfinite(l)
         bad += int((h[m] < l[m]).sum())
     chk("OHLC 无 high<low 冲突", bad == 0, f"({bad} 处)")
+
+    # ---- v35: 展示层(中文标头对齐 / 佣金预留) ----
+    # 这两条都是"不报错、只让人看错"的缺陷: 前者让表格错位, 后者让方案超支。
+    chk("v35: dw() 中文按 2 列、ASCII 按 1 列 (对齐错位的根因)",
+        dw("现价") == 4 and dw("88.35") == 5 and dw("碎股股数") == 8,
+        f"(现价={dw('现价')} 88.35={dw('88.35')} 碎股股数={dw('碎股股数')})")
+    _hdr = pad("现价", 11, "r")
+    chk("v35: pad() 按显示宽度补齐, 与数字列同宽 (f-string 按字符数会对不齐)",
+        dw(_hdr) == 11 and dw(pad("$88.35", 11, "r")) == 11,
+        f"(标头宽={dw(_hdr)} 数据宽={dw(pad('$88.35', 11, 'r'))})")
+    # 佣金预留: 目标金额必须扣掉佣金, 否则碎股方案合计 > 净值
+    for _net, _topk, _comm in ((1500.0, 2, 2.0), (3000.0, 2, 2.0), (500.0, 3, 2.0)):
+        _fee = (0 + _topk) * _comm
+        _avail = max(0.0, _net - _fee)
+        _bud = _avail / _topk
+        chk(f"v35: 碎股方案不超支 (净值 ${_net:.0f} Top{_topk})",
+            _bud * _topk + _fee <= _net + 1e-9,
+            f"({_bud*_topk:.0f} + {_fee:.0f} vs {_net:.0f})")
     print("\n" + "=" * 116)
     print(f"  结果: {'✅ 全部通过' if not fails else '❌ 失败: ' + ', '.join(fails)}")
     return 0 if not fails else 1
