@@ -35,6 +35,16 @@ snap_p, hist_p = os.path.join(BASE, "signal_snapshot.json"), os.path.join(BASE, 
 snap_b = os.path.join(BASE, "signal_snapshot.bak.json")
 hist_b = os.path.join(BASE, "signal_history.bak.csv")
 
+# v27 修复: 备份必须【在 A 段覆写之前】真的做出来。
+# 原写法只声明了 snap_b / hist_b 却从未写入 -> 下面 finally 里的还原是【空操作】
+# (os.path.exists(snap_b) 恒为 False), A 段 6 次 subprocess 覆写生产文件后无人还原。
+# 现在 signal_snapshot.json 已退出版本控制, 被覆写就【没有 git 可回滚】, 所以这个备份更关键。
+for _src, _dst in ((snap_p, snap_b), (hist_p, hist_b)):
+    if os.path.exists(_src):
+        shutil.copy2(_src, _dst)
+    else:
+        print(f"  [!] {os.path.basename(_src)} 不存在 -> 跳过备份 (A 段会重新生成它)")
+
 CAPS = [
     ("$1 极端",            ["--capital", "1"]),
     ("$100",               ["--capital", "100"]),

@@ -8,9 +8,16 @@ venv/
 
 # ---- 个人实盘状态 (会随你的交易变化, 不该进版本库) ----
 portfolio.json
-portfolio.json.bak
-*.bak
-*.py.bak
+# v27: signal_snapshot.json 含【账户规模 capital_usd + 当前持仓 + 目标股数】,
+# 属于个人实盘状态 -> 退出版本控制(与 portfolio.json 同理)。
+# ⚠️ 它自首次提交(3aef7e4)起就一直在公开仓库的历史里 —— 退出版本控制只能阻止
+#    【以后】继续新增暴露, 历史里的旧值仍在。要彻底清除得重写历史。
+signal_snapshot.json
+signal_snapshot.bak.json
+signal_history.bak.csv
+# v27: 备份改用后缀式命名(signal_history.csv.cal-bak / .v26bak), 旧的 *.bak 匹配不到,
+# 会让备份文件静默进入版本库 -> 统一用 *bak 兜底
+*bak
 
 # ---- WorkBuddy 工作区元数据 (含内部工作日志与自动化配置) ----
 .workbuddy/
@@ -33,6 +40,8 @@ _cleanup_*.py
 _cred_*.py
 _acct_*.py
 _gcm_*.log
+# 中文提交信息走 git commit -F <utf8文件> -> 这个文件是一次性的, 别提交
+_commitmsg*.txt
 
 # ---- 编辑器 / 系统 ----
 .vscode/

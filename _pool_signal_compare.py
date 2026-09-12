@@ -80,8 +80,13 @@ for s in ["Vortex", "动量-1月反转"]:
     b = results.get((81, s), (None, None))[1]
     same = "未变" if a == b else "**变了**"
     print(f"  {s:<14} 37只池: {str(a):<22} -> 81只池: {str(b):<22} {same}")
-snap = json.load(open("signal_snapshot.json", encoding="utf-8"))
-print(f"\n  最终 snapshot: pool_size={snap.get('pool_size')} picks={snap.get('picks')}")
+# v27: signal_snapshot.json 已【退出版本控制】(内含账户规模/持仓, 属个人实盘状态)
+# -> 克隆后它可能不存在。这里只是顺带打印, 缺失不该让脚本失败。
+try:
+    snap = json.load(open("signal_snapshot.json", encoding="utf-8"))
+    print(f"\n  最终 snapshot: pool_size={snap.get('pool_size')} picks={snap.get('picks')}")
+except FileNotFoundError:
+    print("\n  (signal_snapshot.json 不存在 —— 它已退出版本控制, 先跑一次 _update_signal.py 即可生成)")
 json.dump({"before": {str(k): v for k, v in results.items() if k[0] == 37},
            "after": {str(k): v for k, v in results.items() if k[0] == 81}},
           open("_pool_signal_compare.json", "w", encoding="utf-8"), ensure_ascii=False, indent=2)

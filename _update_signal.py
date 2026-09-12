@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-美股因子策略 · 一键下单助手 (v25.1 审计修复版)
+美股因子策略 · 一键下单助手 (v27 双频版)
 
 用法:
-    python _update_signal.py                     # 刷新行情 + 出完整下单清单
+    python _update_signal.py                     # 刷新行情 + 出完整下单清单 (默认 21 日调仓)
+    python _update_signal.py --rebal 10          # 切到 10 日调仓 (v26 风险调整最优)
+    python _update_signal.py --rebal 10 --anchor 2026-09-14   # 从指定日起算调仓节奏
     python _update_signal.py --no-fetch          # 只出信号(不联网)
     python _update_signal.py --self-test         # 自检: 跑全部断言
     python _update_signal.py --capital 3000      # 指定本金(美元)
@@ -14,6 +16,35 @@
     python _update_signal.py --no-gate           # 关闭闸门(复现旧口径, 仅用于对比)
 
 退出码: 0 正常 / 2 数据不可用(勿下单)
+
+v27 变更 —— 调仓周期成为可调参数(--rebal):
+  G1 v26 全策略总排名显示: 同一个 Vortex 信号, 21 日调仓 CAGR 59.9% / 回撤 -65.0%,
+     10 日调仓 CAGR 94.8% / 回撤 -35.8% / 夏普 1.67 / Calmar 2.65 / 8 年全正。
+     但生产脚本此前把 REBAL 写死为 21 -> 榜单上的最优策略在工具里【下不了单】。
+  G2 --rebal 是【日历参数】, 不改变"选什么": 选股永远取最新一根的因子排序
+     (select() 只看第 N-1 行), REBAL 只决定"今天算不算调仓日"和"下次哪天调"。
+     自检里有一条断言专门证明这一点。
+  G3 代价必须一起说: 10 日调仓的佣金是 21 日的【两倍】。实测(本金 $3,000, $2/笔):
+     21 日每年约 $96 (占本金 3.2%), 10 日每年约 $202 (占本金 6.7%)。
+     本金越小负担越重 —— 10 日每年约 25.3 次调仓 x $8 = $202:
+         $1,490 -> 13.6%   $3,000 -> 6.7%   $10,000 -> 2.0%   $30,000 -> 0.7%
+     ⚠ 上面是【全换手上限】(回测口径: 每次卖光再买回)。实盘用【最小换手】只动变了的
+     那几条腿, 实测选票相同率仅 1.5%(10日) -> 省 14% -> 每年约 $173, $1,490 时 11.6%。
+     两个数都要说清楚, 别混用。详见 美股Vortex10日实盘方案_v27.md。
+  G4 留痕: rebal 计入 signal_snapshot.json 与 signal_history.csv 的【去重键】。
+     同一天、同池子、同闸门口径下, 21 日与 10 日是两个不同结果(执行时点不同),
+     不加进键就会重演 v24(池子规模)、v25(闸门变体)那两次"静默覆盖"。
+  G5 --anchor: 调仓日历的起点。默认仍是面板第 START(252) 根, 与 v26 回测口径一致。
+     作用: 换周期时"重新锚定"到你的实际起步日 —— 否则刚切到 10 日时, 工具会告诉你
+     "今天无需操作", 把建仓日挡掉。v21 已实证【相位只解释 4~7% 的差异, 93% 是运气】,
+     所以锚在哪天都行, 关键是有个确定的节奏。anchor 同样计入历史去重键。
+  G6 [v27.1 修正] 日历 off-by-one: 引擎口径是"第 i-1 根收盘出信号 -> 第 i 根【开盘】成交"
+     (见 _v27_cost.py engine()), 所以 RB 里的索引是【执行日】。v27 初版把"最后一根是
+     执行日"误当成"最后一根是信号日", 报出 next_trading_day(last_d) —— 实测引擎在
+     2026-09-11 开盘成交, 初版却报 2026-09-14, 晚 1 个交易日。按初版下单 = 在一个引擎
+     不会成交的日子下单, 用的还是晚一根的信号 -> 跑的不是回测过的那套策略。
+     修法: next_exec_offset() 纯函数统一口径, 自检 7 条断言(含遍历全样本命中率)。
+
 
 v25.1 审计修复 —— 三处"不报错但算错"的缺陷(详见 美股回测深度审计_v25.1.md):
   F1 [严重] 【成交量被 ffill】是语义错误: 停牌日没有成交, 成交量应当是空的, 旧写法却把它
@@ -89,7 +120,7 @@ LONGDIR = os.path.join(BASE, "data_kline_long")
 SNAP = os.path.join(BASE, "signal_snapshot.json")
 HIST = os.path.join(BASE, "signal_history.csv")
 
-REBAL = 21          # 月度调仓(交易日)
+REBAL_DEFAULT = 21  # 月度调仓(交易日) —— 默认值; 实际取值由 --rebal 决定(见下方参数段)
 START = 252         # 预热根数
 COMM = 2.0          # 富途: 买 $2/笔 + 卖 $2/笔
 MIN_HIST = 253      # 参与排名所需最少真实历史(252日动量)
@@ -113,6 +144,17 @@ if CAP0 is None:
     CAP0 = (CNY or 10000.0) / FX
 TOPK = arg("--topk", 2, int)
 STRAT = arg("--strategy", "Vortex", str)
+# v27 调仓周期: 日历参数, 与选股无关。默认 21 保持向后兼容; 10 日 = v26 风险调整最优。
+REBAL = arg("--rebal", REBAL_DEFAULT, int)
+if not isinstance(REBAL, int) or REBAL < 1:
+    raise SystemExit(f"  --rebal 必须是 >= 1 的整数(交易日), 收到 {REBAL!r}")
+if REBAL > 252:
+    raise SystemExit(f"  --rebal {REBAL} 超过一年(252 交易日), 没有意义; v26 实测年频是最差的。")
+# v27 调仓日历起点。None = 面板第 START(252) 根, 与 v26 回测口径完全一致。
+ANCHOR = arg("--anchor", None, str)
+# "-" 表示"用默认起点"。旧历史表没有 anchor 列, 按 "-" 处理 -> 用默认口径重跑仍能
+# 原地更新旧行(结果确实相同), 而 --anchor 指定过日期的会另存一行。
+ANCHOR_TAG = ANCHOR.strip() if ANCHOR else "-"
 # v25 流动性闸门: 默认开启。变体标识会写进快照与历史表 —— 闸门开关会改信号,
 # 不记录"这份信号是用哪套口径算的", 事后就没法解释同一天为什么有两个结果。
 MIN_DV = arg("--min-dv", GATE_DV, float)
@@ -207,6 +249,19 @@ def project_trading_days(d, n):
     for _ in range(n):
         cur = next_trading_day(cur)
     return cur
+
+def next_exec_offset(last_i, anchor_i, rebal):
+    """最后一根是 last_i 时, 距【下一次执行】还有几个交易日 (恒在 [1, rebal])。
+
+    引擎口径 (见 _v27_cost.py engine()): 第 i 根【开盘】成交, 信号取第 i-1 根收盘 ——
+        RB = {i | (i - anchor_i) % rebal == 0} 里的索引是【执行日】, 不是信号日。
+    工具手上只有到 last_i 的数据, 最早能执行的是 last_i + 1; 从它开始往后数,
+    数到第一个执行日为止。故:
+        offset = rebal - ((last_i - anchor_i) % rebal)
+    边界: last_i 本身就是执行日 -> offset = rebal (本日开盘已成交, 要再等一整轮);
+          last_i 是执行日的前一根 -> offset = 1 (下一交易日开盘就该动手)。
+    """
+    return rebal - ((last_i - anchor_i) % rebal)
 
 HOLIDAYS = {
     2026: ["01-01","01-19","02-16","04-03","05-25","06-19","07-03","09-07","11-26","12-25"],
@@ -475,19 +530,71 @@ def main():
               + "  -> ffill(limit=10) 跨不过去, 受影响标的会静默掉出排名")
     if not ok: print("  ❌ 本次数据不可靠 (见上方警告), 请勿据此下单")
 
-    print("\n" + "=" * 116); print("[3] 调仓日历"); print("=" * 116)
-    RB = [i for i in range(N) if i >= START and (i - START) % REBAL == 0]
-    is_rebal = (RB[-1] == N - 1)
-    last_reb_date = dp[RB[-1]].date()
-    if is_rebal:
-        exec_d = next_trading_day(last_d)
-        print(f"  ⚡ 最新一根({last_d})【就是调仓日】-> 下一个交易日 {exec_d} 开盘执行")
+    print("\n" + "=" * 116)
+    print(f"[3] 调仓日历   （周期 {REBAL} 个交易日"
+          + ("，默认月频" if REBAL == REBAL_DEFAULT else "，非默认：佣金约为月频的 "
+             f"{REBAL_DEFAULT/REBAL:.1f} 倍") + "）")
+    print("=" * 116)
+    # v27: 日历起点。默认 = 面板第 START 根(与 v26 回测口径一致);
+    # --anchor 用于换周期时"重新锚定"到实际起步日, 否则刚切周期会告诉你"今天无需操作"。
+    # 支持【未来日期】: 比如"把 9/14 当起点", 而面板最后一根还是 9/11 ——
+    # 这种锚点没法映射成索引, 但可以按交易日历投影, 首次调仓就是投影出来的那天。
+    anchor_i = START
+    anchor_virtual = False
+    if ANCHOR:
+        try:
+            _ad = datetime.date.fromisoformat(ANCHOR.strip())
+        except ValueError:
+            print(f"  ❌ --anchor 格式应为 YYYY-MM-DD, 收到 '{ANCHOR}'")
+            return 2
+        _cand = [i for i in range(N) if dp[i].date() >= _ad]
+        if not _cand:
+            _k, _d = 0, last_d
+            while _d < _ad:
+                _d = next_trading_day(_d); _k += 1
+            anchor_i = (N - 1) + _k
+            anchor_virtual = True
+            print(f"  日历起点(anchor): {_ad} -> 投影到面板之后 {_d}（首次调仓）")
+        elif _cand[0] < START:
+            print(f"  ❌ --anchor {_ad} 落在预热期内(须 >= {dp[START].date()}); "
+                  f"该区间净值恒为本金, 不能当调仓起点")
+            return 2
+        else:
+            anchor_i = _cand[0]
+            if dp[anchor_i].date() != _ad:
+                print(f"  [!] --anchor {_ad} 不是交易日 -> 顺延到 {dp[anchor_i].date()}")
+            print(f"  日历起点(anchor): {dp[anchor_i].date()}"
+                  + ("   (默认: 面板第 252 根)" if anchor_i == START else ""))
+    # v27.1 日历修正 —— 旧写法有 off-by-one, 会把执行日报晚 1 个交易日。
+    # 引擎口径: 第 i 根【开盘】成交, 信号取第 i-1 根收盘 (见 _v27_cost.py engine())。
+    # 所以 RB 里的索引是【执行日】。旧写法 is_rebal = (N-1 in RB) 把"最后一根是执行日"
+    # 当成了"最后一根是信号日", 于是报 next_trading_day(last_d) —— 实测: 引擎 2026-09-11
+    # 开盘成交, 旧写法却报 2026-09-14。按旧写法下单 = 在一个引擎不会成交的日子下单,
+    # 用的还是晚一根的信号 -> 跑的根本不是回测过的那套策略。
+    RB = [i for i in range(anchor_i, N) if (i - anchor_i) % REBAL == 0]
+    days_to_next = next_exec_offset(N - 1, anchor_i, REBAL)   # ∈ [1, REBAL]
+    act_next_open = (days_to_next == 1)          # 下一交易日开盘就该动手
+    just_exec = (days_to_next == REBAL)          # 最后一根本身是执行日 -> 其开盘已成交
+    is_rebal = just_exec                         # 保留旧字段名(语义: 最后一根是执行日)
+    last_reb_date = dp[RB[-1]].date() if RB else None
+    exec_d = project_trading_days(last_d, days_to_next)
+    if act_next_open:
+        print(f"  ⚡ 信号日就是最后一根({last_d}) -> 下一交易日 {exec_d} 开盘执行")
+        if anchor_virtual:
+            print(f"     (anchor 在面板之后, 这是锚定后的【首次建仓】)")
+    elif anchor_virtual:
+        print(f"  锚点在面板之后: 首次调仓 {exec_d}（{days_to_next} 个交易日后）"
+              f" -> 当前【无需操作】")
+    elif just_exec:
+        print(f"  ⚠ 最新一根({last_d})是调仓日: 它的【开盘】已按前一日收盘信号成交完毕")
+        print(f"     -> 当前【无需操作】; 下次调仓约 {exec_d}（{days_to_next} 个交易日后）")
     else:
-        # RB[-1] 是【已过去】的最近调仓日; 下次调仓需按交易日历往后推 REBAL 根
-        exec_d = project_trading_days(last_reb_date, REBAL)
         past_td = N - 1 - RB[-1]
         print(f"  最近调仓 {last_reb_date}（{past_td} 个交易日前）-> 当前【无需操作】")
-        print(f"  下次调仓约 {exec_d}（距今 {REBAL - past_td} 个交易日, 按交易日历推算）")
+        print(f"  下次调仓约 {exec_d}（{days_to_next} 个交易日后, 按交易日历推算）")
+    if not act_next_open:
+        print("     (下面 [4] 的选票是【最新一根】的信号, 仅供预览; "
+              "真正下单要等 ⚡ 那一天重跑本工具)")
     if exec_d:
         print(f"  执行日: {exec_d}  北京时间 {open_time(exec_d)} 开盘")
         if exec_d.strftime("%m-%d") in HALF_DAYS.get(exec_d.year, []):
@@ -597,11 +704,18 @@ def main():
 
     # 持久化
     snap = {"generated_at": datetime.datetime.now().isoformat(timespec="seconds"),
-            "data_last": str(last_d), "rebal_day": str(dp[RB[-1]].date()),
+            "data_last": str(last_d), "rebal_day": (str(dp[RB[-1]].date()) if RB else None),
             "is_rebal_day": bool(is_rebal),
+            # v27.1: 最后一根是否执行日(is_rebal_day 的新语义) + 还要等几个交易日。
+            # 消费者不该再靠 is_rebal_day 推执行日 —— 那正是 off-by-one 的来源。
+            "act_next_open": bool(act_next_open), "days_to_next": int(days_to_next),
             "exec_day": str(exec_d) if exec_d else None,
             "open_time_cn": open_time(exec_d) if exec_d else None,
             "strategy": STRAT, "topk": TOPK, "capital_usd": round(CAP0, 2), "fx": FX,
+            # v27: 调仓周期。与 pool_size/variant 同理 —— 同一天、同池子、同闸门,
+            # 21 日与 10 日的执行时点不同, 是两个不同结果, 必须能区分。
+            "rebal": REBAL,
+            "anchor": ANCHOR_TAG, "anchor_date": str(dp[anchor_i].date()),
             # v24: 记录池子规模与成分。池子变了信号就会变, 不记录会造成
             # "同一天两个不同结果, 却说不清哪个是哪次"的审计黑洞。
             "pool_size": len(good), "pool_codes": sorted(c.replace("US.", "") for c in good),
@@ -619,7 +733,8 @@ def main():
     json.dump(snap, open(SNAP, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
     try:
         row = pd.DataFrame([{"date": str(last_d), "strategy": STRAT, "topk": TOPK,
-                             "pool_size": len(good), "variant": VARIANT,
+                             "pool_size": len(good), "variant": VARIANT, "rebal": REBAL,
+                             "anchor": ANCHOR_TAG,
                              "picks": ",".join(names), "exec_day": str(exec_d) if exec_d else ""}])
         if os.path.exists(HIST):
             h = hist_merge(pd.read_csv(HIST), row)
@@ -634,11 +749,16 @@ def main():
 def hist_merge(h, row):
     """把一行信号并入历史表。
 
-    去重键 = (date, strategy, topk, pool_size, variant)。
+    去重键 = (date, strategy, topk, pool_size, variant, rebal, anchor)。
     v24: 把 pool_size 计入键 —— 扩大股票池后同一天的信号会变,
     若不区分, 旧记录会被静默覆盖, 事后无法解释"信号为什么变了"。
     v25: 再把 variant(闸门口径)计入键 —— 同一个池子、同一天,
     开闸门与关闸门是两个不同结果, 同样不能互相覆盖。
+    v27: 再把 rebal(调仓周期)与 anchor(日历起点)计入键 —— 同一个池子、同一天、
+    同闸门口径, 21 日与 10 日的"执行时点/下次调仓日"不同, 也是两个不同结果。
+    没有 rebal 列的旧表按 21 处理、没有 anchor 列的旧表按 "-"(默认起点)处理
+    —— v27 之前这两个值本来就是写死的, 所以用默认口径重跑会原地更新旧行
+    (结果确实相同), 而 --rebal 10 / --anchor 会新增一行而不是覆盖它。
     """
     if h is None:
         return row.copy()
@@ -647,12 +767,20 @@ def hist_merge(h, row):
         h["pool_size"] = -1
     if "variant" not in h.columns:
         h["variant"] = "-"
+    if "rebal" not in h.columns:
+        h["rebal"] = REBAL_DEFAULT
+    if "anchor" not in h.columns:
+        h["anchor"] = "-"
     rv = str(row["variant"].iloc[0]) if "variant" in row.columns else "-"
+    rr = int(row["rebal"].iloc[0]) if "rebal" in row.columns else REBAL_DEFAULT
+    ra = str(row["anchor"].iloc[0]) if "anchor" in row.columns else "-"
     key = (h["date"].astype(str) == str(row["date"].iloc[0])) & \
           (h["strategy"].astype(str) == str(row["strategy"].iloc[0])) & \
           (h["topk"].astype(int) == int(row["topk"].iloc[0])) & \
           (h["pool_size"].astype(int) == int(row["pool_size"].iloc[0])) & \
-          (h["variant"].astype(str) == rv)
+          (h["variant"].astype(str) == rv) & \
+          (h["rebal"].astype(int) == rr) & \
+          (h["anchor"].astype(str) == ra)
     return pd.concat([h[~key], row], ignore_index=True)
 
 
@@ -684,7 +812,9 @@ def self_test():
     chk("时段判定: 北京 9/12 11:00 = closed",
         us_phase(datetime.datetime(2026,9,12,11,0)) == "closed")
     chk("下次调仓推算: 9/11 + 21 交易日 = 2026-10-12",
-        str(project_trading_days(datetime.date(2026,9,11), REBAL)) == "2026-10-12")
+        str(project_trading_days(datetime.date(2026,9,11), REBAL_DEFAULT)) == "2026-10-12")
+    chk("下次调仓推算: 9/11 + 10 交易日 = 2026-09-25",
+        str(project_trading_days(datetime.date(2026,9,11), 10)) == "2026-09-25")
     # 数据
     dates, PX, REAL = load(UNI)
     C = PX["close"]; N, S = C.shape
@@ -747,6 +877,111 @@ def self_test():
         _m2.loc[_m2.variant == "nogate", "picks"].iloc[0] == "META,BE")
     chk("历史表: 无 variant 列的旧表兼容",
         len(hist_merge(_g.drop(columns=["variant"]), _n)) == 2)
+    # ---- v27 调仓周期 --rebal ----
+    chk("调仓周期: 默认值仍是 21(向后兼容)", REBAL_DEFAULT == 21, f"({REBAL_DEFAULT})")
+    _n21 = len([i for i in range(N) if i >= START and (i - START) % REBAL_DEFAULT == 0])
+    _n10 = len([i for i in range(N) if i >= START and (i - START) % 10 == 0])
+    chk("调仓周期: 10 日的调仓日数约为 21 日的 2.0~2.2 倍",
+        2.0 <= _n10 / _n21 <= 2.2, f"({_n10}/{_n21} = {_n10/_n21:.2f})")
+    # 两个周期的调仓日交集 = LCM(10,21)=210 日的倍数。
+    # 注意 10 日【不是】21 日的超集 —— 切换周期会改变相位, 这是运维事实, 不是 bug:
+    # 从 21 日切到 10 日时, "下一个调仓日"可能反而更近或更远, 必须重新锚定。
+    _rb10 = [i for i in range(N) if i >= START and (i - START) % 10 == 0]
+    chk("调仓周期: 10 日与 21 日的调仓日交集恰为 210 日的倍数",
+        set(_rb10) & set(i for i in range(N) if i >= START and (i - START) % 21 == 0)
+        == set(i for i in range(N) if i >= START and (i - START) % 210 == 0))
+    # 【最重要的一条】频率只决定"何时执行", 绝不改变"选什么"
+    import inspect as _ins27
+    _saved_r = globals()["REBAL"]
+    _base_r = select(SIG[STRAT], N - 1, good, TOPK)
+    _same_r = True
+    for _fr in (1, 2, 5, 10, 15, 21, 42, 63, 252):
+        globals()["REBAL"] = _fr
+        if select(SIG[STRAT], N - 1, good, TOPK) != _base_r:
+            _same_r = False
+    globals()["REBAL"] = _saved_r
+    chk("调仓周期不改变选股结果(频率只管何时执行, 不管选什么)", _same_r,
+        f"({', '.join(UNI[j].replace('US.','') for j in _base_r)})")
+    chk("选股层未读取调仓周期",
+        not (set(select.__code__.co_names) & {"REBAL", "REBAL_DEFAULT"}),
+        f"({sorted(set(select.__code__.co_names) & {'REBAL','REBAL_DEFAULT'})})")
+    chk("选股层输入签名无调仓周期参数",
+        list(_ins27.signature(select).parameters) == ["A", "i", "good", "topk"])
+    # 历史表: rebal 必须计入去重键, 否则 21 日与 10 日互相覆盖
+    _old = _g.copy()                                   # 无 rebal 列 = v27 之前的旧表
+    _g21 = _g.assign(rebal=21)
+    _g10 = _g.assign(rebal=10, exec_day="2026-09-24")
+    chk("历史表: 同池同变体同 rebal 重跑只留 1 行", len(hist_merge(_g21, _g21)) == 1)
+    _mr = hist_merge(_g21, _g10)
+    chk("历史表: 21 日与 10 日两条都保留(不互相覆盖)", len(_mr) == 2, f"({len(_mr)} 行)")
+    chk("历史表: 10 日那条的执行日可查",
+        _mr.loc[_mr.rebal == 10, "exec_day"].iloc[0] == "2026-09-24")
+    chk("历史表: 无 rebal 列旧表按 21 处理 -> 用 21 重跑只留 1 行",
+        len(hist_merge(_old, _g21)) == 1)
+    chk("历史表: 无 rebal 列旧表 + 10 日新行 -> 两条共存(旧记录不被覆盖)",
+        len(hist_merge(_old, _g10)) == 2)
+    # ---- v27 日历起点 --anchor ----
+    # 注意: 面板最后一根是 2026-09-11, 9/14 还没发生 -> 不能用未来日期做锚点。
+    _dp = pd.to_datetime(dates)
+    _tgt_i = N - 30
+    _tgt_d = _dp[_tgt_i].date()
+    _ai = next(i for i in range(N) if _dp[i].date() >= _tgt_d)
+    chk("anchor: 给定面板内的交易日 -> 精确落到该索引", _ai == _tgt_i, f"({_tgt_d})")
+    # 面板里只有交易日, 找不到周六 -> 自己从某个交易日往后推到最近的周六
+    _base = _dp[N - 30].date()
+    _sat = _base + datetime.timedelta(days=(5 - _base.weekday()) % 7 or 7)
+    _ai_s = next(i for i in range(N) if _dp[i].date() >= _sat)
+    chk("anchor: 给定周六(非交易日) -> 顺延到下一个交易日",
+        _dp[_ai_s].date() > _sat and _dp[_ai_s].weekday() < 5,
+        f"({_sat} -> {_dp[_ai_s].date()})")
+    _rb_a = [i for i in range(_ai, N) if (i - _ai) % 10 == 0]
+    chk("anchor: 锚定后第一个调仓日就是锚点本身", _rb_a[0] == _ai)
+    chk("anchor: 锚定后相邻调仓日间隔恒为 REBAL",
+        all(b - a == 10 for a, b in zip(_rb_a, _rb_a[1:])))
+    chk("anchor: 未指定 --anchor 时标签为 '-'(默认起点)",
+        (ANCHOR_TAG == "-") == (ANCHOR is None),
+        f"(ANCHOR={ANCHOR!r}, tag={ANCHOR_TAG!r})")
+    # 未来锚点(如"把 9/14 当起点"而面板只到 9/11)靠交易日历投影, 测这条机制
+    chk("anchor: 未来锚点按交易日历投影(9/11 之后第 1 个交易日 = 9/14)",
+        str(project_trading_days(datetime.date(2026, 9, 11), 1)) == "2026-09-14")
+    chk("anchor: 未来锚点投影幂等(9/11 + 1 再回推仍落在 9/11 之后)",
+        project_trading_days(datetime.date(2026, 9, 11), 1) > datetime.date(2026, 9, 11))
+    _old2 = _g21.copy()                    # 无 anchor 列 = v27 之前的旧表
+    _dflt = _g21.assign(anchor="-")
+    _anch = _g21.assign(anchor="2026-09-14")
+    chk("历史表: 无 anchor 列旧表按 '-' 处理 -> 与默认口径同键(只留 1 行)",
+        len(hist_merge(_old2, _dflt)) == 1)
+    chk("历史表: 同 rebal 不同 anchor 两条都保留",
+        len(hist_merge(_dflt, _anch)) == 2)
+    # ---- v27.1 日历一致性: 工具报出的执行日必须落在【引擎的执行日】上 ----
+    # 引擎执行日索引 = {i >= START : (i-START) % REBAL == 0}, 且用第 i 根【开盘】价成交。
+    # 这是本次修正的核心断言: 旧写法把"最后一根是执行日"误当成"最后一根是信号日",
+    # 报出的执行日全部比引擎晚 1 个交易日。
+    chk("日历: next_exec_offset 纯函数 —— 执行日的前一根 -> 1",
+        next_exec_offset(9, 0, 10) == 1, f"({next_exec_offset(9, 0, 10)})")
+    chk("日历: next_exec_offset 纯函数 —— 最后一根本身是执行日 -> rebal",
+        next_exec_offset(10, 0, 10) == 10, f"({next_exec_offset(10, 0, 10)})")
+    _off_all = [next_exec_offset(_t, START, REBAL) for _t in range(START, N)]
+    chk("日历: 距下次执行的交易日数恒在 [1, REBAL]",
+        all(1 <= o <= REBAL for o in _off_all), f"(max={max(_off_all)})")
+    _exec_set = set(i for i in range(START, N) if (i - START) % REBAL == 0)
+    _hit = [(t, t + o) for t, o in zip(range(START, N), _off_all) if t + o < N]
+    chk("日历: 面板内的执行日索引 100% 命中引擎调仓日",
+        all(nx in _exec_set for _, nx in _hit), f"({len(_hit)} 个样本)")
+    chk("日历: 报出的执行日索引随数据前进单调不减(不跳空也不回退)",
+        all(a + oa <= b + ob for (a, oa), (b, ob) in zip(_hit, _hit[1:])))
+    chk("日历: act_next_open 等价于『下一根索引是执行日』",
+        all((next_exec_offset(t, START, REBAL) == 1) == ((t + 1 - START) % REBAL == 0)
+            for t in range(START, N)))
+    # 回归: 9/11 是引擎执行日 -> 下次执行 = 9/11 + 21 交易日 = 10/12;
+    # 旧写法(把最后一根当信号日)会错报 next_trading_day(9/11) = 9/14。
+    if str(_dp[N - 1].date()) == "2026-09-11":
+        _off_last = next_exec_offset(N - 1, START, REBAL_DEFAULT)
+        chk("日历回归: 9/11 是执行日 -> 工具报 2026-10-12 (旧写法错报 2026-09-14)",
+            _off_last == REBAL_DEFAULT
+            and str(project_trading_days(datetime.date(2026, 9, 11), _off_last)) == "2026-10-12"
+            and str(next_trading_day(datetime.date(2026, 9, 11))) == "2026-09-14",
+            f"(offset={_off_last})")
     # ---- v25 流动性闸门 ----
     chk("闸门: 输出 bool 面板且与价格面板同形",
         TR.shape == C.shape and bool(TR.dtypes.eq(bool).all()))
