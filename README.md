@@ -197,6 +197,7 @@ python _v29_slippage.py                   # 执行成本：滑点 / 市场冲击
 python _v30_phase.py                      # 周期相位：156 相位扫描 / 配对胜率 / 相位分散化（自带复刻自证）
 python _v31_stagger.py                    # 错开调仓：两腿错开扫描 / 不等权代价 / 滚动窗口稳健性（自带复刻自证）
 python _v32_window.py                     # 因子窗口：8 窗口 × 2 周期 × 全相位 / 窗口×周期交互（自带复刻自证）
+python _v33_gate.py                       # 流动性闸门阈值自由度扫描（8 阈值 × 2 周期 × 全相位，自带复刻自证）
 ```
 
 `_rank_all_strategies.py` 的两条恒等式是本项目最有价值的两条断言：
