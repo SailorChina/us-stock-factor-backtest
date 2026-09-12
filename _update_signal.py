@@ -574,7 +574,15 @@ def fetch_latest():
     return ratio >= 0.9
 
 # ==================== 信号 ====================
-def zs(x): return x.sub(x.mean(axis=1), axis=0).div(x.std(axis=1), axis=0)
+def zs(x):
+    """与 _rank_all_strategies.zs 逐字一致: 必须把 ±inf 转成 NaN。
+
+    横截面标准差为 0 时 (该行所有有效标的取值完全相同) div 会给出 ±inf,
+    argsort 会把 inf 排到最前面 -> 选出一个"得分无穷大"的票。
+    回测引擎一直有 .replace([inf,-inf], nan), 生产脚本原先没有 —— 口径不一致, 已对齐。
+    """
+    m, s = x.mean(axis=1), x.std(axis=1)
+    return x.sub(m, axis=0).div(s, axis=0).replace([np.inf, -np.inf], np.nan)
 def vortex(h, lo, cl, n=14):
     pc = cl.shift()
     tr = np.maximum(np.maximum(h - lo, (h - pc).abs()), (lo - pc).abs())

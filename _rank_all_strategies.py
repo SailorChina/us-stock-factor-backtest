@@ -28,7 +28,7 @@
   python _rank_all_strategies.py            # 全量
   python _rank_all_strategies.py --fast     # 跳过 AI(walk-forward 随机森林), 省几分钟
 """
-import os, sys, json, time, warnings
+import os, sys, json, time, warnings, datetime
 import numpy as np, pandas as pd
 warnings.filterwarnings("ignore")
 
@@ -258,7 +258,8 @@ def vortex(h, l, c, n=14):
 # 3. 引擎 (v25.1 修复版 + 可选 regime / 止损 / 趋势组合)
 # ============================================================================
 def engine(A=None, elig=None, topk=2, gate=None, stop=0.0, regime=None, safe_px=None,
-           cap=CAP0, comm=COMM, keep_stuck=True, charge_buy=True, rebal=REBAL, trace=False):
+           cap=CAP0, comm=COMM, keep_stuck=True, charge_buy=True, rebal=REBAL,
+           anchor=START, trace=False):
     """调仓: 第 i 日开盘执行, 信号取第 i-1 日收盘。
 
     A       : 打分表 (NaN = 不可选)。与 elig 二选一。
@@ -268,8 +269,10 @@ def engine(A=None, elig=None, topk=2, gate=None, stop=0.0, regime=None, safe_px=
               次日开盘卖出, 持现金到下一个调仓日。
     regime  : 逐日布尔数组; 信号日为 False 时清仓并转为持有 safe_px (或空仓)。
     rebal   : 调仓周期(交易日)。必须显式传入 —— 频率变体就靠它, 不能读全局。
+    anchor  : 调仓日历的相位起点。默认 START(与历史口径一致, 不改变任何既有结果);
+              相位扫描时取遍 [START, START+rebal) 看看结论是不是只属于某一天起步。
     """
-    RB = set(i for i in range(N) if i >= START and (i - START) % rebal == 0)
+    RB = set(i for i in range(N) if i >= anchor and (i - anchor) % rebal == 0)
     gm = None if gate is None else (gate.values & Rv)
     cash, pos = cap, {}
     eq = np.full(N, np.nan); eq[:START] = cap
@@ -277,7 +280,7 @@ def engine(A=None, elig=None, topk=2, gate=None, stop=0.0, regime=None, safe_px=
     pk_close, pending, log = {}, set(), []
     safe_sh = 0.0
     dead, bankrupt_i = False, None
-    recon, n_stuck = [], 0
+    recon, n_stuck, resid = [], 0, []
     casharr = np.full(N, np.nan); hold = [None]*N
     for i in range(START, N):
         if not dead:
@@ -334,17 +337,21 @@ def engine(A=None, elig=None, topk=2, gate=None, stop=0.0, regime=None, safe_px=
                 want_safe = (regime is not None) and (not bool(regime[js]))
                 v_after_sell = _val()
                 n_buy_c = 0             # 买入侧实际收取的佣金笔数(含安全资产)
+                n_intend = 0            # 本次调仓【计划】买入笔数 (供"满仓后残现金==0"自检用)
                 if want_safe and safe_sh == 0.0:
                     if safe_px is not None:
                         sp = float(safe_px[i])
                         if np.isfinite(sp) and sp > 0:
                             sh = (cash - comm)/sp
                             if sh > 0:
+                                n_intend = 1
                                 safe_sh = sh
                                 cash -= sh*sp
-                                if charge_buy: cash -= comm
-                                n_buy_c += 1
-                else:
+                                # ⚠ 修正: 旧版把 n_buy_c += 1 写在 charge_buy 之外,
+                                # 导致 charge_buy=False 时"记账收了佣金、现金却没扣" ->
+                                # 价值守恒恒等式会凭空多出 comm。与权益分支的口径对齐。
+                                if charge_buy: cash -= comm; n_buy_c += 1
+                elif not want_safe:
                     if elig is not None:
                         cand = [j for j in elig(js)]
                         if gm is not None and len(cand):
@@ -352,6 +359,7 @@ def engine(A=None, elig=None, topk=2, gate=None, stop=0.0, regime=None, safe_px=
                         cand = [j for j in cand if j not in pos]
                         if len(cand) >= topk:
                             bud = max(0.0, (cash - len(cand)*comm)/len(cand))
+                            n_intend = len(cand)
                             for j in cand:
                                 pr = Ov[i, j]
                                 if not np.isfinite(pr) or pr <= 0: continue
@@ -370,6 +378,7 @@ def engine(A=None, elig=None, topk=2, gate=None, stop=0.0, regime=None, safe_px=
                         if len(idx) >= topk:
                             pk = list(idx[np.argsort(-row[idx])][:topk])
                             bud = max(0.0, (cash - topk*comm)/topk)
+                            n_intend = topk
                             for j in pk:
                                 pr = Ov[i, j]
                                 if not np.isfinite(pr) or pr <= 0: continue
@@ -391,6 +400,10 @@ def engine(A=None, elig=None, topk=2, gate=None, stop=0.0, regime=None, safe_px=
                               v_before - v_after_sell - n_sell_c*comm,
                               v_after_sell - v_after_buy - n_buy_c*comm,
                               max(abs(v_before), 1.0)))
+                # "佣金只被预留、没真扣走" 的通用探针: 一次【计划笔数全部成交】的调仓
+                # 结束后, 账上残现金必须恰好为 0。若恒等于 k×佣金, 就是买入佣金没扣(F3)。
+                if n_intend > 0 and n_buy_c == n_intend:
+                    resid.append((i, cash))
 
                 # 破产判定: 清仓佣金超过账户总价值 -> 这笔调仓在现实中根本执行不了
                 if cash < -1e-6:
@@ -424,7 +437,7 @@ def engine(A=None, elig=None, topk=2, gate=None, stop=0.0, regime=None, safe_px=
         cashf[i] = cash/eq[i] if eq[i] > 0 else np.nan
         npos[i] = len(pos) + (1 if safe_sh > 0 else 0)
     out = {"eq": eq, "cashf": cashf, "npos": npos, "log": log, "cash_end": cash,
-           "bankrupt_i": bankrupt_i, "recon": recon, "n_stuck": n_stuck}
+           "bankrupt_i": bankrupt_i, "recon": recon, "n_stuck": n_stuck, "resid": resid}
     if trace:
         out["casharr"] = casharr; out["hold"] = hold
     return out
@@ -773,6 +786,51 @@ def chk(tag, cond, msg=""):
     CHK.append((tag, bool(cond), msg))
     print(f"  {'✅' if cond else '❌'} {tag}  {msg}")
 
+# ----------------------------------------------------------------------------
+# 8.0 数据层 (§0) —— 坏数据不会停在数据层, 它会沿着管线一路放大成结论级的错误
+# ----------------------------------------------------------------------------
+# §0.6 三条配套断言 (本次审计新增; 旧版自检完全没有数据层检查)
+_n_fake_vol = int((~Rv & PX["volume"].notna().values).sum())
+chk("§0.6 缺 bar 处没有伪造成交量 (volume 未被 ffill)", _n_fake_vol == 0,
+    f"❌ 伪造 {_n_fake_vol} 格" if _n_fake_vol else "0 格伪造 (停牌日成交量为 NaN)")
+
+_n_tr_leak = int((TRADE.values & ~Rv).sum())
+chk("§0.6 闸门为 True 处必有真实 bar (trade ⊆ REAL)", _n_tr_leak == 0,
+    (f"❌ 违例 {_n_tr_leak} 格 —— 策略会去买已停牌的票" if _n_tr_leak else
+     "trade ⊆ REAL 恒成立 (顺带证明 REAL 层不改变默认口径, 只保护'关闸门'那条对比路径)"))
+
+_n_sig_leak = 0
+for _nm, _f in [("Vortex", TS(vort14)), ("动量-1月反转", XS_REV),
+                ("金叉+MA50距离", TS(ma_dist50.where(golden)))]:
+    for _v in (V_OFF, V_ON):
+        _n_sig_leak += int((~Rv & np.isfinite(_f(_v).values)).sum())
+chk("§0.6 无真实 bar 的日子因子必为 NaN", _n_sig_leak == 0,
+    (f"❌ 泄漏 {_n_sig_leak} 格" if _n_sig_leak else
+     "3 个主信号 × 2 口径: 无 bar 处全部 NaN (脏数据不参与打分)"))
+
+# §0.3 OHLC 自洽
+_n_hl = int((PX["high"].values < PX["low"].values).sum())
+chk("§0.3 OHLC 自洽 (high >= low)", _n_hl == 0,
+    f"❌ 违例 {_n_hl} 格" if _n_hl else "0 格违例")
+
+# §0.1 末根是否为"盘中未完成 bar" —— 有价有量, volume>0 之类的检查完全识别不出来
+_vsum = np.nansum(PX["volume"].values, axis=1)
+_r_last = float(_vsum[-1]/np.nanmedian(_vsum[-22:-1]))
+_mt = max(os.path.getmtime(os.path.join(LONGDIR, c.replace(".", "_") + ".csv")) for c in UNI)
+_mt_et = datetime.datetime.fromtimestamp(_mt) - datetime.timedelta(hours=12)   # 夏令时 北京-12h
+_in_sess = _mt_et.weekday() < 5 and 9.5 <= _mt_et.hour + _mt_et.minute/60 < 16.0
+chk("§0.1 末根不是盘中未完成 bar", (_r_last >= 0.5) and (not _in_sess),
+    (f"末根成交量/近20日中位 = {_r_last:.0%} (盘中快照通常只有 58%~81%); "
+     f"数据文件美东时间 {_mt_et:%Y-%m-%d %H:%M} {'⚠ 落在盘中' if _in_sess else '✓ 盘后'}"))
+
+# §0.3 面板空洞 / 极端跳变 —— 只报告, 不判负 (财报跳空常见 15~26%, 50% 阈值不该自动剔除)
+_gap = pd.Series(DT).diff().dt.days
+_n_gap = int((_gap > 12).sum())
+_n_jump = int(np.nansum(np.abs(C.pct_change().values) > 0.5))
+print(f"       ℹ 相邻交易日间隔 >12 天: {_n_gap} 处 | 单日涨跌 >50% 的格子: {_n_jump} 个"
+      f" (需人工确认是真实行情还是数据错误, 不自动剔除)")
+print(f"       ℹ 末根日期 {DT[-1].date()} | 面板 {N} 根 | 缺真 bar 格子 {1-Rv.mean():.1%}")
+
 # 8.1 现金守恒: 同一策略, 扣/不扣买入佣金 必须给出不同终值(证明 F3 修复真的生效)
 _r_fixed = engine(A=vort14.where(REAL), topk=2, gate=TRADE, charge_buy=True)
 _r_bug = engine(A=vort14.where(REAL), topk=2, gate=TRADE, charge_buy=False)
@@ -784,11 +842,16 @@ chk("F3 修复生效: 扣买入佣金后终值必须更低",
 #       卖出前 - 卖出后 == 卖出笔数 × 佣金   且   卖出后 - 买入后 == 买入笔数 × 佣金
 # 任一次调仓的残差不为 0, 就说明有资金在"清仓/下单"过程中凭空出现或消失 ——
 # 这正是 F2/F3 那类缺陷的通用探针。必须对【所有】策略都成立。
+# ⚠ 修正(审计发现): 旧版这里【硬编码 gate=TRADE】, 循环变量 gate 从未被使用 ——
+# 于是 ("off", None) 那一趟跑的其实还是有闸门的配置, 恒等式只验了有闸门那一半,
+# 无闸门口径(全榜另一半结果)从未被守恒律覆盖。同时 _recon_n 被虚增一倍。
 _recon_worst, _recon_bad, _recon_n = [], [], 0
+_resid_bad, _resid_n, _resid_worst = [], 0, 0.0
 for row, cfg in zip(results, STRATS):
     for tag, gate in (("off", None), ("on", TRADE)):
-        r = engine(A=(cfg["sig"](V_ON) if cfg["sig"] is not None else None),
-                   elig=cfg["elig"], topk=cfg["topk"], gate=TRADE,
+        valid = V_OFF if tag == "off" else V_ON
+        r = engine(A=(cfg["sig"](valid) if cfg["sig"] is not None else None),
+                   elig=cfg["elig"], topk=cfg["topk"], gate=gate,
                    stop=cfg["stop"], regime=cfg["regime"], safe_px=cfg["safe"],
                    rebal=cfg["rebal"])
         for i, r1, r2, scale in r["recon"]:
@@ -796,10 +859,20 @@ for row, cfg in zip(results, STRATS):
             res_ = max(abs(r1), abs(r2))/scale
             _recon_worst.append((res_, row["name"], tag, i))
             if res_ > 1e-9: _recon_bad.append((row["name"], tag, str(DT[i].date()), r1, r2))
+        for i, cash_after in r["resid"]:
+            _resid_n += 1
+            if abs(cash_after) > 1e-6:
+                _resid_bad.append((row["name"], tag, str(DT[i].date()), cash_after))
+            _resid_worst = max(_resid_worst, abs(cash_after))
 _recon_worst.sort(reverse=True)
 chk("价值守恒恒等式: 每次调仓 资金变动 == 笔数×佣金", not _recon_bad,
     (f"❌ 违约 {len(_recon_bad)} 处, 例: {_recon_bad[0]}" if _recon_bad else
-     f"共核验 {_recon_n:,} 次调仓, 最差相对残差 {_recon_worst[0][0]:.2e}"))
+     f"共核验 {_recon_n:,} 次调仓(有闸门+无闸门两条路径), 最差相对残差 {_recon_worst[0][0]:.2e}"))
+
+# 8.2c 满仓调仓后残现金必须恰为 0 —— "佣金只预留没真扣"的指纹是残现金恒等于 k×佣金
+chk("§1.9 满仓调仓后残现金 == 0 (佣金真被扣走, 不是只预留)", not _resid_bad,
+    (f"❌ {len(_resid_bad)} 次残留, 例: {_resid_bad[0]}" if _resid_bad else
+     f"共核验 {_resid_n:,} 次满仓调仓, 最差残现金 ${_resid_worst:.2e}"))
 
 # 8.2b F2: "保留停牌持仓" vs "清空持仓" —— 数值可能相同(样本里没发生长期停牌),
 # 所以这里【只报告不判负】, 真正证明修复生效靠上面 8.2 的恒等式 + 合成复现(见 _audit_v25.py C-fix)。
@@ -908,6 +981,61 @@ for nm, _d in _bk:
     if r["m_on"]["final"] != 0.0: _ok_bk = False
 chk("破产策略终值恰为 0 (不是负数/复数)", _ok_bk,
     f"破产 {len(_bk)} 个: " + ", ".join(f"{n}({d})" for n, d in _bk[:4]) if _bk else "无破产策略")
+
+# ----------------------------------------------------------------------------
+# 8.10 §1.2 无前视偏差 (截断测试): 截掉末 21 根重算信号, 前段必须逐格一致
+# ----------------------------------------------------------------------------
+T = N - 21
+_la_bad = []
+for _nm, _b in [("Vortex14", lambda c, h, l, v: vortex(h, l, c, 14)),
+                ("MA50距离", lambda c, h, l, v: c/c.rolling(50).mean() - 1.0),
+                ("金叉MA50>MA200", lambda c, h, l, v: (c.rolling(50).mean() > c.rolling(200).mean()).astype(float)),
+                ("动量12-1", lambda c, h, l, v: c.shift(21)/c.shift(252) - 1.0),
+                ("1月反转", lambda c, h, l, v: c/c.shift(21) - 1.0)]:
+    a = _b(C, H, L, V).values[:T]
+    b = _b(C.iloc[:T], H.iloc[:T], L.iloc[:T], V.iloc[:T]).values
+    nd = int(np.sum(np.isfinite(a) & np.isfinite(b) & (np.abs(a - b) > 1e-12)))
+    nnd = int(np.sum(np.isfinite(a) != np.isfinite(b)))
+    if nd or nnd: _la_bad.append((_nm, nd, nnd))
+chk("§1.2 无前视偏差 (截断末21根重算, 前段逐格一致)", not _la_bad,
+    (f"❌ {_la_bad[:3]}" if _la_bad else
+     f"5 个因子 × {T:,} 根重叠区: 数值差异 0 处, NaN 位置差异 0 处"))
+
+# ----------------------------------------------------------------------------
+# 8.11 §1.5 上界校验: 任何多头策略都不得超越"逐日完美择时"的理论上界
+# ----------------------------------------------------------------------------
+_pf = np.ones(N)
+for i in range(START+1, N):
+    a, b = Cv[i-1], Cv[i]
+    ok = np.isfinite(a) & np.isfinite(b) & (a > 0)
+    if ok.any():
+        _pf[i] = _pf[i-1]*float(np.nanmax(np.where(ok, b/np.where(ok, a, 1), np.nan)))
+_pf[:START] = 1.0
+_pf_tot = float(_pf[-1] - 1)
+_best1 = float(np.nanmax(Cv[-1]/Cv[START] - 1))
+_mx = max(r["m_on"]["total"] for r in results)
+_over = [(r["name"], r["m_on"]["total"]) for r in results if r["m_on"]["total"] > _pf_tot]
+chk("§1.5 上界校验: 无策略超越逐日完美择时理论上界", not _over,
+    (f"❌ 越界 {_over[:3]}" if _over else
+     f"完美择时上界 {_pf_tot*100:,.0f}% | 最优单票买入持有 {_best1*100:,.0f}% | "
+     f"全榜最强 {_mx*100:,.0f}% (为上界的 {_mx/_pf_tot:.4%}, 远未触及 => 无复利/前视 bug)"))
+
+# ----------------------------------------------------------------------------
+# 8.12 §1.6 资金解耦: 选股不得随本金变化 (零佣金 + 碎股下跨 5 个数量级, 选票必须逐笔相同)
+# ----------------------------------------------------------------------------
+_pick_bad = []
+for _nm, _f, _rb in [("Vortex@10", TS(vort14), 10),
+                     ("金叉+MA50距离", TS(ma_dist50.where(golden)), 21)]:
+    _base = None
+    for _cap in (500.0, 1500.0, 3000.0, 50000.0, 1e7):
+        r = engine(A=_f(V_ON), topk=2, gate=TRADE, cap=_cap, comm=0.0, rebal=_rb)
+        pk = [(t["i"], t["j"]) for t in r["log"]]
+        if _base is None: _base = pk
+        elif pk != _base: _pick_bad.append((_nm, _cap))
+chk("§1.6 选股与本金解耦 (零佣金跨 $500~$1e7 选票逐笔相同)", not _pick_bad,
+    (f"❌ {_pick_bad[:4]}" if _pick_bad else
+     "Vortex@10 / 金叉+MA50距离: 5 档本金选票完全一致 "
+     "(本金只决定'买得起几股', 绝不决定'买哪只')"))
 
 print(f"\n  ℹ 闸门后 CAGR 下降的策略数: "
       f"{sum(1 for r in results if float(r['m_on']['cagr']) < float(r['m_off']['cagr']))}/{len(results)} "
@@ -1034,11 +1162,65 @@ for nm, a, b in rows_half[:20]:
 ok = sum(1 for _, c, _ in CHK if c)
 P(f"\n自检 {ok}/{len(CHK)} 通过 | 策略 {len(results)} 个 + 基准 {len(BENCH_ROWS)} 个")
 
-json.dump({"meta": {"pool": len(UNI), "bars": N, "start": str(DT[START].date()),
-                    "end": str(DT[-1].date()), "years": _YRS, "cap": CAP0, "comm": COMM,
-                    "rebal": 21, "gate": f"rolling{GATE_WIN}d median dv >= {GATE_DV}",
-                    "time": time.strftime("%Y-%m-%d %H:%M:%S")},
-           "results": ALL, "checks": [{"tag": t, "pass": c, "msg": m} for t, c, m in CHK]},
-          open(OUT_JSON, "w", encoding="utf-8"), ensure_ascii=False, indent=1, default=str)
-print("\nSAVED", OUT_JSON)
+# ⚠ --fast --phase 那一跑是【不完整】的(跳过 AI, 只有 64 个策略),
+# 绝不能让它覆盖全量跑出来的 _rank_all.json —— 否则主榜单会静默少 5 行。
+if FAST and "--phase" in sys.argv:
+    print("\nSKIP 主 JSON 写入 (--fast --phase 为不完整跑, 不覆盖全量结果)")
+else:
+    json.dump({"meta": {"pool": len(UNI), "bars": N, "start": str(DT[START].date()),
+                        "end": str(DT[-1].date()), "years": _YRS, "cap": CAP0, "comm": COMM,
+                        "rebal": 21, "gate": f"rolling{GATE_WIN}d median dv >= {GATE_DV}",
+                        "time": time.strftime("%Y-%m-%d %H:%M:%S")},
+               "results": ALL, "checks": [{"tag": t, "pass": c, "msg": m} for t, c, m in CHK]},
+              open(OUT_JSON, "w", encoding="utf-8"), ensure_ascii=False, indent=1, default=str)
+    print("\nSAVED", OUT_JSON)
 print("RANK_DONE")
+
+
+# ============================================================================
+# 10. 相位扫描 (§1.11) —— 仅 --phase 时运行
+# ============================================================================
+# 总榜里那个 CAGR 是【某一个相位】的抽签结果, 不是策略属性。
+# anchor 平移一天, 调仓日整体平移 -> 选票/成交价/持有期全部变样。
+# v30 实测: 10 日调仓相位极差 49.3pp, 21 日 62.9pp —— 比所有交易成本加起来还大一个量级。
+# 所以"定最终版"必须报【区间】, 不能报单点。
+if "--phase" in sys.argv:
+    print("\n" + "=" * 132)
+    print(f"[相位扫描 §1.11] 本金 ${CAP0:,.0f} | 佣金 ${COMM:.0f}/笔双边 | 有闸门口径")
+    print("=" * 132)
+    CHAMPS = [("金叉+MA50距离 Top2", TS(ma_dist50.where(golden)), 2, 21),
+              ("Vortex Top2 @10日", TS(vort14), 2, 10)]
+    PH = []
+    for _nm, _f, _tk, _rb in CHAMPS:
+        cs, ms, fs = [], [], []
+        for _a in range(START, START + _rb):
+            r = engine(A=_f(V_ON), topk=_tk, gate=TRADE, rebal=_rb, anchor=_a)
+            fin = float(r["eq"][-1])
+            _ya = (DT[-1] - DT[_a]).days/365.25      # 各相位按自己的起步日算年数
+            cs.append((fin/CAP0)**(1/_ya) - 1 if fin > 0 else -1.0)
+            _s = pd.Series(r["eq"][_a:], index=pd.DatetimeIndex(DT[_a:]))
+            ms.append(float((_s/_s.cummax() - 1).min()))
+            fs.append(fin)
+        cs, ms, fs = np.array(cs), np.array(ms), np.array(fs)
+        base, rank = cs[0], int(np.sum(cs > cs[0])) + 1
+        print(f"\n  {_nm}  (rebal={_rb}日, 共 {len(cs)} 个相位)")
+        print(f"    CAGR   最差 {cs.min()*100:6.1f}%   中位 {np.median(cs)*100:6.1f}%   "
+              f"最好 {cs.max()*100:6.1f}%   标准差 {cs.std(ddof=1)*100:5.1f}pp   "
+              f"极差 {(cs.max()-cs.min())*100:5.1f}pp")
+        print(f"    回撤   最深 {ms.min()*100:6.1f}%   中位 {np.median(ms)*100:6.1f}%   "
+              f"最浅 {ms.max()*100:6.1f}%")
+        print(f"    终值   最差 ${np.min(fs):>11,.0f}   中位 ${np.median(fs):>11,.0f}   "
+              f"最好 ${np.max(fs):>11,.0f}")
+        print(f"    ★ 总榜那个数 (anchor=START) = {base*100:.1f}%, 在 {len(cs)} 个相位里排 "
+              f"{rank}/{len(cs)} —— {'偏幸运' if rank <= len(cs)//3 else ('偏倒霉' if rank > 2*len(cs)//3 else '居中')}")
+        PH.append({"name": _nm, "rebal": _rb, "cap": CAP0,
+                   "cagr_min": float(cs.min()), "cagr_med": float(np.median(cs)),
+                   "cagr_max": float(cs.max()), "cagr_std": float(cs.std(ddof=1)),
+                   "cagr_base": float(base), "base_rank": rank, "n_phase": len(cs),
+                   "mdd_med": float(np.median(ms)), "mdd_worst": float(ms.min()),
+                   "final_med": float(np.median(fs)), "final_min": float(np.min(fs)),
+                   "final_max": float(np.max(fs))})
+    _po = OUT_JSON.replace(".json", "_phase.json")
+    json.dump({"meta": {"cap": CAP0, "comm": COMM, "gate": "on"}, "phases": PH},
+              open(_po, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    print(f"\nSAVED {_po}")
