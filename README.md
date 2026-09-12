@@ -99,7 +99,7 @@ python _update_signal.py --no-fetch
 python _update_signal.py --rebal 10
 python _update_signal.py --rebal 10 --anchor 2026-09-14
 
-# 4. 跑全链路自检（95 项断言，含资金无关性、调仓日历、佣金拖累、执行时点、周期相位、错开调仓、因子窗口、历史表去重）
+# 4. 跑全链路自检（103 项断言，含资金无关性、调仓日历、佣金拖累、执行时点、周期相位、错开调仓、因子窗口、闸门阈值、历史表去重、展示层对齐与佣金预留）
 python _update_signal.py --self-test
 ```
 
@@ -107,6 +107,11 @@ python _update_signal.py --self-test
 > **一个字都不影响选股结果**（自检里有 4 条断言锁死）。
 > **执行日只有看到 `⚡` 才是"今晚动手"** —— 工具现在会明确区分
 > "该下单 / 已错过 / 还没到"三种状态，别凭感觉下单。
+>
+> **⚠ 周期数的是【交易日栅格】，不是自然日、也不是"每周一"（v35 补）** ——
+> 从 `anchor`（默认面板第 252 根，2019-01-03）起每 `rebal` 个交易日一格，
+> 栅格外的日子一律不动。例：上次调仓 2026-09-09、周期 10 → 下次 **2026-09-23**，
+> 而不是下周一 09-14。工具会打印 `= 上次调仓 X + N 个交易日（已过 a + 还需 b = N）` 供核对。
 
 需要**拉取最新行情**时，先启动 Futu OpenD（默认端口 11111），然后：
 
@@ -216,7 +221,7 @@ python _fetch_long.py                       # 或只重拉 37 只股票的完整
 ## 引擎自检（交付前必跑）
 
 ```bash
-python _update_signal.py --self-test      # 98 项断言（数据层 / 因子层 / 资金无关性 / 调仓日历 / 佣金拖累 / 执行时点 / 周期相位 / 错开调仓 / 因子窗口 / 闸门阈值 / 历史表去重）
+python _update_signal.py --self-test      # 103 项断言（数据层 / 因子层 / 资金无关性 / 调仓日历 / 佣金拖累 / 执行时点 / 周期相位 / 错开调仓 / 因子窗口 / 闸门阈值 / 历史表去重 / 展示层对齐与佣金预留）
 python _v27_hist_audit.py                 # 审计 signal_history.csv 的 exec_day 是否与当前口径一致
 python _rank_all_strategies.py            # 全策略重跑 + 19 项引擎自检（两条恒等式 + 数据层 + 残现金 + 前视截断 + 上界 + 资金解耦）
 python _rank_all_strategies.py --fast --phase   # 冠军策略相位扫描（不覆盖 _rank_all.json）
