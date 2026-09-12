@@ -1,11 +1,16 @@
 @echo off
-chcp 65001 >nul 2>&1
-setlocal enabledelayedexpansion
-title ç¾è‚¡å› å­ç­–ç•¥ - ä¸€é”®èœå•
+setlocal
+cd /d "%~dp0"
+title ÃÀ¹ÉÒò×Ó²ßÂÔ - Ò»¼ü²Ëµ¥
 
 rem ============================================================
-rem  åŒå‡»æœ¬æ–‡ä»¶å³å¯ã€‚éœ€è¦æ”¾åˆ°é¡¹ç›®ç›®å½•ï¼ˆæœ¬ .bat ä¸ _menu.py åŒçº§ï¼‰ã€‚
-rem  æƒ³æ”¾æ¡Œé¢ï¼šå³é”®æœ¬æ–‡ä»¶ -> å‘é€åˆ° -> æ¡Œé¢å¿«æ·æ–¹å¼ï¼ˆä¸è¦åªå¤åˆ¶ .batï¼‰ã€‚
+rem  Ë«»÷±¾ÎÄ¼ş¼´¿ÉÔËĞĞ¡£
+rem  ±¾ .bat ±ØĞëÓë _menu.py ·ÅÔÚÍ¬Ò»¸öÄ¿Â¼ÏÂ¡£
+rem  Ïë·Åµ½×ÀÃæ£ºÓÒ¼ü±¾ÎÄ¼ş£¬·¢ËÍµ½£¬×ÀÃæ¿ì½İ·½Ê½¡£²»ÒªÖ»¸´ÖÆ .bat ±¾Éí¡£
+rem
+rem  ×¢Òâ£º±¾ÎÄ¼ş±ØĞë±£´æÎª ANSI/GBK(936) ±àÂë + CRLF »»ĞĞ¡£
+rem  ¾ø²»ÒªÔÚÅú´¦ÀíÀïÖ´ĞĞ chcp£ºcmd.exe °´×Ö½ÚÆ«ÒÆĞø¶Á±¾ÎÄ¼ş£¬
+rem  ÇĞ»»´úÂëÒ³»áÈÃ¶à×Ö½ÚÖĞÎÄµÄ³¤¶È±ä»¯£¬µ¼ÖÂºóÃæÃ¿Ò»ĞĞ±»½Ø¶Ï¡£
 rem ============================================================
 
 set "PY=C:\Users\sailor\AppData\Local\Programs\Python\Python312\python.exe"
@@ -14,18 +19,34 @@ if not exist "%PY%" set "PY=python"
 set "PYTHONIOENCODING=utf-8"
 set "PYTHONUTF8=1"
 
-cd /d "%~dp0"
+if not exist "%~dp0_menu.py" goto NOMENU
 
-if not exist "%~dp0_menu.py" (
-    echo [é”™è¯¯] æ‰¾ä¸åˆ° _menu.pyï¼Œè¯·ç¡®è®¤æœ¬ .bat ä¸ _menu.py åœ¨åŒä¸€ç›®å½•ã€‚
-    echo å½“å‰ç›®å½•: %~dp0
-    pause
-    exit /b 1
-)
+"%PY%" -c "import sys" >nul 2>&1
+if errorlevel 1 goto NOPY
 
 "%PY%" "%~dp0_menu.py"
+set "RC=%ERRORLEVEL%"
 
 echo.
+if not "%RC%"=="0" echo [WARN] python exited with code %RC%
 echo ------------------------------------------------------------
 pause
 endlocal
+exit /b 0
+
+:NOMENU
+echo [´íÎó] ÕÒ²»µ½ _menu.py
+echo        ÇëÈ·ÈÏ Ò»¼üÔËĞĞ.bat Óë _menu.py ÔÚÍ¬Ò»¸öÄ¿Â¼ÏÂ¡£
+echo        µ±Ç°Ä¿Â¼ÊÇ£º
+cd
+echo.
+pause
+exit /b 1
+
+:NOPY
+echo [´íÎó] ÎŞ·¨ÔËĞĞ Python£º
+echo        %PY%
+echo        Çë¼ì²é Python ÊÇ·ñÒÑ°²×°£¬»òĞŞ¸Ä±¾ÎÄ¼şÀïµÄ PY Â·¾¶¡£
+echo.
+pause
+exit /b 1
