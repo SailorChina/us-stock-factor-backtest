@@ -19,6 +19,11 @@ portfolio.json.bak
 futulog/
 *.log.bak
 
+# ---- 一次性工具脚本 (仅用于探测 GitHub / 推送 / 清理, 用完即删) ----
+_gh_probe*.py
+_push_*.py
+_cleanup_*.py
+
 # ---- 编辑器 / 系统 ----
 .vscode/
 .idea/
