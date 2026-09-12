@@ -535,6 +535,9 @@ def load(codes, limit=MAX_FFILL):
     return dt, out, REAL
 
 # ==================== 拉取 ====================
+LAST_FETCH_FAILED = []      # [(code, ret)] —— 供主流程提示「哪几只还在用旧数据」
+
+
 def fetch_latest():
     _T = os.path.join(tempfile.gettempdir(), "futu_log_upd"); os.makedirs(_T, exist_ok=True)
     os.environ["APPDATA"] = _T
@@ -550,11 +553,25 @@ def fetch_latest():
     start = (today - pd.Timedelta(days=45)).strftime("%Y-%m-%d")
     end = today.strftime("%Y-%m-%d")
     ok_n = 0
+    failed = []
+    RETRY, COOL = 2, (2.0, 5.0)
     for code in UNI + ["US.VOO"]:
-        out = ctx.request_history_kline(code, start=start, end=end, ktype=SubType.K_DAY,
-                                        autype=AuType.QFQ, max_count=90)
+        out = (1, None)
+        # 富途接口限额有两层, 频率那层(约 60 次/30 秒)超限是【立即失败且不抛异常】的:
+        # 不冷却重试就会把「扫全池」静默变成「扫了一部分」, 而它不会崩溃、只会给出
+        # 看起来合理的错答案 —— 比报错危险得多。所以失败必须重试, 不能直接放弃。
+        for attempt in range(RETRY + 1):
+            out = ctx.request_history_kline(code, start=start, end=end, ktype=SubType.K_DAY,
+                                            autype=AuType.QFQ, max_count=90)
+            if out[0] == 0 and out[1] is not None and len(out[1]) > 0:
+                break
+            if attempt < RETRY:
+                print(f"  RETRY {code} ret={out[0]} (第 {attempt + 1} 次, 冷却 {COOL[attempt]}s)")
+                time.sleep(COOL[attempt])
         if out[0] != 0 or out[1] is None or len(out[1]) == 0:
-            print(f"  FAIL {code} ret={out[0]}"); time.sleep(1.0); continue
+            print(f"  FAIL {code} ret={out[0]}（已重试 {RETRY} 次仍失败）")
+            failed.append((code, out[0]))
+            continue
         df = out[1][["time_key","open","close","high","low","volume"]].copy()
         df["time_key"] = pd.to_datetime(df["time_key"])
         p = os.path.join(LONGDIR, code.replace(".", "_") + ".csv")
@@ -565,12 +582,26 @@ def fetch_latest():
         ok_n += 1
         time.sleep(0.35)
     safe_close(ctx)
-    ratio = ok_n / (len(UNI) + 1)
-    print(f"  已刷新 {ok_n}/{len(UNI)+1} 只")
+    total = len(UNI) + 1
+    ratio = ok_n / total
+    print(f"  已刷新 {ok_n}/{total} 只")
+    if failed:
+        # 光说「不完整」没用 —— 必须点名是哪几只、它们停在哪个交易日,
+        # 否则用户无法判断这份信号能不能信(这正是「不报错、只让结果悄悄变差」的缺陷)
+        print(f"  ⚠ 刷新不完整({ok_n}/{total}) —— 下面 {len(failed)} 只仍在用【旧数据】:")
+        for code, _ in failed:
+            p = os.path.join(LONGDIR, code.replace(".", "_") + ".csv")
+            try:
+                _s = pd.read_csv(p, usecols=["time_key"])["time_key"].dropna()
+                last = str(_s.iloc[-1])[:10] if len(_s) else "-"
+            except Exception:
+                last = "无本地文件"
+            print(f"      {code.replace('US.', ''):<6} 本地最后交易日 {last}")
+        print(f"     半份数据会让信号失真: 这些票的因子滞后 {len(failed)} 只, 排名不可全信")
+    LAST_FETCH_FAILED[:] = failed
     if ratio >= 0.95:
         return True
     # 部分失败: 只有"信号相关标的"齐全才可用
-    print(f"  ⚠ 刷新不完整({ok_n}/{len(UNI)+1}) —— 半份数据会让信号失真")
     return ratio >= 0.9
 
 # ==================== 信号 ====================
@@ -675,6 +706,9 @@ def main():
             if not fetch_latest():
                 ok = False
                 print("  ⚠ 数据未更新, 以下结果基于本地数据, 请谨慎")
+            elif LAST_FETCH_FAILED:
+                # 刷新率达标但仍有零星失败: 不能因为"整体够了"就当没发生过
+                print(f"  ⚠ {len(LAST_FETCH_FAILED)} 只标的本次未刷新成功, 它们参与排名的是【旧数据】")
         except Exception as e:
             print(f"  拉取异常(用本地数据继续): {type(e).__name__}: {e}")
             ok = False
