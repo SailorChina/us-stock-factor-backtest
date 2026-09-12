@@ -242,9 +242,14 @@ def readback():
         d = api_get(f"https://api.github.com/repos/{repo}/git/trees/main?recursive=1", tok)
         names = [t["path"] for t in d.get("tree", []) if t["type"] == "blob"]
         c = api_get(f"https://api.github.com/repos/{repo}/commits/main", tok)
-        bad = [n for n in names if n.endswith(".log") or n.startswith(NEVER_PREFIX)]
-        print(f"  远端文件数 {len(names)} | 最新 commit {c['sha'][:12]} | 变更 {len(c.get('files', []))} 个")
-        print(f"  远端脏文件: {bad or 'NONE'}")
+        # 只校验【本次提交碰到的文件】—— 全仓库扫描会把历史遗留文件误报成"脏"
+        # （例如 v26 就提交的 _gen_report_v26.py 会被 _gen_ 前缀命中，但它不是本次产物）
+        touched = [f["filename"] for f in c.get("files", [])]
+        bad = [n for n in touched
+               if n.endswith(".log") or n.startswith(NEVER_PREFIX) or n in NEVER_EXACT]
+        print(f"  远端文件总数 {len(names)} | 最新 commit {c['sha'][:12]} | 本次变更 {len(touched)} 个")
+        print(f"  本次变更含临时/日志文件: {bad or 'NONE'}")
+        print(f"  {GIT_REMOTE}/commit/{c['sha'][:12]}")
         return not bad
     except Exception as ex:
         print(f"  ⚠ API 回读失败（{type(ex).__name__}），请用浏览器确认：{GIT_REMOTE}")
