@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-美股因子策略 · 一键下单助手 (v27 双频版)
+美股因子策略 · 一键下单助手 (v28 双频版)
 
 用法:
     python _update_signal.py                     # 刷新行情 + 出完整下单清单 (默认 21 日调仓)
@@ -16,6 +16,25 @@
     python _update_signal.py --no-gate           # 关闭闸门(复现旧口径, 仅用于对比)
 
 退出码: 0 正常 / 2 数据不可用(勿下单)
+
+v28 变更 —— 补上【本金维度】的成本口径(此前只有"单次佣金占净值"):
+  H1 v27 报过"$1,490 时佣金占本金/年 11.6%~13.57%"。那个数字把本金【固定在 $1,490】
+     来算, 而本策略年化 ~93%, 本金一年就翻倍 -> 佣金占【当期本金】的比例会迅速衰减。
+     拿"第 1 年的比例"去和 CAGR 并列, 属口径混用, 成本被高估约 2 倍。
+  H2 真正能和 CAGR 比较的是【拖累 pp】= CAGR(零佣金) - CAGR(实佣金)。实测:
+     $1,490 -> 10 日 5.45pp / 21 日 2.88pp;  $3,000 -> 2.58 / 1.39pp。
+  H3 拖累的成因只有一个: 那 $2/笔【固定】佣金不随本金缩放。碎股口径下策略本身是
+     【尺度不变】的(零佣金 CAGR 对 $500~$50,000 极差 < 1e-13pp, 见 _v28_smallcap.py [2b]),
+     所以本金对结果的【全部】影响都来自佣金 -> 经验律: 拖累(pp) ≈ 7,700 ÷ 本金($) (10 日)。
+  H4 [4] 段新增本金维度提示 + 拖累告警; 自检 76 -> 83 项。
+  H5 结论: 在本金 $1,490 下冠军【仍是 10 日】(CAGR 93.1% vs 58.4%, 领先 34.7pp),
+     换手成本差 2.57pp 不构成换周期的理由。整股口径额外损失仅 0.71pp 且 0 条腿买不起
+     -> 碎股不是瓶颈, 可以放心用。
+  H6 修掉 hist_merge() 的【静默重复行】缺陷: 旧写法只给历史表补齐缺失列(pool_size/
+     variant/rebal/anchor), 没给【新行】补 -> 新行这几列是 NaN, 而去重键用的是默认值,
+     NaN != "-" => 该记录永远匹配不上, 每跑一次追加一次, 历史表静默堆重复。
+     同时把行序改成按去重键【稳定排序】—— 否则用不同参数跑的先后顺序会让同一份数据
+     产生不同行序, 制造无意义的 git diff 并破坏可复现性。配 3 条断言回归。
 
 v27 变更 —— 调仓周期成为可调参数(--rebal):
   G1 v26 全策略总排名显示: 同一个 Vortex 信号, 21 日调仓 CAGR 59.9% / 回撤 -65.0%,
@@ -262,6 +281,31 @@ def next_exec_offset(last_i, anchor_i, rebal):
           last_i 是执行日的前一根 -> offset = 1 (下一交易日开盘就该动手)。
     """
     return rebal - ((last_i - anchor_i) % rebal)
+
+# ---- v28: 佣金拖累的经验律 (本金维度) ----
+# 数据来源: _v28_smallcap.py / _v28_smallcap.json（复刻引擎, $2/笔, 最小换手, 碎股口径）。
+# 关键前提: 碎股口径下策略本身是【尺度不变】的 —— 零佣金 CAGR 对 $500~$50,000 任意本金
+#   极差 < 1e-13pp（自检有断言）。所以【本金对结果的唯一影响, 就是那 $2/笔固定佣金】。
+# 实测「拖累(pp) x 本金($)」在 $1,490 以上稳定:
+#   21 日调仓 ≈ 4,200   10 日调仓 ≈ 7,700
+# 于是拖累(pp) ≈ K / 本金($)。本金翻倍 -> 拖累减半。本金 < $1,000 时该近似失效(拖累涨得更快)。
+DRAG_K = {21: 4200.0, 10: 7700.0}
+DRAG_K_DEFAULT = 4200.0
+
+def comm_drag_pp(capital, rebal=21):
+    """按本金估算【佣金拖累】, 单位 pp(百分点)。
+
+    定义: 拖累 = CAGR(零佣金) - CAGR(实佣金)。这与"每年佣金 ÷ 本金"【不是一回事】——
+    后者把本金固定在当期不动, 而本策略年化很高, 本金一年就翻倍, 佣金占当期本金的比例
+    会迅速衰减。拿"第 1 年的比例"去和 CAGR 比较会严重高估成本(约 2 倍), 见 v28 报告勘误。
+    """
+    if capital is None or capital <= 0:
+        return float("nan")
+    k = DRAG_K.get(int(rebal))
+    if k is None:
+        # 未实测的周期: 按"拖累近似线性于调仓频率"外推(21 日为基准)。仅作数量级提示。
+        k = DRAG_K_DEFAULT * (21.0 / int(rebal))
+    return k / float(capital)
 
 HOLIDAYS = {
     2026: ["01-01","01-19","02-16","04-03","05-25","06-19","07-03","09-07","11-26","12-25"],
@@ -640,6 +684,26 @@ def main():
     print(f"  碎股方案: 每只按金额 ${bud:,.0f} 买入, 份额 "
           + ", ".join(f"{UNI[j].replace('US.','')} {bud/float(C.values[N-1,j]):.4f}股" for j in pick))
 
+    # ---- v28: 本金维度 —— 佣金拖累 ----
+    # 上面那句"佣金占净值 x%"是【单次】比例, 不是年费率。能拿来和 CAGR 比较的是
+    # 【拖累 pp】= CAGR(零佣金) - CAGR(实佣金)。用"每年佣金÷本金"会高估约 2 倍 ——
+    # 因为它把本金固定在当期, 而本策略年化很高, 本金一年就翻倍。见 v28 报告勘误。
+    _drag = comm_drag_pp(NET, REBAL)
+    _reb_yr = 252.0 / REBAL
+    _k = DRAG_K.get(int(REBAL), DRAG_K_DEFAULT * 21.0 / int(REBAL))
+    print(f"\n  【本金维度】佣金 ${COMM:.0f}/笔是【固定费】, 不随本金缩放 -> 本金越小, 拖累越重")
+    print(f"    本周期 {REBAL} 日调仓 ≈ 每年 {_reb_yr:.1f} 次; 全换手年佣金 ≈ "
+          f"${_reb_yr * TOPK * 2 * COMM:,.0f}")
+    print(f"    预期佣金拖累 ≈ {_drag:.2f}pp   经验律: 拖累(pp) ≈ {_k:,.0f} ÷ 本金($); "
+          f"本金翻倍, 拖累减半")
+    if _drag > 5.0:
+        print(f"    ⚠ 拖累 {_drag:.2f}pp > 5pp —— 本金偏小, 换手成本被放大。"
+              f"(10 日调仓要到 $8,000 左右才能压到 1pp 以内)")
+    if int(REBAL) != REBAL_DEFAULT:
+        _d21 = comm_drag_pp(NET, REBAL_DEFAULT)
+        print(f"    对照 {REBAL_DEFAULT} 日调仓: 拖累约 {_d21:.2f}pp —— 两周期换手成本只差 "
+              f"{_drag - _d21:+.2f}pp, 远小于它们本身的 CAGR 差, 不构成换周期的理由")
+
     print("\n" + "=" * 116); print("[5] 换仓指令（最小换手，省佣金）"); print("=" * 116)
     px_now = {UNI[j].replace("US.",""): float(C.values[N-1, j]) for j in range(len(UNI))}
     if POSITIONS:
@@ -771,6 +835,20 @@ def hist_merge(h, row):
         h["rebal"] = REBAL_DEFAULT
     if "anchor" not in h.columns:
         h["anchor"] = "-"
+    # v28: 【新行也要补齐同样的列】。旧写法只补 h 不补 row -> 新行在这几列上是 NaN,
+    # 而下面的 key 比较用的是【默认值】(ra="-", rr=REBAL_DEFAULT), NaN != "-"
+    # => 这条记录【永远匹配不上】, 于是每跑一次就被追加一次, 静默堆成多行重复。
+    # 不抛异常、不影响单次结果, 只让历史表慢慢变脏 —— 正是本项目最在意的那类缺陷。
+    # 触发条件: h 已有该列而 row 没有(例如手工构造的行、或上游改了写入口径)。
+    row = row.copy()
+    if "pool_size" not in row.columns:
+        row["pool_size"] = -1
+    if "variant" not in row.columns:
+        row["variant"] = "-"
+    if "rebal" not in row.columns:
+        row["rebal"] = REBAL_DEFAULT
+    if "anchor" not in row.columns:
+        row["anchor"] = "-"
     rv = str(row["variant"].iloc[0]) if "variant" in row.columns else "-"
     rr = int(row["rebal"].iloc[0]) if "rebal" in row.columns else REBAL_DEFAULT
     ra = str(row["anchor"].iloc[0]) if "anchor" in row.columns else "-"
@@ -781,7 +859,14 @@ def hist_merge(h, row):
           (h["variant"].astype(str) == rv) & \
           (h["rebal"].astype(int) == rr) & \
           (h["anchor"].astype(str) == ra)
-    return pd.concat([h[~key], row], ignore_index=True)
+    out = pd.concat([h[~key], row], ignore_index=True)
+    # v28: 行序必须【与运行顺序无关】。旧写法把新行追加到末尾, 于是用不同参数跑
+    # (例如先 `--rebal 10` 再默认 21) 会让【同一份数据】产生不同行序 ——
+    # 制造无意义的 git diff, 也让"历史表"失去可复现性。
+    # 按去重键稳定排序后, 文件内容成为【数据】的函数, 而不是【数据, 运行顺序】的函数。
+    _cols = ["date", "strategy", "topk", "pool_size", "variant", "rebal", "anchor"]
+    out = out.sort_values(_cols, kind="mergesort").reset_index(drop=True)
+    return out
 
 
 def self_test():
@@ -920,6 +1005,18 @@ def self_test():
         len(hist_merge(_old, _g21)) == 1)
     chk("历史表: 无 rebal 列旧表 + 10 日新行 -> 两条共存(旧记录不被覆盖)",
         len(hist_merge(_old, _g10)) == 2)
+    # v28: 行序不得依赖运行顺序 —— 否则同一份数据会因"先跑哪个参数"产生不同文件
+    _ab = hist_merge(hist_merge(_g21, _g10), _g21)
+    _ba = hist_merge(hist_merge(_g10, _g21), _g10)
+    chk("历史表: 行序与合并顺序无关(文件内容是数据的函数, 不是运行顺序的函数)",
+        _ab.to_csv(index=False) == _ba.to_csv(index=False))
+    chk("历史表: 排序稳定(同键行不因重复合并而漂移)",
+        hist_merge(_ab, _g10).to_csv(index=False) == _ab.to_csv(index=False))
+    # v28 缺陷回归: h 有 anchor 列而 row 没有时, 旧写法给新行留下 NaN anchor,
+    # 与 key 用的默认值 "-" 不相等 -> 同一条记录被反复追加, 静默堆成多行。
+    _nan_bug = hist_merge(_ab, _g10.drop(columns=["anchor"]) if "anchor" in _g10.columns else _g10)
+    chk("历史表: 新行缺 anchor 列时不得产生重复行(v28 缺陷回归)",
+        len(_nan_bug) == 2, f"({len(_nan_bug)} 行, 期望 2)")
     # ---- v27 日历起点 --anchor ----
     # 注意: 面板最后一根是 2026-09-11, 9/14 还没发生 -> 不能用未来日期做锚点。
     _dp = pd.to_datetime(dates)
@@ -1063,6 +1160,24 @@ def self_test():
     chk("选股层输入签名无资金参数",
         list(_ins.signature(select).parameters) == ["A", "i", "good", "topk"],
         f"({list(_ins.signature(select).parameters)})")
+    # ---- v28 本金维度: 佣金拖累 ----
+    # 前提在 _v28_smallcap.py [2b] 断言过: 碎股 + 零佣金下策略【尺度不变】(极差 < 1e-13pp),
+    # 所以本金对结果的唯一影响就是那 $2/笔固定佣金 -> 拖累 ≈ K / 本金。
+    chk("v28: 佣金拖累随本金单调递减, 本金翻倍 -> 拖累减半",
+        all(abs(comm_drag_pp(c, 10) / comm_drag_pp(2 * c, 10) - 2.0) < 1e-12
+            for c in (1000.0, 1490.49, 10000.0)))
+    # 参考表逐点来自 _v28_smallcap.json(复刻引擎实测, 最小换手, $2/笔, 碎股)
+    _ref = {(1490.49, 10): 5.45, (1490.49, 21): 2.88,
+            (3000.0, 10): 2.58, (3000.0, 21): 1.39,
+            (10000.0, 10): 0.75, (10000.0, 21): 0.41}
+    _dev = max(abs(comm_drag_pp(c, r) - v) for (c, r), v in _ref.items())
+    chk("v28: 拖累经验律对上实测参考表(容差 0.35pp)", _dev <= 0.35, f"(最大偏差 {_dev:.3f}pp)")
+    _k10 = [5.45 * 1490.49, 2.58 * 3000.0, 0.75 * 10000.0]
+    chk("v28: 实测「拖累x本金」在 $1,490 以上近似恒定(1/本金 律成立)",
+        max(_k10) / min(_k10) < 1.15, f"(K10 = {min(_k10):,.0f} ~ {max(_k10):,.0f})")
+    # 反例保护: 极小本金下不得给出荒谬的负值或 NaN
+    chk("v28: 拖累函数对 0/负本金返回 NaN, 不抛异常",
+        all(np.isnan(comm_drag_pp(c, 10)) for c in (0.0, -1.0)))
     # OHLC
     bad = 0
     for i in range(0, N, 11):
