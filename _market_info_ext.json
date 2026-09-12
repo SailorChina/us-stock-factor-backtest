@@ -1,0 +1,2402 @@
+{
+  "US.AAPL": {
+    "name": "苹果",
+    "total_market_val": 4766021362600.0
+  },
+  "US.MU": {
+    "name": "美光科技",
+    "total_market_val": 1103880159718.91
+  },
+  "US.ORCL": {
+    "name": "甲骨文",
+    "total_market_val": 440539234740.0
+  },
+  "US.NVDA": {
+    "name": "英伟达",
+    "total_market_val": 5262476000000.0
+  },
+  "US.VOO": {
+    "name": "标普500ETF-Vanguard",
+    "total_market_val": NaN
+  },
+  "US.QQQ": {
+    "name": "纳指100ETF-Invesco QQQ Trust",
+    "total_market_val": NaN
+  },
+  "US.TSLA": {
+    "name": "特斯拉",
+    "total_market_val": 1435897450562.64
+  },
+  "US.INTC": {
+    "name": "英特尔",
+    "total_market_val": 527030173380.48
+  },
+  "US.TSM": {
+    "name": "台积电",
+    "total_market_val": 2219979694059.12
+  },
+  "US.META": {
+    "name": "Meta Platforms",
+    "total_market_val": 1641562061265.5
+  },
+  "US.GOOG": {
+    "name": "谷歌-C",
+    "total_market_val": 4040669700000.0
+  },
+  "US.SOXL": {
+    "name": "三倍做多半导体ETF-Direxion",
+    "total_market_val": NaN
+  },
+  "US.AVGO": {
+    "name": "博通",
+    "total_market_val": 1716677662844.34
+  },
+  "US.LITE": {
+    "name": "Lumentum",
+    "total_market_val": 83932290000.0
+  },
+  "US.BE": {
+    "name": "Bloom Energy",
+    "total_market_val": 76132373667.54
+  },
+  "US.AMD": {
+    "name": "美国超微公司",
+    "total_market_val": 822114431151.2
+  },
+  "US.GOOGL": {
+    "name": "谷歌-A",
+    "total_market_val": 4067698000000.0
+  },
+  "US.MRVL": {
+    "name": "迈威尔科技",
+    "total_market_val": 199021224000.0
+  },
+  "US.ADBE": {
+    "name": "Adobe",
+    "total_market_val": 98909925000.0
+  },
+  "US.BABA": {
+    "name": "阿里巴巴",
+    "total_market_val": 269839299535.84
+  },
+  "US.SOXS": {
+    "name": "三倍做空半导体ETF-Direxion",
+    "total_market_val": NaN
+  },
+  "US.GLD": {
+    "name": "黄金ETF-SPDR",
+    "total_market_val": NaN
+  },
+  "US.PLTR": {
+    "name": "Palantir",
+    "total_market_val": 398571279492.8
+  },
+  "US.RKLB": {
+    "name": "Rocket Lab",
+    "total_market_val": 37080565428.44
+  },
+  "US.PDD": {
+    "name": "拼多多",
+    "total_market_val": 110797180602.08
+  },
+  "US.MSTR": {
+    "name": "Strategy",
+    "total_market_val": 49396062548.56
+  },
+  "US.HOOD": {
+    "name": "Robinhood",
+    "total_market_val": 101892993999.09
+  },
+  "US.SPY": {
+    "name": "标普500ETF-SPDR",
+    "total_market_val": NaN
+  },
+  "US.DELL": {
+    "name": "戴尔科技",
+    "total_market_val": 322115455405.0
+  },
+  "US.MSFT": {
+    "name": "微软",
+    "total_market_val": 3656635621588.04
+  },
+  "US.AAOI": {
+    "name": "Applied Optoelectronics",
+    "total_market_val": 8769970590.81
+  },
+  "US.SOXX": {
+    "name": "半导体ETF-iShares",
+    "total_market_val": NaN
+  },
+  "US.USO": {
+    "name": "美国原油ETF",
+    "total_market_val": NaN
+  },
+  "US.AVAV": {
+    "name": "AeroVironment",
+    "total_market_val": 7474227874.975
+  },
+  "US.GLW": {
+    "name": "康宁",
+    "total_market_val": 140509664552.72
+  },
+  "US.AMZN": {
+    "name": "亚马逊",
+    "total_market_val": 2716964525651.08
+  },
+  "US.TLT": {
+    "name": "20+年以上美国国债ETF-iShares",
+    "total_market_val": NaN
+  },
+  "US.COHR": {
+    "name": "Coherent",
+    "total_market_val": 57412139559.82
+  },
+  "US.QCOM": {
+    "name": "高通",
+    "total_market_val": 185724000000.0
+  },
+  "US.COIN": {
+    "name": "Coinbase",
+    "total_market_val": 45453825094.44
+  },
+  "US.QQQM": {
+    "name": "NASDAQ100指数ETF-Invesco",
+    "total_market_val": NaN
+  },
+  "US.GDXU": {
+    "name": "三倍做多黄金矿业ETN-MicroSectors",
+    "total_market_val": NaN
+  },
+  "US.VRT": {
+    "name": "Vertiv Holdings",
+    "total_market_val": 95527115366.49
+  },
+  "US.AXTI": {
+    "name": "AXT Inc",
+    "total_market_val": 4242586816.4
+  },
+  "US.NKE": {
+    "name": "耐克",
+    "total_market_val": 54325722503.86
+  },
+  "US.NOK": {
+    "name": "诺基亚",
+    "total_market_val": 59457609900.0
+  },
+  "US.CRDO": {
+    "name": "Credo Technology",
+    "total_market_val": 30130571974.58
+  },
+  "US.FUTU": {
+    "name": "富途控股",
+    "total_market_val": 15913476219.37
+  },
+  "US.MRNA": {
+    "name": "Moderna",
+    "total_market_val": 54543607155.18
+  },
+  "US.TSLL": {
+    "name": "2倍做多TSLA ETF-Direxion",
+    "total_market_val": NaN
+  },
+  "US.NOW": {
+    "name": "ServiceNow",
+    "total_market_val": 135611678540.0
+  },
+  "US.TEM": {
+    "name": "Tempus AI",
+    "total_market_val": 10598737567.44
+  },
+  "US.SLV": {
+    "name": "白银ETF-iShares",
+    "total_market_val": NaN
+  },
+  "US.SPCX": {
+    "name": "SpaceX",
+    "total_market_val": 1993216945483.45
+  },
+  "US.SNDK": {
+    "name": "闪迪",
+    "total_market_val": 239153475283.35
+  },
+  "US.SKHY": {
+    "name": "SK海力士",
+    "total_market_val": 1385354655850.0
+  },
+  "US.SNXX": {
+    "name": "2倍做多SNDK ETF-Tradr",
+    "total_market_val": NaN
+  },
+  "US.CRCL": {
+    "name": "Circle",
+    "total_market_val": 23001154818.6
+  },
+  "US.OKLO": {
+    "name": "Oklo Inc",
+    "total_market_val": 6737559283.0
+  },
+  "US.TQQQ": {
+    "name": "三倍做多纳指ETF-ProShares",
+    "total_market_val": NaN
+  },
+  "US.NBIS": {
+    "name": "NEBIUS",
+    "total_market_val": 61045089201.9
+  },
+  "US.SNDQ": {
+    "name": "2倍做空SNDK ETF-Tradr",
+    "total_market_val": NaN
+  },
+  "US.SQQQ": {
+    "name": "三倍做空纳指ETF-ProShares",
+    "total_market_val": NaN
+  },
+  "US.CRWV": {
+    "name": "CoreWeave",
+    "total_market_val": 49081242211.98
+  },
+  "US.SPCH": {
+    "name": "2倍做多SpaceX ETF-Leverage Shares",
+    "total_market_val": NaN
+  },
+  "US.BMNR": {
+    "name": "Bitmine Immersion Technologies",
+    "total_market_val": 15098756641.82
+  },
+  "US.MUU": {
+    "name": "2倍做多MU ETF-Direxion",
+    "total_market_val": NaN
+  },
+  "US.SMR": {
+    "name": "NuScale Power",
+    "total_market_val": 3533453784.42
+  },
+  "US.DRAM": {
+    "name": "Roundhill Memory ETF",
+    "total_market_val": NaN
+  },
+  "US.SKDD": {
+    "name": "2倍做空海力士ETF-GraniteShares",
+    "total_market_val": NaN
+  },
+  "US.HPE": {
+    "name": "慧与科技",
+    "total_market_val": 82422288128.11
+  },
+  "US.SCO": {
+    "name": "2倍做空彭博原油ETF-Proshares",
+    "total_market_val": NaN
+  },
+  "US.ORCX": {
+    "name": "2倍做多ORCL ETF-Defiance",
+    "total_market_val": NaN
+  },
+  "US.SMCI": {
+    "name": "超微电脑",
+    "total_market_val": 26344311898.4
+  },
+  "US.NIO": {
+    "name": "蔚来",
+    "total_market_val": 9245911311.18
+  },
+  "US.MCD": {
+    "name": "麦当劳",
+    "total_market_val": 178700715823.43
+  },
+  "US.CRWD": {
+    "name": "CrowdStrike",
+    "total_market_val": 211688289235.08
+  },
+  "US.SKUU": {
+    "name": "2倍做多海力士ETF-GraniteShares",
+    "total_market_val": NaN
+  },
+  "US.MSTU": {
+    "name": "2倍做多MSTR ETF-T-Rex",
+    "total_market_val": NaN
+  },
+  "US.UNH": {
+    "name": "联合健康",
+    "total_market_val": 340269230549.23
+  },
+  "US.ARM": {
+    "name": "Arm Holdings",
+    "total_market_val": 282795720000.0
+  },
+  "US.WDC": {
+    "name": "西部数据",
+    "total_market_val": 161226699337.92
+  },
+  "US.KO": {
+    "name": "可口可乐",
+    "total_market_val": 379872072664.47
+  },
+  "US.SMH": {
+    "name": "半导体指数ETF-VanEck",
+    "total_market_val": NaN
+  },
+  "US.XE": {
+    "name": "X-Energy",
+    "total_market_val": 4291758898.62
+  },
+  "US.UBER": {
+    "name": "优步",
+    "total_market_val": 146390283872.07
+  },
+  "US.APP": {
+    "name": "Applovin",
+    "total_market_val": 108413537960.0
+  },
+  "US.IREN": {
+    "name": "IREN Ltd",
+    "total_market_val": 17271590541.84
+  },
+  "US.ONDS": {
+    "name": "Ondas",
+    "total_market_val": 4125093425.43
+  },
+  "US.IBM": {
+    "name": "IBM Corp",
+    "total_market_val": 229211875743.1
+  },
+  "US.NVO": {
+    "name": "诺和诺德",
+    "total_market_val": 192307550000.0
+  },
+  "US.AXTX": {
+    "name": "2倍做多AXTI ETF-Tradr",
+    "total_market_val": NaN
+  },
+  "US.OKLL": {
+    "name": "2倍做多OKLO ETF-Defiance",
+    "total_market_val": NaN
+  },
+  "US.AAOX": {
+    "name": "2倍做多AAOI ETF-Tradr",
+    "total_market_val": NaN
+  },
+  "US.MVLL": {
+    "name": "2倍做多MRVL ETF-GraniteShares",
+    "total_market_val": NaN
+  },
+  "US.UGL": {
+    "name": "2倍做多黄金ETF-ProShares",
+    "total_market_val": NaN
+  },
+  "US.BRK.B": {
+    "name": "伯克希尔-B",
+    "total_market_val": 1092554244869.57
+  },
+  "US.BEX": {
+    "name": "2倍做多BE ETF-Tradr",
+    "total_market_val": NaN
+  },
+  "US.AEHR": {
+    "name": "Aehr Test Systems",
+    "total_market_val": 3092532410.74
+  },
+  "US.DLLL": {
+    "name": "2倍做多DELL ETF-GraniteShares",
+    "total_market_val": NaN
+  },
+  "US.MULL": {
+    "name": "2倍做多MU ETF-GraniteShares",
+    "total_market_val": NaN
+  },
+  "US.INTW": {
+    "name": "2倍做多INTC ETF-GraniteShares",
+    "total_market_val": NaN
+  },
+  "US.CONL": {
+    "name": "2倍做多COIN ETF-GraniteShares",
+    "total_market_val": NaN
+  },
+  "US.XPEV": {
+    "name": "小鹏集团",
+    "total_market_val": 10098059581.26
+  },
+  "US.KORU": {
+    "name": "3倍做多韩国ETF-Direxion",
+    "total_market_val": NaN
+  },
+  "US.LLY": {
+    "name": "礼来",
+    "total_market_val": 1050272077420.5
+  },
+  "US.LULU": {
+    "name": "Lululemon Athletica",
+    "total_market_val": 10956971174.25
+  },
+  "US.BWET": {
+    "name": "BREAKWAVE TANKER SHIPPING ETF",
+    "total_market_val": NaN
+  },
+  "US.NVDL": {
+    "name": "2倍做多NVDA ETF-GraniteShares",
+    "total_market_val": NaN
+  },
+  "US.NFLX": {
+    "name": "奈飞",
+    "total_market_val": 322288930922.4
+  },
+  "US.CRCG": {
+    "name": "2倍做多CRCL ETF-Leverage Shares",
+    "total_market_val": NaN
+  },
+  "US.AAPU": {
+    "name": "2倍做多AAPL ETF-Direxion",
+    "total_market_val": NaN
+  },
+  "US.PANW": {
+    "name": "Palo Alto Networks",
+    "total_market_val": 270471700000.0
+  },
+  "US.LITX": {
+    "name": "2倍做多LITE ETF-Tradr",
+    "total_market_val": NaN
+  },
+  "US.GGLL": {
+    "name": "2倍做多GOOGL-Direxion",
+    "total_market_val": NaN
+  },
+  "US.SGOV": {
+    "name": "0-3月美国国债ETF-iShares",
+    "total_market_val": NaN
+  },
+  "US.AGQ": {
+    "name": "2倍做多白银ETF-ProShares",
+    "total_market_val": NaN
+  },
+  "US.VST": {
+    "name": "Vistra Energy",
+    "total_market_val": 49801550234.1
+  },
+  "US.CBRS": {
+    "name": "Cerebras Systems",
+    "total_market_val": 45595666389.13
+  },
+  "US.OXY": {
+    "name": "西方石油",
+    "total_market_val": 61437712821.66
+  },
+  "US.STX": {
+    "name": "希捷科技",
+    "total_market_val": 188774858432.38
+  },
+  "US.AMAT": {
+    "name": "应用材料",
+    "total_market_val": 362269296755.07
+  },
+  "US.HPQ": {
+    "name": "惠普",
+    "total_market_val": 31995543580.12
+  },
+  "US.FIG": {
+    "name": "Figma Inc",
+    "total_market_val": 12365828914.4
+  },
+  "US.SSPC": {
+    "name": "2倍做空SpaceX ETF-Leverage Shares",
+    "total_market_val": NaN
+  },
+  "US.IONQ": {
+    "name": "IonQ Inc",
+    "total_market_val": 14001835039.5
+  },
+  "US.MUZ": {
+    "name": "2倍做空MU ETF-Defiance",
+    "total_market_val": NaN
+  },
+  "US.NET": {
+    "name": "Cloudflare",
+    "total_market_val": 109149115038.95
+  },
+  "US.GDX": {
+    "name": "黄金矿业ETF-VanEck",
+    "total_market_val": NaN
+  },
+  "US.ASTS": {
+    "name": "AST SpaceMobile",
+    "total_market_val": 17945387797.3
+  },
+  "US.SCHD": {
+    "name": "美国红利股ETF-Schwab",
+    "total_market_val": NaN
+  },
+  "US.ORCU": {
+    "name": "2倍做多ORCL ETF-Direxion",
+    "total_market_val": NaN
+  },
+  "US.NBIL": {
+    "name": "2倍做多NBIS ETF-GraniteShares",
+    "total_market_val": NaN
+  },
+  "US.CRM": {
+    "name": "赛富时",
+    "total_market_val": 203873560000.0
+  },
+  "US.LEU": {
+    "name": "Centrus Energy",
+    "total_market_val": 3039057879.48
+  },
+  "US.NTAP": {
+    "name": "美国网存",
+    "total_market_val": 39142379316.4
+  },
+  "US.GEV": {
+    "name": "GE Vernova",
+    "total_market_val": 254953147083.87
+  },
+  "US.ALAB": {
+    "name": "Astera Labs",
+    "total_market_val": 50522331986.88
+  },
+  "US.RKLX": {
+    "name": "2倍做多RKLB ETF-Defiance",
+    "total_market_val": NaN
+  },
+  "US.GME": {
+    "name": "游戏驿站",
+    "total_market_val": 10670195938.5
+  },
+  "US.BIDU": {
+    "name": "百度",
+    "total_market_val": 31099093032.6
+  },
+  "US.GPRO": {
+    "name": "GoPro",
+    "total_market_val": 284771782.32
+  },
+  "US.SNOW": {
+    "name": "Snowflake",
+    "total_market_val": 116067672000.0
+  },
+  "US.SPYM": {
+    "name": "投资组合标普500指数ETF-SPDR",
+    "total_market_val": NaN
+  },
+  "US.TNON": {
+    "name": "Tenon Medical",
+    "total_market_val": 3955588.71
+  },
+  "US.TMF": {
+    "name": "3倍做多20年期以上国债ETF-Direxion",
+    "total_market_val": NaN
+  },
+  "US.LI": {
+    "name": "理想汽车",
+    "total_market_val": 12266341718.61
+  },
+  "US.UVIX": {
+    "name": "2倍做多恐慌指数期货ETF",
+    "total_market_val": NaN
+  },
+  "US.JD": {
+    "name": "京东",
+    "total_market_val": 36368640000.0
+  },
+  "US.ASML": {
+    "name": "阿斯麦",
+    "total_market_val": 652317030000.0
+  },
+  "US.SANM": {
+    "name": "新美亚电子",
+    "total_market_val": 11577028896.0
+  },
+  "US.USAR": {
+    "name": "USA Rare Earth",
+    "total_market_val": 3807844740.44
+  },
+  "US.TCEHY": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.MP": {
+    "name": "MP Materials",
+    "total_market_val": 8995911209.88
+  },
+  "US.MSTZ": {
+    "name": "2倍做空MSTR ETF-T-Rex",
+    "total_market_val": NaN
+  },
+  "US.SNDU": {
+    "name": "2倍做多SNDK ETF-T-REX",
+    "total_market_val": NaN
+  },
+  "US.IGV": {
+    "name": "扩展科技软件行业ETF-iShares",
+    "total_market_val": NaN
+  },
+  "US.HIMS": {
+    "name": "Hims & Hers Health",
+    "total_market_val": 6418451991.63
+  },
+  "US.LITZ": {
+    "name": "2倍做空LITE ETF- Tradr",
+    "total_market_val": NaN
+  },
+  "US.GRAB": {
+    "name": "Grab Holdings",
+    "total_market_val": 12440950000.0
+  },
+  "US.RDDT": {
+    "name": "Reddit",
+    "total_market_val": 30354397382.7
+  },
+  "US.JPM": {
+    "name": "摩根大通",
+    "total_market_val": 946925668244.85
+  },
+  "US.FCX": {
+    "name": "麦克莫兰铜金",
+    "total_market_val": 102057765359.61
+  },
+  "US.BMNU": {
+    "name": "2倍做多BMNR ETF-T-REX",
+    "total_market_val": NaN
+  },
+  "US.MSTX": {
+    "name": "2倍做多MSTR ETF-Defiance",
+    "total_market_val": NaN
+  },
+  "US.OKTA": {
+    "name": "Okta",
+    "total_market_val": 29107684512.0
+  },
+  "US.CSCO": {
+    "name": "思科",
+    "total_market_val": 442082266069.49
+  },
+  "US.SWKS": {
+    "name": "思佳讯",
+    "total_market_val": 13294270289.7
+  },
+  "US.AMDL": {
+    "name": "2倍做多AMD ETF-GraniteShares",
+    "total_market_val": NaN
+  },
+  "US.ASX": {
+    "name": "日月光半导体",
+    "total_market_val": 88226743985.27
+  },
+  "US.VT": {
+    "name": "全球股市指数ETF-Vanguard",
+    "total_market_val": NaN
+  },
+  "US.UVXY": {
+    "name": "1.5倍做多短期期货恐慌指数ETF-Proshares",
+    "total_market_val": NaN
+  },
+  "US.SOFI": {
+    "name": "SoFi Technologies",
+    "total_market_val": 22369998011.68
+  },
+  "US.UCO": {
+    "name": "2倍做多彭博原油ETF-ProShares",
+    "total_market_val": NaN
+  },
+  "US.CIFR": {
+    "name": "Cipher Digital",
+    "total_market_val": 6993267665.7
+  },
+  "US.MARA": {
+    "name": "MARA Holdings",
+    "total_market_val": 4627865578.06
+  },
+  "US.ON": {
+    "name": "安森美半导体",
+    "total_market_val": 29642719193.82
+  },
+  "US.IBIT": {
+    "name": "比特币ETF-iShares",
+    "total_market_val": NaN
+  },
+  "US.RAM": {
+    "name": "2倍做多DRAM ETF-T-REX",
+    "total_market_val": NaN
+  },
+  "US.COHX": {
+    "name": "2倍做多COHR ETF-Tradr",
+    "total_market_val": NaN
+  },
+  "US.YINN": {
+    "name": "三倍做多富时中国ETF-Direxion",
+    "total_market_val": NaN
+  },
+  "US.SKHX": {
+    "name": "2倍做多海力士ETF-Leverage Shares",
+    "total_market_val": NaN
+  },
+  "US.ACVA": {
+    "name": "ACV Auctions",
+    "total_market_val": 1767701071.8
+  },
+  "US.EWY": {
+    "name": "MSCI韩国指数ETF-iShares",
+    "total_market_val": NaN
+  },
+  "US.TME": {
+    "name": "腾讯音乐",
+    "total_market_val": 12559757910.0
+  },
+  "US.GOOX": {
+    "name": "2倍做多GOOG ETF-T-REX",
+    "total_market_val": NaN
+  },
+  "US.GLDM": {
+    "name": "SPDR Gold MiniShares Trust",
+    "total_market_val": NaN
+  },
+  "US.GTLB": {
+    "name": "Gitlab",
+    "total_market_val": 7828534000.0
+  },
+  "US.PURR": {
+    "name": "Hyperliquid Strategies",
+    "total_market_val": 2296894501.17
+  },
+  "US.CRCA": {
+    "name": "2倍做多CRCL ETF-Proshares",
+    "total_market_val": NaN
+  },
+  "US.XBI": {
+    "name": "标普生物科技ETF-SPDR",
+    "total_market_val": NaN
+  },
+  "US.AMKR": {
+    "name": "艾马克技术",
+    "total_market_val": 12852446376.56
+  },
+  "US.TCOM": {
+    "name": "携程网",
+    "total_market_val": 24571097762.44
+  },
+  "US.CLS": {
+    "name": "天弘科技",
+    "total_market_val": 43200751457.75
+  },
+  "US.TTMI": {
+    "name": "TTM科技",
+    "total_market_val": 13320310364.16
+  },
+  "US.ANET": {
+    "name": "Arista Networks",
+    "total_market_val": 251727827494.32
+  },
+  "US.ISRG": {
+    "name": "直觉外科公司",
+    "total_market_val": 130412587727.7
+  },
+  "US.RBLX": {
+    "name": "Roblox",
+    "total_market_val": 32504105315.5
+  },
+  "US.NBIZ": {
+    "name": "2倍做空NBIS ETF-Tradr",
+    "total_market_val": NaN
+  },
+  "US.TER": {
+    "name": "泰瑞达",
+    "total_market_val": 59365709590.0
+  },
+  "US.WOLF": {
+    "name": "Wolfspeed",
+    "total_market_val": 1373640664.32
+  },
+  "US.SNDG": {
+    "name": "2倍做多SNDK ETF-Leverage Shares",
+    "total_market_val": NaN
+  },
+  "US.APLD": {
+    "name": "Applied Digital",
+    "total_market_val": 7700613939.04
+  },
+  "US.VSH": {
+    "name": "威世科技",
+    "total_market_val": 5093722136.07
+  },
+  "US.AENT": {
+    "name": "Alliance Entertainment Holding",
+    "total_market_val": 327289224.6
+  },
+  "US.SPMO": {
+    "name": "Invesco S&P 500 Momentum ETF",
+    "total_market_val": NaN
+  },
+  "US.COST": {
+    "name": "好市多",
+    "total_market_val": 401246317495.08
+  },
+  "US.XOM": {
+    "name": "埃克森美孚",
+    "total_market_val": 682536266240.4
+  },
+  "US.WMT": {
+    "name": "沃尔玛",
+    "total_market_val": 850100909723.15
+  },
+  "US.OPEN": {
+    "name": "Opendoor Technologies",
+    "total_market_val": 2709344029.5
+  },
+  "US.NVTS": {
+    "name": "纳微半导体",
+    "total_market_val": 3036517265.44
+  },
+  "US.UMC": {
+    "name": "联电",
+    "total_market_val": 56999171907.52
+  },
+  "US.BEZ": {
+    "name": "2倍做空BE ETF-Tradr",
+    "total_market_val": NaN
+  },
+  "US.PFE": {
+    "name": "辉瑞",
+    "total_market_val": 157994951887.08
+  },
+  "US.ASST": {
+    "name": "Strive",
+    "total_market_val": 2622092491.96
+  },
+  "US.QQQI": {
+    "name": "NEOS NASDAQ 100 HIGH INCOME ETF",
+    "total_market_val": NaN
+  },
+  "US.MXL": {
+    "name": "MaxLinear",
+    "total_market_val": 6762991252.87
+  },
+  "US.EOSE": {
+    "name": "Eos Energy",
+    "total_market_val": 1438462588.8
+  },
+  "US.BA": {
+    "name": "波音",
+    "total_market_val": 166333370709.0
+  },
+  "US.LKNCY": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.U": {
+    "name": "Unity Software",
+    "total_market_val": 19346309494.68
+  },
+  "US.CIEN": {
+    "name": "Ciena",
+    "total_market_val": 49567751828.5
+  },
+  "US.GLWG": {
+    "name": "2倍做多GLW ETF-Leverage Shares",
+    "total_market_val": NaN
+  },
+  "US.PL": {
+    "name": "Planet Labs PBC",
+    "total_market_val": 5985299419.05
+  },
+  "US.BILI": {
+    "name": "哔哩哔哩",
+    "total_market_val": 6503579588.1
+  },
+  "US.ROBN": {
+    "name": "2倍做多HOOD ETF-T-REX",
+    "total_market_val": NaN
+  },
+  "US.DUOL": {
+    "name": "多邻国",
+    "total_market_val": 6722251129.92
+  },
+  "US.VGT": {
+    "name": "资讯科技ETF-Vanguard",
+    "total_market_val": NaN
+  },
+  "US.OSCR": {
+    "name": "Oscar Health",
+    "total_market_val": 10114296650.0
+  },
+  "US.CRML": {
+    "name": "Critical Metals",
+    "total_market_val": 944494681.79
+  },
+  "US.LYTE": {
+    "name": "Roundhill Photonics & Optics ETF",
+    "total_market_val": NaN
+  },
+  "US.CRCD": {
+    "name": "2倍做空CRCL ETF-T-REX",
+    "total_market_val": NaN
+  },
+  "US.XLV": {
+    "name": "医疗保健精选行业指数ETF-SPDR",
+    "total_market_val": NaN
+  },
+  "US.ALB": {
+    "name": "美国雅保",
+    "total_market_val": 13867954298.64
+  },
+  "US.CEG": {
+    "name": "Constellation Energy",
+    "total_market_val": 100889026170.25
+  },
+  "US.UMAC": {
+    "name": "Unusual Machines",
+    "total_market_val": 1146501789.75
+  },
+  "US.SURG": {
+    "name": "SurgePays",
+    "total_market_val": 9158448.021
+  },
+  "US.ETHU": {
+    "name": "2倍以太币期货ETF-Volatility Shares",
+    "total_market_val": NaN
+  },
+  "US.UDOW": {
+    "name": "三倍做多道指30ETF-ProShares",
+    "total_market_val": NaN
+  },
+  "US.NVD": {
+    "name": "2倍做空NVDA ETF-GraniteShares",
+    "total_market_val": NaN
+  },
+  "US.YANG": {
+    "name": "三倍做空富时中国ETF-Direxion",
+    "total_market_val": NaN
+  },
+  "US.NEBX": {
+    "name": "2倍做多NBIS ETF-Tradr",
+    "total_market_val": NaN
+  },
+  "US.CVX": {
+    "name": "雪佛龙",
+    "total_market_val": 422933598912.44
+  },
+  "US.HYNX": {
+    "name": "2倍做多海力士ETF-T-REX",
+    "total_market_val": NaN
+  },
+  "US.FRO": {
+    "name": "Frontline",
+    "total_market_val": 10955272367.69
+  },
+  "US.SMCX": {
+    "name": "2倍做多SMCI ETF-Defiance",
+    "total_market_val": NaN
+  },
+  "US.TRUG": {
+    "name": "TruGolf",
+    "total_market_val": 1256757.783
+  },
+  "US.HUT": {
+    "name": "Hut 8",
+    "total_market_val": 12153383544.8
+  },
+  "US.SIMO": {
+    "name": "慧荣科技",
+    "total_market_val": 9646100900.8
+  },
+  "US.BAC": {
+    "name": "美国银行",
+    "total_market_val": 438375395001.85
+  },
+  "US.TTWO": {
+    "name": "Take-Two互动软件",
+    "total_market_val": 40288676053.21
+  },
+  "US.AVL": {
+    "name": "2倍做多AVGO ETF-Direxion",
+    "total_market_val": NaN
+  },
+  "US.RGTI": {
+    "name": "Rigetti Computing",
+    "total_market_val": 5096648766.69
+  },
+  "US.SHOP": {
+    "name": "Shopify",
+    "total_market_val": 165706872002.28
+  },
+  "US.LRCX": {
+    "name": "泛林集团",
+    "total_market_val": 373168948620.0
+  },
+  "US.SMTC": {
+    "name": "先科电子",
+    "total_market_val": 15607777692.24
+  },
+  "US.POET": {
+    "name": "POET Technologies",
+    "total_market_val": 1375811799.6
+  },
+  "US.PYPL": {
+    "name": "PayPal",
+    "total_market_val": 45955358151.28
+  },
+  "US.QLD": {
+    "name": "2倍做多纳斯达克100指数ETF-ProShares",
+    "total_market_val": NaN
+  },
+  "US.FUTG": {
+    "name": "2倍做多富途ETF-Leverage Shares",
+    "total_market_val": NaN
+  },
+  "US.FFAI": {
+    "name": "Faraday Future Intelligent Electric Inc.",
+    "total_market_val": 6438352.67
+  },
+  "US.PATH": {
+    "name": "UiPath",
+    "total_market_val": 7165886873.75
+  },
+  "US.TXN": {
+    "name": "德州仪器",
+    "total_market_val": 245389653228.2
+  },
+  "US.CRWG": {
+    "name": "2倍做多CRWV ETF-Leverage Shares",
+    "total_market_val": NaN
+  },
+  "US.DXYZ": {
+    "name": "Destiny Tech100",
+    "total_market_val": 978252471.04
+  },
+  "US.KLAC": {
+    "name": "科磊",
+    "total_market_val": 236014610881.12
+  },
+  "US.METU": {
+    "name": "2倍做多META ETF-Direxion",
+    "total_market_val": NaN
+  },
+  "US.FTNT": {
+    "name": "飞塔信息",
+    "total_market_val": 114510689823.71
+  },
+  "US.UUUU": {
+    "name": "Energy Fuels",
+    "total_market_val": 3428817757.4
+  },
+  "US.PCLA": {
+    "name": "PicoCELA",
+    "total_market_val": 97195568.55
+  },
+  "US.JNJ": {
+    "name": "强生",
+    "total_market_val": 640020869391.26
+  },
+  "US.MRK": {
+    "name": "默沙东",
+    "total_market_val": 355100013857.34
+  },
+  "US.ACHR": {
+    "name": "Archer Aviation",
+    "total_market_val": 4296749544.0
+  },
+  "US.SCCO": {
+    "name": "南方铜业",
+    "total_market_val": 163372059804.14
+  },
+  "US.QBTS": {
+    "name": "D-Wave Quantum",
+    "total_market_val": 6256990874.4
+  },
+  "US.XLE": {
+    "name": "能源指数ETF-SPDR",
+    "total_market_val": NaN
+  },
+  "US.DIS": {
+    "name": "迪士尼",
+    "total_market_val": 183978489408.1
+  },
+  "US.DIA": {
+    "name": "道琼斯工业平均指数ETF-State Street SPDR",
+    "total_market_val": NaN
+  },
+  "US.BEKE": {
+    "name": "贝壳",
+    "total_market_val": 19389146106.01
+  },
+  "US.AAL": {
+    "name": "美国航空",
+    "total_market_val": 8612229062.51
+  },
+  "US.QCML": {
+    "name": "2倍做多QCOM ETF-GraniteShares",
+    "total_market_val": NaN
+  },
+  "US.VG": {
+    "name": "Venture Global",
+    "total_market_val": 39501467045.8
+  },
+  "US.COPX": {
+    "name": "铜矿ETF-Global X",
+    "total_market_val": NaN
+  },
+  "US.ETHA": {
+    "name": "以太坊ETF-iShares",
+    "total_market_val": NaN
+  },
+  "US.IVV": {
+    "name": "标普500ETF-iShares",
+    "total_market_val": NaN
+  },
+  "US.LMT": {
+    "name": "洛克希德马丁",
+    "total_market_val": 120978204815.07
+  },
+  "US.GS": {
+    "name": "高盛",
+    "total_market_val": 299667789685.44
+  },
+  "US.RDW": {
+    "name": "Redwire",
+    "total_market_val": 2654921507.58
+  },
+  "US.ORCZ": {
+    "name": "2倍做空ORCL ETF-Tradr",
+    "total_market_val": NaN
+  },
+  "US.SMU": {
+    "name": "2倍做多SMR ETF-Tradr",
+    "total_market_val": NaN
+  },
+  "US.APH": {
+    "name": "安费诺",
+    "total_market_val": 206943943422.88
+  },
+  "US.SMMT": {
+    "name": "Summit Therapeutics",
+    "total_market_val": 14000505515.1
+  },
+  "US.CRDU": {
+    "name": "2倍做多CRDO ETF-Tradr",
+    "total_market_val": NaN
+  },
+  "US.BB": {
+    "name": "黑莓",
+    "total_market_val": 4495390305.77
+  },
+  "US.CLSK": {
+    "name": "CleanSpark",
+    "total_market_val": 3510689387.91
+  },
+  "US.SE": {
+    "name": "Sea",
+    "total_market_val": 65070355617.28
+  },
+  "US.PM": {
+    "name": "菲利普莫里斯",
+    "total_market_val": 297788683655.34
+  },
+  "US.CAT": {
+    "name": "卡特彼勒",
+    "total_market_val": 376276073888.73
+  },
+  "US.CBRG": {
+    "name": "2倍做多CBRS ETF-Leverage Shares",
+    "total_market_val": NaN
+  },
+  "US.DAL": {
+    "name": "达美航空",
+    "total_market_val": 52550656327.3
+  },
+  "US.DIDIY": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SBET": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.INTU": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.VTI": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.CORD": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NTLA": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SDOW": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BDRX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.VXUS": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.ONTO": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.CHA": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.XLK": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.MAGS": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.ASTX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.IWM": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.MRAAY": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SK": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NUGT": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.KXIAY": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BABX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.MRNX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SNPS": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.UPRO": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.DDOG": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.APPX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.TXG": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.JOBY": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.TTD": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.TSLQ": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.OPTT": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.UZX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.AZN": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.FSLR": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.LABU": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.CF": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SPXL": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.RVMD": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NOWL": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.IAU": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.RXRX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BENF": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BSX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.GFS": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NU": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.AVXX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.KTOS": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BOXX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.UPST": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SPYI": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.ETN": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.WDCX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.V": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SWRD": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.GE": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.WTI": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.HSBC": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.IEF": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.PONY": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.CCML": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.ARMG": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BNO": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.VICR": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.RBRK": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.HKPD": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.TSMX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NAIL": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NVDX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.ZM": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.WULF": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.AVGX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.FEIM": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.XIACY": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.ALM": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SOUN": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.FTFT": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.CCL": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.VCX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.FCEL": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.TJGC": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NEM": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.PTIR": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.RCAT": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.TSEM": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.ZS": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.DJT": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.ENB": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.AAOZ": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BITX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.QNT": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NVDY": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.LAC": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.AEHG": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.LNVGY": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NBIG": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SEDG": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.DAMD": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BTDR": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.KR": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.PMEC": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.CWVX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.AMC": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BITU": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NASA": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NVS": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.GLL": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.AXP": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.AEON": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.FIGR": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.AMZU": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.IRE": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.ONON": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SSO": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.ADBT": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.EWJ": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.HSAI": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.TEAM": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.VIXY": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.MDB": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.KWEB": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.VIPS": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.MSFU": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.ASPI": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BTI": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.EWZ": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.LX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.PEP": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.AFRM": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.FBL": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BUG": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.KHC": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.PLUG": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.AAOG": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.EROC": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.IBB": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.VOR": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.TE": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.AXTQ": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.QUBT": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SMCZ": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.B": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.FPS": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.PBR": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BBAI": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.JEPQ": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NEE": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.CPNG": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.LEGN": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.CDT": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.ADBG": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.GM": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.WRD": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.LUNR": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.URA": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.VZ": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.FSLY": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.C": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.TZA": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.FLNC": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.MSTY": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BTCT": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.MKDW": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.IQ": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.XLF": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.XLU": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NDAQ": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BAOS": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.STM": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.CPRT": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.CDNS": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.M": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.HIMX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SBIT": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.INFQ": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SPGI": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SIVEF": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BZ": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.MPC": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.CMCM": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.XOP": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.CELH": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.FXY": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.TWST": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.MS": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.IBKR": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.PG": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.MOS": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.DBA": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BNC": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.AAPD": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.ZETA": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SCHG": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SYK": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.TMDX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.RH": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.HESAY": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.FN": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.LEN": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.RIVN": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SPXU": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.GDXD": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.PLTZ": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.UAL": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.MNST": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.AMGN": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.FRVO": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.ADI": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.AEP": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SLS": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.MPNGY": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.MRVU": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.XLP": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NCLH": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.UAMY": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.ZSL": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.TSDD": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.CAN": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BLSH": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.OAIW": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SPAX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.STRC": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.P": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.MNSO": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NLR": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SNK": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.QRVO": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NXPI": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.LASE": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.MCO": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.UPS": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.ANTW": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SWMR": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BIL": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.AA": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.FORM": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SFTBY": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.XHLD": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.KC": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SNYR": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NCLD": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.DOW": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SNAP": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.ITRG": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NCI": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NFE": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BRK.A": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.RIOT": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SONY": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.TIGR": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BNTX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.VIAV": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.RCL": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.CHWY": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.HD": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BLK": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.DOCN": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.LLYX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BMNZ": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.MA": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.BEAM": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.CASY": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.IPDN": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.AAPX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.AI": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SHEL": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.VIK": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.ZENA": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.LIN": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NTR": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NXXT": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.T": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.MO": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NB": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.RY": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.VRTX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.LABX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.GOSS": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.ECHO": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NAVN": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.VXX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.NCT": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.F": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.OUST": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.IBX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.VLO": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.EUV": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.SAP": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.PAYP": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.OEF": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.LULG": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.XRTX": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.HLSQ": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.RMBS": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.STZ": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.ENPH": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.CYPH": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.LNOK": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.MOO": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.MASK": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.ZIM": {
+    "name": "",
+    "total_market_val": null
+  },
+  "US.MUD": {
+    "name": "",
+    "total_market_val": null
+  }
+}

@@ -1,0 +1,1129 @@
+{
+  "generated": "2026-09-12",
+  "source": "Futu US 热门榜 (HotListSortField.AVERAGE_HEAT, DESC), offset 0..600, 2026-09-12 抓取",
+  "rule": "非 ETF/ETN/杠杆 + 总市值 >= $100亿 + 上市日期满足 >=253 根日线",
+  "qualified_total": 140,
+  "target100": [
+    {
+      "rank": 1,
+      "code": "US.ORCL",
+      "name": "甲骨文",
+      "mktcap_usd": 440539234740.0,
+      "listing_date": "2013-07-15",
+      "has_long": true
+    },
+    {
+      "rank": 2,
+      "code": "US.MU",
+      "name": "美光科技",
+      "mktcap_usd": 1103880159718.91,
+      "listing_date": "2009-12-30",
+      "has_long": true
+    },
+    {
+      "rank": 4,
+      "code": "US.SNDK",
+      "name": "闪迪",
+      "mktcap_usd": 239153475283.35,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 5,
+      "code": "US.NVDA",
+      "name": "英伟达",
+      "mktcap_usd": 5262476000000.0,
+      "listing_date": "1999-01-22",
+      "has_long": true
+    },
+    {
+      "rank": 6,
+      "code": "US.DELL",
+      "name": "戴尔科技",
+      "mktcap_usd": 322115455405.0,
+      "listing_date": "2016-09-07",
+      "has_long": true
+    },
+    {
+      "rank": 7,
+      "code": "US.AAPL",
+      "name": "苹果",
+      "mktcap_usd": 4766021362600.0,
+      "listing_date": "1980-12-12",
+      "has_long": true
+    },
+    {
+      "rank": 8,
+      "code": "US.TSLA",
+      "name": "特斯拉",
+      "mktcap_usd": 1435897450562.64,
+      "listing_date": "2010-06-29",
+      "has_long": true
+    },
+    {
+      "rank": 9,
+      "code": "US.INTC",
+      "name": "英特尔",
+      "mktcap_usd": 527030173380.48,
+      "listing_date": "1971-10-21",
+      "has_long": true
+    },
+    {
+      "rank": 13,
+      "code": "US.GOOG",
+      "name": "谷歌-C",
+      "mktcap_usd": 4040669700000.0,
+      "listing_date": "2014-03-27",
+      "has_long": true
+    },
+    {
+      "rank": 16,
+      "code": "US.CRCL",
+      "name": "Circle",
+      "mktcap_usd": 23001154818.6,
+      "listing_date": "2025-06-05",
+      "has_long": false
+    },
+    {
+      "rank": 17,
+      "code": "US.BE",
+      "name": "Bloom Energy",
+      "mktcap_usd": 76132373667.54,
+      "listing_date": "2018-07-25",
+      "has_long": true
+    },
+    {
+      "rank": 18,
+      "code": "US.GOOGL",
+      "name": "谷歌-A",
+      "mktcap_usd": 4067698000000.0,
+      "listing_date": "2004-08-19",
+      "has_long": true
+    },
+    {
+      "rank": 20,
+      "code": "US.MRVL",
+      "name": "迈威尔科技",
+      "mktcap_usd": 199021224000.0,
+      "listing_date": "1970-01-01",
+      "has_long": true
+    },
+    {
+      "rank": 21,
+      "code": "US.MSTR",
+      "name": "Strategy",
+      "mktcap_usd": 49396062548.56,
+      "listing_date": "1970-01-01",
+      "has_long": true
+    },
+    {
+      "rank": 22,
+      "code": "US.AVGO",
+      "name": "博通",
+      "mktcap_usd": 1716677662844.34,
+      "listing_date": "1970-01-01",
+      "has_long": true
+    },
+    {
+      "rank": 23,
+      "code": "US.LITE",
+      "name": "Lumentum",
+      "mktcap_usd": 83932290000.0,
+      "listing_date": "2015-07-23",
+      "has_long": true
+    },
+    {
+      "rank": 25,
+      "code": "US.TSM",
+      "name": "台积电",
+      "mktcap_usd": 2219979694059.12,
+      "listing_date": "1997-10-08",
+      "has_long": true
+    },
+    {
+      "rank": 26,
+      "code": "US.NBIS",
+      "name": "NEBIUS",
+      "mktcap_usd": 61045089201.9,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 28,
+      "code": "US.AMD",
+      "name": "美国超微公司",
+      "mktcap_usd": 822114431151.2,
+      "listing_date": "1972-09-01",
+      "has_long": true
+    },
+    {
+      "rank": 29,
+      "code": "US.META",
+      "name": "Meta Platforms",
+      "mktcap_usd": 1641562061265.5,
+      "listing_date": "2012-05-18",
+      "has_long": true
+    },
+    {
+      "rank": 30,
+      "code": "US.HOOD",
+      "name": "Robinhood",
+      "mktcap_usd": 101892993999.09,
+      "listing_date": "2021-07-29",
+      "has_long": true
+    },
+    {
+      "rank": 31,
+      "code": "US.RKLB",
+      "name": "Rocket Lab",
+      "mktcap_usd": 37080565428.44,
+      "listing_date": "1970-01-01",
+      "has_long": true
+    },
+    {
+      "rank": 33,
+      "code": "US.PLTR",
+      "name": "Palantir",
+      "mktcap_usd": 398571279492.8,
+      "listing_date": "2020-09-30",
+      "has_long": true
+    },
+    {
+      "rank": 35,
+      "code": "US.NOK",
+      "name": "诺基亚",
+      "mktcap_usd": 59457609900.0,
+      "listing_date": "1994-07-01",
+      "has_long": true
+    },
+    {
+      "rank": 37,
+      "code": "US.GLW",
+      "name": "康宁",
+      "mktcap_usd": 140509664552.72,
+      "listing_date": "1970-01-01",
+      "has_long": true
+    },
+    {
+      "rank": 38,
+      "code": "US.MSFT",
+      "name": "微软",
+      "mktcap_usd": 3656635621588.04,
+      "listing_date": "1986-03-14",
+      "has_long": true
+    },
+    {
+      "rank": 39,
+      "code": "US.BABA",
+      "name": "阿里巴巴",
+      "mktcap_usd": 269839299535.84,
+      "listing_date": "2014-09-19",
+      "has_long": true
+    },
+    {
+      "rank": 40,
+      "code": "US.ADBE",
+      "name": "Adobe",
+      "mktcap_usd": 98909925000.0,
+      "listing_date": "1986-08-15",
+      "has_long": true
+    },
+    {
+      "rank": 41,
+      "code": "US.QCOM",
+      "name": "高通",
+      "mktcap_usd": 185724000000.0,
+      "listing_date": "1991-12-13",
+      "has_long": true
+    },
+    {
+      "rank": 42,
+      "code": "US.PDD",
+      "name": "拼多多",
+      "mktcap_usd": 110797180602.08,
+      "listing_date": "2018-07-26",
+      "has_long": true
+    },
+    {
+      "rank": 43,
+      "code": "US.CRWV",
+      "name": "CoreWeave",
+      "mktcap_usd": 49081242211.98,
+      "listing_date": "2025-03-28",
+      "has_long": false
+    },
+    {
+      "rank": 45,
+      "code": "US.MRNA",
+      "name": "Moderna",
+      "mktcap_usd": 54543607155.18,
+      "listing_date": "2018-12-07",
+      "has_long": true
+    },
+    {
+      "rank": 47,
+      "code": "US.BMNR",
+      "name": "Bitmine Immersion Technologies",
+      "mktcap_usd": 15098756641.82,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 49,
+      "code": "US.AMZN",
+      "name": "亚马逊",
+      "mktcap_usd": 2716964525651.08,
+      "listing_date": "1997-05-16",
+      "has_long": true
+    },
+    {
+      "rank": 51,
+      "code": "US.COHR",
+      "name": "Coherent",
+      "mktcap_usd": 57412139559.82,
+      "listing_date": "1970-01-01",
+      "has_long": true
+    },
+    {
+      "rank": 55,
+      "code": "US.HPE",
+      "name": "慧与科技",
+      "mktcap_usd": 82422288128.11,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 59,
+      "code": "US.COIN",
+      "name": "Coinbase",
+      "mktcap_usd": 45453825094.44,
+      "listing_date": "2021-04-14",
+      "has_long": true
+    },
+    {
+      "rank": 65,
+      "code": "US.SMCI",
+      "name": "超微电脑",
+      "mktcap_usd": 26344311898.4,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 66,
+      "code": "US.FUTU",
+      "name": "富途控股",
+      "mktcap_usd": 15913476219.37,
+      "listing_date": "2019-03-08",
+      "has_long": true
+    },
+    {
+      "rank": 68,
+      "code": "US.MCD",
+      "name": "麦当劳",
+      "mktcap_usd": 178700715823.43,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 69,
+      "code": "US.CRWD",
+      "name": "CrowdStrike",
+      "mktcap_usd": 211688289235.08,
+      "listing_date": "2019-06-12",
+      "has_long": false
+    },
+    {
+      "rank": 73,
+      "code": "US.UNH",
+      "name": "联合健康",
+      "mktcap_usd": 340269230549.23,
+      "listing_date": "1984-10-19",
+      "has_long": false
+    },
+    {
+      "rank": 74,
+      "code": "US.ARM",
+      "name": "Arm Holdings",
+      "mktcap_usd": 282795720000.0,
+      "listing_date": "2023-09-14",
+      "has_long": false
+    },
+    {
+      "rank": 75,
+      "code": "US.WDC",
+      "name": "西部数据",
+      "mktcap_usd": 161226699337.92,
+      "listing_date": "2012-06-01",
+      "has_long": false
+    },
+    {
+      "rank": 77,
+      "code": "US.NOW",
+      "name": "ServiceNow",
+      "mktcap_usd": 135611678540.0,
+      "listing_date": "1970-01-01",
+      "has_long": true
+    },
+    {
+      "rank": 78,
+      "code": "US.KO",
+      "name": "可口可乐",
+      "mktcap_usd": 379872072664.47,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 81,
+      "code": "US.UBER",
+      "name": "优步",
+      "mktcap_usd": 146390283872.07,
+      "listing_date": "2019-05-10",
+      "has_long": false
+    },
+    {
+      "rank": 82,
+      "code": "US.APP",
+      "name": "Applovin",
+      "mktcap_usd": 108413537960.0,
+      "listing_date": "2021-04-15",
+      "has_long": false
+    },
+    {
+      "rank": 83,
+      "code": "US.IREN",
+      "name": "IREN Ltd",
+      "mktcap_usd": 17271590541.84,
+      "listing_date": "2021-11-17",
+      "has_long": false
+    },
+    {
+      "rank": 85,
+      "code": "US.IBM",
+      "name": "IBM Corp",
+      "mktcap_usd": 229211875743.1,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 86,
+      "code": "US.NVO",
+      "name": "诺和诺德",
+      "mktcap_usd": 192307550000.0,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 90,
+      "code": "US.CRDO",
+      "name": "Credo Technology",
+      "mktcap_usd": 30130571974.58,
+      "listing_date": "2022-01-27",
+      "has_long": true
+    },
+    {
+      "rank": 93,
+      "code": "US.VRT",
+      "name": "Vertiv Holdings",
+      "mktcap_usd": 95527115366.49,
+      "listing_date": "2018-06-08",
+      "has_long": true
+    },
+    {
+      "rank": 94,
+      "code": "US.BRK.B",
+      "name": "伯克希尔-B",
+      "mktcap_usd": 1092554244869.57,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 95,
+      "code": "US.TEM",
+      "name": "Tempus AI",
+      "mktcap_usd": 10598737567.44,
+      "listing_date": "2024-06-14",
+      "has_long": true
+    },
+    {
+      "rank": 102,
+      "code": "US.XPEV",
+      "name": "小鹏集团",
+      "mktcap_usd": 10098059581.26,
+      "listing_date": "2020-08-27",
+      "has_long": false
+    },
+    {
+      "rank": 104,
+      "code": "US.NKE",
+      "name": "耐克",
+      "mktcap_usd": 54325722503.86,
+      "listing_date": "1980-12-05",
+      "has_long": true
+    },
+    {
+      "rank": 106,
+      "code": "US.LLY",
+      "name": "礼来",
+      "mktcap_usd": 1050272077420.5,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 107,
+      "code": "US.LULU",
+      "name": "Lululemon Athletica",
+      "mktcap_usd": 10956971174.25,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 110,
+      "code": "US.NFLX",
+      "name": "奈飞",
+      "mktcap_usd": 322288930922.4,
+      "listing_date": "2002-05-23",
+      "has_long": false
+    },
+    {
+      "rank": 113,
+      "code": "US.PANW",
+      "name": "Palo Alto Networks",
+      "mktcap_usd": 270471700000.0,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 118,
+      "code": "US.VST",
+      "name": "Vistra Energy",
+      "mktcap_usd": 49801550234.1,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 120,
+      "code": "US.OXY",
+      "name": "西方石油",
+      "mktcap_usd": 61437712821.66,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 121,
+      "code": "US.STX",
+      "name": "希捷科技",
+      "mktcap_usd": 188774858432.38,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 122,
+      "code": "US.AMAT",
+      "name": "应用材料",
+      "mktcap_usd": 362269296755.07,
+      "listing_date": "1978-01-06",
+      "has_long": false
+    },
+    {
+      "rank": 123,
+      "code": "US.HPQ",
+      "name": "惠普",
+      "mktcap_usd": 31995543580.12,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 124,
+      "code": "US.FIG",
+      "name": "Figma Inc",
+      "mktcap_usd": 12365828914.4,
+      "listing_date": "2025-07-31",
+      "has_long": false
+    },
+    {
+      "rank": 126,
+      "code": "US.IONQ",
+      "name": "IonQ Inc",
+      "mktcap_usd": 14001835039.5,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 128,
+      "code": "US.NET",
+      "name": "Cloudflare",
+      "mktcap_usd": 109149115038.95,
+      "listing_date": "2019-09-13",
+      "has_long": false
+    },
+    {
+      "rank": 130,
+      "code": "US.ASTS",
+      "name": "AST SpaceMobile",
+      "mktcap_usd": 17945387797.3,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 134,
+      "code": "US.CRM",
+      "name": "赛富时",
+      "mktcap_usd": 203873560000.0,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 136,
+      "code": "US.NTAP",
+      "name": "美国网存",
+      "mktcap_usd": 39142379316.4,
+      "listing_date": "1995-11-21",
+      "has_long": false
+    },
+    {
+      "rank": 137,
+      "code": "US.GEV",
+      "name": "GE Vernova",
+      "mktcap_usd": 254953147083.87,
+      "listing_date": "2024-03-27",
+      "has_long": false
+    },
+    {
+      "rank": 138,
+      "code": "US.ALAB",
+      "name": "Astera Labs",
+      "mktcap_usd": 50522331986.88,
+      "listing_date": "2024-03-20",
+      "has_long": false
+    },
+    {
+      "rank": 140,
+      "code": "US.GME",
+      "name": "游戏驿站",
+      "mktcap_usd": 10670195938.5,
+      "listing_date": "2005-10-08",
+      "has_long": false
+    },
+    {
+      "rank": 141,
+      "code": "US.BIDU",
+      "name": "百度",
+      "mktcap_usd": 31099093032.6,
+      "listing_date": "2005-08-05",
+      "has_long": false
+    },
+    {
+      "rank": 143,
+      "code": "US.SNOW",
+      "name": "Snowflake",
+      "mktcap_usd": 116067672000.0,
+      "listing_date": "2020-09-16",
+      "has_long": false
+    },
+    {
+      "rank": 147,
+      "code": "US.LI",
+      "name": "理想汽车",
+      "mktcap_usd": 12266341718.61,
+      "listing_date": "2020-07-30",
+      "has_long": false
+    },
+    {
+      "rank": 149,
+      "code": "US.JD",
+      "name": "京东",
+      "mktcap_usd": 36368640000.0,
+      "listing_date": "2014-05-22",
+      "has_long": false
+    },
+    {
+      "rank": 150,
+      "code": "US.ASML",
+      "name": "阿斯麦",
+      "mktcap_usd": 652317030000.0,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 151,
+      "code": "US.SANM",
+      "name": "新美亚电子",
+      "mktcap_usd": 11577028896.0,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 160,
+      "code": "US.GRAB",
+      "name": "Grab Holdings",
+      "mktcap_usd": 12440950000.0,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 161,
+      "code": "US.RDDT",
+      "name": "Reddit",
+      "mktcap_usd": 30354397382.7,
+      "listing_date": "2024-03-21",
+      "has_long": false
+    },
+    {
+      "rank": 162,
+      "code": "US.JPM",
+      "name": "摩根大通",
+      "mktcap_usd": 946925668244.85,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 163,
+      "code": "US.FCX",
+      "name": "麦克莫兰铜金",
+      "mktcap_usd": 102057765359.61,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 166,
+      "code": "US.OKTA",
+      "name": "Okta",
+      "mktcap_usd": 29107684512.0,
+      "listing_date": "2017-04-07",
+      "has_long": false
+    },
+    {
+      "rank": 167,
+      "code": "US.CSCO",
+      "name": "思科",
+      "mktcap_usd": 442082266069.49,
+      "listing_date": "1990-02-16",
+      "has_long": false
+    },
+    {
+      "rank": 168,
+      "code": "US.SWKS",
+      "name": "思佳讯",
+      "mktcap_usd": 13294270289.7,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 170,
+      "code": "US.ASX",
+      "name": "日月光半导体",
+      "mktcap_usd": 88226743985.27,
+      "listing_date": "2000-10-02",
+      "has_long": false
+    },
+    {
+      "rank": 173,
+      "code": "US.SOFI",
+      "name": "SoFi Technologies",
+      "mktcap_usd": 22369998011.68,
+      "listing_date": "2020-11-30",
+      "has_long": false
+    },
+    {
+      "rank": 177,
+      "code": "US.ON",
+      "name": "安森美半导体",
+      "mktcap_usd": 29642719193.82,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 185,
+      "code": "US.TME",
+      "name": "腾讯音乐",
+      "mktcap_usd": 12559757910.0,
+      "listing_date": "2018-12-12",
+      "has_long": false
+    },
+    {
+      "rank": 192,
+      "code": "US.AMKR",
+      "name": "艾马克技术",
+      "mktcap_usd": 12852446376.56,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 193,
+      "code": "US.TCOM",
+      "name": "携程网",
+      "mktcap_usd": 24571097762.44,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 194,
+      "code": "US.CLS",
+      "name": "天弘科技",
+      "mktcap_usd": 43200751457.75,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 195,
+      "code": "US.TTMI",
+      "name": "TTM科技",
+      "mktcap_usd": 13320310364.16,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 196,
+      "code": "US.ANET",
+      "name": "Arista Networks",
+      "mktcap_usd": 251727827494.32,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 197,
+      "code": "US.ISRG",
+      "name": "直觉外科公司",
+      "mktcap_usd": 130412587727.7,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 198,
+      "code": "US.RBLX",
+      "name": "Roblox",
+      "mktcap_usd": 32504105315.5,
+      "listing_date": "2021-03-10",
+      "has_long": false
+    },
+    {
+      "rank": 200,
+      "code": "US.TER",
+      "name": "泰瑞达",
+      "mktcap_usd": 59365709590.0,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    }
+  ],
+  "dropped_short_history": [
+    {
+      "rank": 3,
+      "code": "US.SPCX",
+      "name": "SpaceX",
+      "mktcap_usd": 1993216945483.45,
+      "listing_date": "2026-06-12"
+    },
+    {
+      "rank": 11,
+      "code": "US.SKHY",
+      "name": "SK海力士",
+      "mktcap_usd": 1385354655850.0,
+      "listing_date": "2026-07-10"
+    },
+    {
+      "rank": 119,
+      "code": "US.CBRS",
+      "name": "Cerebras Systems",
+      "mktcap_usd": 45595666389.13,
+      "listing_date": "2026-05-14"
+    }
+  ],
+  "backup_beyond_100": [
+    {
+      "rank": 207,
+      "code": "US.COST",
+      "name": "好市多",
+      "mktcap_usd": 401246317495.08,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 208,
+      "code": "US.XOM",
+      "name": "埃克森美孚",
+      "mktcap_usd": 682536266240.4,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 209,
+      "code": "US.WMT",
+      "name": "沃尔玛",
+      "mktcap_usd": 850100909723.15,
+      "listing_date": "1972-08-25",
+      "has_long": false
+    },
+    {
+      "rank": 212,
+      "code": "US.UMC",
+      "name": "联电",
+      "mktcap_usd": 56999171907.52,
+      "listing_date": "2000-09-19",
+      "has_long": false
+    },
+    {
+      "rank": 214,
+      "code": "US.PFE",
+      "name": "辉瑞",
+      "mktcap_usd": 157994951887.08,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 219,
+      "code": "US.BA",
+      "name": "波音",
+      "mktcap_usd": 166333370709.0,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 221,
+      "code": "US.U",
+      "name": "Unity Software",
+      "mktcap_usd": 19346309494.68,
+      "listing_date": "2020-09-18",
+      "has_long": false
+    },
+    {
+      "rank": 222,
+      "code": "US.CIEN",
+      "name": "Ciena",
+      "mktcap_usd": 49567751828.5,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 229,
+      "code": "US.OSCR",
+      "name": "Oscar Health",
+      "mktcap_usd": 10114296650.0,
+      "listing_date": "2021-03-03",
+      "has_long": false
+    },
+    {
+      "rank": 234,
+      "code": "US.ALB",
+      "name": "美国雅保",
+      "mktcap_usd": 13867954298.64,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 235,
+      "code": "US.CEG",
+      "name": "Constellation Energy",
+      "mktcap_usd": 100889026170.25,
+      "listing_date": "2022-02-02",
+      "has_long": false
+    },
+    {
+      "rank": 243,
+      "code": "US.CVX",
+      "name": "雪佛龙",
+      "mktcap_usd": 422933598912.44,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 245,
+      "code": "US.FRO",
+      "name": "Frontline",
+      "mktcap_usd": 10955272367.69,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 248,
+      "code": "US.HUT",
+      "name": "Hut 8",
+      "mktcap_usd": 12153383544.8,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 250,
+      "code": "US.BAC",
+      "name": "美国银行",
+      "mktcap_usd": 438375395001.85,
+      "listing_date": "1979-06-05",
+      "has_long": false
+    },
+    {
+      "rank": 251,
+      "code": "US.TTWO",
+      "name": "Take-Two互动软件",
+      "mktcap_usd": 40288676053.21,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 254,
+      "code": "US.SHOP",
+      "name": "Shopify",
+      "mktcap_usd": 165706872002.28,
+      "listing_date": "2015-05-21",
+      "has_long": false
+    },
+    {
+      "rank": 255,
+      "code": "US.LRCX",
+      "name": "泛林集团",
+      "mktcap_usd": 373168948620.0,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 256,
+      "code": "US.SMTC",
+      "name": "先科电子",
+      "mktcap_usd": 15607777692.24,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 258,
+      "code": "US.PYPL",
+      "name": "PayPal",
+      "mktcap_usd": 45955358151.28,
+      "listing_date": "2015-07-06",
+      "has_long": false
+    },
+    {
+      "rank": 263,
+      "code": "US.TXN",
+      "name": "德州仪器",
+      "mktcap_usd": 245389653228.2,
+      "listing_date": "2012-01-03",
+      "has_long": false
+    },
+    {
+      "rank": 266,
+      "code": "US.KLAC",
+      "name": "科磊",
+      "mktcap_usd": 236014610881.12,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 268,
+      "code": "US.FTNT",
+      "name": "飞塔信息",
+      "mktcap_usd": 114510689823.71,
+      "listing_date": "2009-11-18",
+      "has_long": false
+    },
+    {
+      "rank": 271,
+      "code": "US.JNJ",
+      "name": "强生",
+      "mktcap_usd": 640020869391.26,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 272,
+      "code": "US.MRK",
+      "name": "默沙东",
+      "mktcap_usd": 355100013857.34,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 274,
+      "code": "US.SCCO",
+      "name": "南方铜业",
+      "mktcap_usd": 163372059804.14,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 277,
+      "code": "US.DIS",
+      "name": "迪士尼",
+      "mktcap_usd": 183978489408.1,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 279,
+      "code": "US.BEKE",
+      "name": "贝壳",
+      "mktcap_usd": 19389146106.01,
+      "listing_date": "2020-08-13",
+      "has_long": false
+    },
+    {
+      "rank": 282,
+      "code": "US.VG",
+      "name": "Venture Global",
+      "mktcap_usd": 39501467045.8,
+      "listing_date": "2025-01-24",
+      "has_long": false
+    },
+    {
+      "rank": 286,
+      "code": "US.LMT",
+      "name": "洛克希德马丁",
+      "mktcap_usd": 120978204815.07,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 287,
+      "code": "US.GS",
+      "name": "高盛",
+      "mktcap_usd": 299667789685.44,
+      "listing_date": "1999-05-04",
+      "has_long": false
+    },
+    {
+      "rank": 291,
+      "code": "US.APH",
+      "name": "安费诺",
+      "mktcap_usd": 206943943422.88,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 292,
+      "code": "US.SMMT",
+      "name": "Summit Therapeutics",
+      "mktcap_usd": 14000505515.1,
+      "listing_date": "2015-03-05",
+      "has_long": false
+    },
+    {
+      "rank": 296,
+      "code": "US.SE",
+      "name": "Sea",
+      "mktcap_usd": 65070355617.28,
+      "listing_date": "2017-10-20",
+      "has_long": false
+    },
+    {
+      "rank": 297,
+      "code": "US.PM",
+      "name": "菲利普莫里斯",
+      "mktcap_usd": 297788683655.34,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 298,
+      "code": "US.CAT",
+      "name": "卡特彼勒",
+      "mktcap_usd": 376276073888.73,
+      "listing_date": "1970-01-01",
+      "has_long": false
+    },
+    {
+      "rank": 300,
+      "code": "US.DAL",
+      "name": "达美航空",
+      "mktcap_usd": 52550656327.3,
+      "listing_date": "2007-05-03",
+      "has_long": false
+    }
+  ]
+}

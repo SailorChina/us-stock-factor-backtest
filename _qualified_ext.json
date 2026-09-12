@@ -1,0 +1,842 @@
+[
+  {
+    "rank": 1,
+    "code": "US.ORCL",
+    "name": "甲骨文",
+    "mktcap": 440539234740.0
+  },
+  {
+    "rank": 2,
+    "code": "US.MU",
+    "name": "美光科技",
+    "mktcap": 1103880159718.91
+  },
+  {
+    "rank": 3,
+    "code": "US.SPCX",
+    "name": "SpaceX",
+    "mktcap": 1993216945483.45
+  },
+  {
+    "rank": 4,
+    "code": "US.SNDK",
+    "name": "闪迪",
+    "mktcap": 239153475283.35
+  },
+  {
+    "rank": 5,
+    "code": "US.NVDA",
+    "name": "英伟达",
+    "mktcap": 5262476000000.0
+  },
+  {
+    "rank": 6,
+    "code": "US.DELL",
+    "name": "戴尔科技",
+    "mktcap": 322115455405.0
+  },
+  {
+    "rank": 7,
+    "code": "US.AAPL",
+    "name": "苹果",
+    "mktcap": 4766021362600.0
+  },
+  {
+    "rank": 8,
+    "code": "US.TSLA",
+    "name": "特斯拉",
+    "mktcap": 1435897450562.64
+  },
+  {
+    "rank": 9,
+    "code": "US.INTC",
+    "name": "英特尔",
+    "mktcap": 527030173380.48
+  },
+  {
+    "rank": 11,
+    "code": "US.SKHY",
+    "name": "SK海力士",
+    "mktcap": 1385354655850.0
+  },
+  {
+    "rank": 13,
+    "code": "US.GOOG",
+    "name": "谷歌-C",
+    "mktcap": 4040669700000.0
+  },
+  {
+    "rank": 16,
+    "code": "US.CRCL",
+    "name": "Circle",
+    "mktcap": 23001154818.6
+  },
+  {
+    "rank": 17,
+    "code": "US.BE",
+    "name": "Bloom Energy",
+    "mktcap": 76132373667.54
+  },
+  {
+    "rank": 18,
+    "code": "US.GOOGL",
+    "name": "谷歌-A",
+    "mktcap": 4067698000000.0
+  },
+  {
+    "rank": 20,
+    "code": "US.MRVL",
+    "name": "迈威尔科技",
+    "mktcap": 199021224000.0
+  },
+  {
+    "rank": 21,
+    "code": "US.MSTR",
+    "name": "Strategy",
+    "mktcap": 49396062548.56
+  },
+  {
+    "rank": 22,
+    "code": "US.AVGO",
+    "name": "博通",
+    "mktcap": 1716677662844.34
+  },
+  {
+    "rank": 23,
+    "code": "US.LITE",
+    "name": "Lumentum",
+    "mktcap": 83932290000.0
+  },
+  {
+    "rank": 25,
+    "code": "US.TSM",
+    "name": "台积电",
+    "mktcap": 2219979694059.12
+  },
+  {
+    "rank": 26,
+    "code": "US.NBIS",
+    "name": "NEBIUS",
+    "mktcap": 61045089201.9
+  },
+  {
+    "rank": 28,
+    "code": "US.AMD",
+    "name": "美国超微公司",
+    "mktcap": 822114431151.2
+  },
+  {
+    "rank": 29,
+    "code": "US.META",
+    "name": "Meta Platforms",
+    "mktcap": 1641562061265.5
+  },
+  {
+    "rank": 30,
+    "code": "US.HOOD",
+    "name": "Robinhood",
+    "mktcap": 101892993999.09
+  },
+  {
+    "rank": 31,
+    "code": "US.RKLB",
+    "name": "Rocket Lab",
+    "mktcap": 37080565428.44
+  },
+  {
+    "rank": 33,
+    "code": "US.PLTR",
+    "name": "Palantir",
+    "mktcap": 398571279492.8
+  },
+  {
+    "rank": 35,
+    "code": "US.NOK",
+    "name": "诺基亚",
+    "mktcap": 59457609900.0
+  },
+  {
+    "rank": 37,
+    "code": "US.GLW",
+    "name": "康宁",
+    "mktcap": 140509664552.72
+  },
+  {
+    "rank": 38,
+    "code": "US.MSFT",
+    "name": "微软",
+    "mktcap": 3656635621588.04
+  },
+  {
+    "rank": 39,
+    "code": "US.BABA",
+    "name": "阿里巴巴",
+    "mktcap": 269839299535.84
+  },
+  {
+    "rank": 40,
+    "code": "US.ADBE",
+    "name": "Adobe",
+    "mktcap": 98909925000.0
+  },
+  {
+    "rank": 41,
+    "code": "US.QCOM",
+    "name": "高通",
+    "mktcap": 185724000000.0
+  },
+  {
+    "rank": 42,
+    "code": "US.PDD",
+    "name": "拼多多",
+    "mktcap": 110797180602.08
+  },
+  {
+    "rank": 43,
+    "code": "US.CRWV",
+    "name": "CoreWeave",
+    "mktcap": 49081242211.98
+  },
+  {
+    "rank": 45,
+    "code": "US.MRNA",
+    "name": "Moderna",
+    "mktcap": 54543607155.18
+  },
+  {
+    "rank": 47,
+    "code": "US.BMNR",
+    "name": "Bitmine Immersion Technologies",
+    "mktcap": 15098756641.82
+  },
+  {
+    "rank": 49,
+    "code": "US.AMZN",
+    "name": "亚马逊",
+    "mktcap": 2716964525651.08
+  },
+  {
+    "rank": 51,
+    "code": "US.COHR",
+    "name": "Coherent",
+    "mktcap": 57412139559.82
+  },
+  {
+    "rank": 55,
+    "code": "US.HPE",
+    "name": "慧与科技",
+    "mktcap": 82422288128.11
+  },
+  {
+    "rank": 59,
+    "code": "US.COIN",
+    "name": "Coinbase",
+    "mktcap": 45453825094.44
+  },
+  {
+    "rank": 65,
+    "code": "US.SMCI",
+    "name": "超微电脑",
+    "mktcap": 26344311898.4
+  },
+  {
+    "rank": 66,
+    "code": "US.FUTU",
+    "name": "富途控股",
+    "mktcap": 15913476219.37
+  },
+  {
+    "rank": 68,
+    "code": "US.MCD",
+    "name": "麦当劳",
+    "mktcap": 178700715823.43
+  },
+  {
+    "rank": 69,
+    "code": "US.CRWD",
+    "name": "CrowdStrike",
+    "mktcap": 211688289235.08
+  },
+  {
+    "rank": 73,
+    "code": "US.UNH",
+    "name": "联合健康",
+    "mktcap": 340269230549.23
+  },
+  {
+    "rank": 74,
+    "code": "US.ARM",
+    "name": "Arm Holdings",
+    "mktcap": 282795720000.0
+  },
+  {
+    "rank": 75,
+    "code": "US.WDC",
+    "name": "西部数据",
+    "mktcap": 161226699337.92
+  },
+  {
+    "rank": 77,
+    "code": "US.NOW",
+    "name": "ServiceNow",
+    "mktcap": 135611678540.0
+  },
+  {
+    "rank": 78,
+    "code": "US.KO",
+    "name": "可口可乐",
+    "mktcap": 379872072664.47
+  },
+  {
+    "rank": 81,
+    "code": "US.UBER",
+    "name": "优步",
+    "mktcap": 146390283872.07
+  },
+  {
+    "rank": 82,
+    "code": "US.APP",
+    "name": "Applovin",
+    "mktcap": 108413537960.0
+  },
+  {
+    "rank": 83,
+    "code": "US.IREN",
+    "name": "IREN Ltd",
+    "mktcap": 17271590541.84
+  },
+  {
+    "rank": 85,
+    "code": "US.IBM",
+    "name": "IBM Corp",
+    "mktcap": 229211875743.1
+  },
+  {
+    "rank": 86,
+    "code": "US.NVO",
+    "name": "诺和诺德",
+    "mktcap": 192307550000.0
+  },
+  {
+    "rank": 90,
+    "code": "US.CRDO",
+    "name": "Credo Technology",
+    "mktcap": 30130571974.58
+  },
+  {
+    "rank": 93,
+    "code": "US.VRT",
+    "name": "Vertiv Holdings",
+    "mktcap": 95527115366.49
+  },
+  {
+    "rank": 94,
+    "code": "US.BRK.B",
+    "name": "伯克希尔-B",
+    "mktcap": 1092554244869.57
+  },
+  {
+    "rank": 95,
+    "code": "US.TEM",
+    "name": "Tempus AI",
+    "mktcap": 10598737567.44
+  },
+  {
+    "rank": 102,
+    "code": "US.XPEV",
+    "name": "小鹏集团",
+    "mktcap": 10098059581.26
+  },
+  {
+    "rank": 104,
+    "code": "US.NKE",
+    "name": "耐克",
+    "mktcap": 54325722503.86
+  },
+  {
+    "rank": 106,
+    "code": "US.LLY",
+    "name": "礼来",
+    "mktcap": 1050272077420.5
+  },
+  {
+    "rank": 107,
+    "code": "US.LULU",
+    "name": "Lululemon Athletica",
+    "mktcap": 10956971174.25
+  },
+  {
+    "rank": 110,
+    "code": "US.NFLX",
+    "name": "奈飞",
+    "mktcap": 322288930922.4
+  },
+  {
+    "rank": 113,
+    "code": "US.PANW",
+    "name": "Palo Alto Networks",
+    "mktcap": 270471700000.0
+  },
+  {
+    "rank": 118,
+    "code": "US.VST",
+    "name": "Vistra Energy",
+    "mktcap": 49801550234.1
+  },
+  {
+    "rank": 119,
+    "code": "US.CBRS",
+    "name": "Cerebras Systems",
+    "mktcap": 45595666389.13
+  },
+  {
+    "rank": 120,
+    "code": "US.OXY",
+    "name": "西方石油",
+    "mktcap": 61437712821.66
+  },
+  {
+    "rank": 121,
+    "code": "US.STX",
+    "name": "希捷科技",
+    "mktcap": 188774858432.38
+  },
+  {
+    "rank": 122,
+    "code": "US.AMAT",
+    "name": "应用材料",
+    "mktcap": 362269296755.07
+  },
+  {
+    "rank": 123,
+    "code": "US.HPQ",
+    "name": "惠普",
+    "mktcap": 31995543580.12
+  },
+  {
+    "rank": 124,
+    "code": "US.FIG",
+    "name": "Figma Inc",
+    "mktcap": 12365828914.4
+  },
+  {
+    "rank": 126,
+    "code": "US.IONQ",
+    "name": "IonQ Inc",
+    "mktcap": 14001835039.5
+  },
+  {
+    "rank": 128,
+    "code": "US.NET",
+    "name": "Cloudflare",
+    "mktcap": 109149115038.95
+  },
+  {
+    "rank": 130,
+    "code": "US.ASTS",
+    "name": "AST SpaceMobile",
+    "mktcap": 17945387797.3
+  },
+  {
+    "rank": 134,
+    "code": "US.CRM",
+    "name": "赛富时",
+    "mktcap": 203873560000.0
+  },
+  {
+    "rank": 136,
+    "code": "US.NTAP",
+    "name": "美国网存",
+    "mktcap": 39142379316.4
+  },
+  {
+    "rank": 137,
+    "code": "US.GEV",
+    "name": "GE Vernova",
+    "mktcap": 254953147083.87
+  },
+  {
+    "rank": 138,
+    "code": "US.ALAB",
+    "name": "Astera Labs",
+    "mktcap": 50522331986.88
+  },
+  {
+    "rank": 140,
+    "code": "US.GME",
+    "name": "游戏驿站",
+    "mktcap": 10670195938.5
+  },
+  {
+    "rank": 141,
+    "code": "US.BIDU",
+    "name": "百度",
+    "mktcap": 31099093032.6
+  },
+  {
+    "rank": 143,
+    "code": "US.SNOW",
+    "name": "Snowflake",
+    "mktcap": 116067672000.0
+  },
+  {
+    "rank": 147,
+    "code": "US.LI",
+    "name": "理想汽车",
+    "mktcap": 12266341718.61
+  },
+  {
+    "rank": 149,
+    "code": "US.JD",
+    "name": "京东",
+    "mktcap": 36368640000.0
+  },
+  {
+    "rank": 150,
+    "code": "US.ASML",
+    "name": "阿斯麦",
+    "mktcap": 652317030000.0
+  },
+  {
+    "rank": 151,
+    "code": "US.SANM",
+    "name": "新美亚电子",
+    "mktcap": 11577028896.0
+  },
+  {
+    "rank": 160,
+    "code": "US.GRAB",
+    "name": "Grab Holdings",
+    "mktcap": 12440950000.0
+  },
+  {
+    "rank": 161,
+    "code": "US.RDDT",
+    "name": "Reddit",
+    "mktcap": 30354397382.7
+  },
+  {
+    "rank": 162,
+    "code": "US.JPM",
+    "name": "摩根大通",
+    "mktcap": 946925668244.85
+  },
+  {
+    "rank": 163,
+    "code": "US.FCX",
+    "name": "麦克莫兰铜金",
+    "mktcap": 102057765359.61
+  },
+  {
+    "rank": 166,
+    "code": "US.OKTA",
+    "name": "Okta",
+    "mktcap": 29107684512.0
+  },
+  {
+    "rank": 167,
+    "code": "US.CSCO",
+    "name": "思科",
+    "mktcap": 442082266069.49
+  },
+  {
+    "rank": 168,
+    "code": "US.SWKS",
+    "name": "思佳讯",
+    "mktcap": 13294270289.7
+  },
+  {
+    "rank": 170,
+    "code": "US.ASX",
+    "name": "日月光半导体",
+    "mktcap": 88226743985.27
+  },
+  {
+    "rank": 173,
+    "code": "US.SOFI",
+    "name": "SoFi Technologies",
+    "mktcap": 22369998011.68
+  },
+  {
+    "rank": 177,
+    "code": "US.ON",
+    "name": "安森美半导体",
+    "mktcap": 29642719193.82
+  },
+  {
+    "rank": 185,
+    "code": "US.TME",
+    "name": "腾讯音乐",
+    "mktcap": 12559757910.0
+  },
+  {
+    "rank": 192,
+    "code": "US.AMKR",
+    "name": "艾马克技术",
+    "mktcap": 12852446376.56
+  },
+  {
+    "rank": 193,
+    "code": "US.TCOM",
+    "name": "携程网",
+    "mktcap": 24571097762.44
+  },
+  {
+    "rank": 194,
+    "code": "US.CLS",
+    "name": "天弘科技",
+    "mktcap": 43200751457.75
+  },
+  {
+    "rank": 195,
+    "code": "US.TTMI",
+    "name": "TTM科技",
+    "mktcap": 13320310364.16
+  },
+  {
+    "rank": 196,
+    "code": "US.ANET",
+    "name": "Arista Networks",
+    "mktcap": 251727827494.32
+  },
+  {
+    "rank": 197,
+    "code": "US.ISRG",
+    "name": "直觉外科公司",
+    "mktcap": 130412587727.7
+  },
+  {
+    "rank": 198,
+    "code": "US.RBLX",
+    "name": "Roblox",
+    "mktcap": 32504105315.5
+  },
+  {
+    "rank": 200,
+    "code": "US.TER",
+    "name": "泰瑞达",
+    "mktcap": 59365709590.0
+  },
+  {
+    "rank": 207,
+    "code": "US.COST",
+    "name": "好市多",
+    "mktcap": 401246317495.08
+  },
+  {
+    "rank": 208,
+    "code": "US.XOM",
+    "name": "埃克森美孚",
+    "mktcap": 682536266240.4
+  },
+  {
+    "rank": 209,
+    "code": "US.WMT",
+    "name": "沃尔玛",
+    "mktcap": 850100909723.15
+  },
+  {
+    "rank": 212,
+    "code": "US.UMC",
+    "name": "联电",
+    "mktcap": 56999171907.52
+  },
+  {
+    "rank": 214,
+    "code": "US.PFE",
+    "name": "辉瑞",
+    "mktcap": 157994951887.08
+  },
+  {
+    "rank": 219,
+    "code": "US.BA",
+    "name": "波音",
+    "mktcap": 166333370709.0
+  },
+  {
+    "rank": 221,
+    "code": "US.U",
+    "name": "Unity Software",
+    "mktcap": 19346309494.68
+  },
+  {
+    "rank": 222,
+    "code": "US.CIEN",
+    "name": "Ciena",
+    "mktcap": 49567751828.5
+  },
+  {
+    "rank": 229,
+    "code": "US.OSCR",
+    "name": "Oscar Health",
+    "mktcap": 10114296650.0
+  },
+  {
+    "rank": 234,
+    "code": "US.ALB",
+    "name": "美国雅保",
+    "mktcap": 13867954298.64
+  },
+  {
+    "rank": 235,
+    "code": "US.CEG",
+    "name": "Constellation Energy",
+    "mktcap": 100889026170.25
+  },
+  {
+    "rank": 243,
+    "code": "US.CVX",
+    "name": "雪佛龙",
+    "mktcap": 422933598912.44
+  },
+  {
+    "rank": 245,
+    "code": "US.FRO",
+    "name": "Frontline",
+    "mktcap": 10955272367.69
+  },
+  {
+    "rank": 248,
+    "code": "US.HUT",
+    "name": "Hut 8",
+    "mktcap": 12153383544.8
+  },
+  {
+    "rank": 250,
+    "code": "US.BAC",
+    "name": "美国银行",
+    "mktcap": 438375395001.85
+  },
+  {
+    "rank": 251,
+    "code": "US.TTWO",
+    "name": "Take-Two互动软件",
+    "mktcap": 40288676053.21
+  },
+  {
+    "rank": 254,
+    "code": "US.SHOP",
+    "name": "Shopify",
+    "mktcap": 165706872002.28
+  },
+  {
+    "rank": 255,
+    "code": "US.LRCX",
+    "name": "泛林集团",
+    "mktcap": 373168948620.0
+  },
+  {
+    "rank": 256,
+    "code": "US.SMTC",
+    "name": "先科电子",
+    "mktcap": 15607777692.24
+  },
+  {
+    "rank": 258,
+    "code": "US.PYPL",
+    "name": "PayPal",
+    "mktcap": 45955358151.28
+  },
+  {
+    "rank": 263,
+    "code": "US.TXN",
+    "name": "德州仪器",
+    "mktcap": 245389653228.2
+  },
+  {
+    "rank": 266,
+    "code": "US.KLAC",
+    "name": "科磊",
+    "mktcap": 236014610881.12
+  },
+  {
+    "rank": 268,
+    "code": "US.FTNT",
+    "name": "飞塔信息",
+    "mktcap": 114510689823.71
+  },
+  {
+    "rank": 271,
+    "code": "US.JNJ",
+    "name": "强生",
+    "mktcap": 640020869391.26
+  },
+  {
+    "rank": 272,
+    "code": "US.MRK",
+    "name": "默沙东",
+    "mktcap": 355100013857.34
+  },
+  {
+    "rank": 274,
+    "code": "US.SCCO",
+    "name": "南方铜业",
+    "mktcap": 163372059804.14
+  },
+  {
+    "rank": 277,
+    "code": "US.DIS",
+    "name": "迪士尼",
+    "mktcap": 183978489408.1
+  },
+  {
+    "rank": 279,
+    "code": "US.BEKE",
+    "name": "贝壳",
+    "mktcap": 19389146106.01
+  },
+  {
+    "rank": 282,
+    "code": "US.VG",
+    "name": "Venture Global",
+    "mktcap": 39501467045.8
+  },
+  {
+    "rank": 286,
+    "code": "US.LMT",
+    "name": "洛克希德马丁",
+    "mktcap": 120978204815.07
+  },
+  {
+    "rank": 287,
+    "code": "US.GS",
+    "name": "高盛",
+    "mktcap": 299667789685.44
+  },
+  {
+    "rank": 291,
+    "code": "US.APH",
+    "name": "安费诺",
+    "mktcap": 206943943422.88
+  },
+  {
+    "rank": 292,
+    "code": "US.SMMT",
+    "name": "Summit Therapeutics",
+    "mktcap": 14000505515.1
+  },
+  {
+    "rank": 296,
+    "code": "US.SE",
+    "name": "Sea",
+    "mktcap": 65070355617.28
+  },
+  {
+    "rank": 297,
+    "code": "US.PM",
+    "name": "菲利普莫里斯",
+    "mktcap": 297788683655.34
+  },
+  {
+    "rank": 298,
+    "code": "US.CAT",
+    "name": "卡特彼勒",
+    "mktcap": 376276073888.73
+  },
+  {
+    "rank": 300,
+    "code": "US.DAL",
+    "name": "达美航空",
+    "mktcap": 52550656327.3
+  }
+]

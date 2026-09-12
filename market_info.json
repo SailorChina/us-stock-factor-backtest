@@ -210,5 +210,181 @@
   "US.SLV": {
     "name": "白银ETF-iShares",
     "total_market_val": NaN
+  },
+  "US.SNDK": {
+    "name": "闪迪",
+    "total_market_val": 239153475283.35
+  },
+  "US.CRCL": {
+    "name": "Circle",
+    "total_market_val": 23001154818.6
+  },
+  "US.NBIS": {
+    "name": "NEBIUS",
+    "total_market_val": 61045089201.9
+  },
+  "US.CRWV": {
+    "name": "CoreWeave",
+    "total_market_val": 49081242211.98
+  },
+  "US.HPE": {
+    "name": "慧与科技",
+    "total_market_val": 82422288128.11
+  },
+  "US.SMCI": {
+    "name": "超微电脑",
+    "total_market_val": 26344311898.4
+  },
+  "US.MCD": {
+    "name": "麦当劳",
+    "total_market_val": 178700715823.43
+  },
+  "US.CRWD": {
+    "name": "CrowdStrike",
+    "total_market_val": 211688289235.08
+  },
+  "US.UNH": {
+    "name": "联合健康",
+    "total_market_val": 340269230549.23
+  },
+  "US.ARM": {
+    "name": "Arm Holdings",
+    "total_market_val": 282795720000.0
+  },
+  "US.WDC": {
+    "name": "西部数据",
+    "total_market_val": 161226699337.92
+  },
+  "US.KO": {
+    "name": "可口可乐",
+    "total_market_val": 379872072664.47
+  },
+  "US.UBER": {
+    "name": "优步",
+    "total_market_val": 146390283872.07
+  },
+  "US.IBM": {
+    "name": "IBM Corp",
+    "total_market_val": 229211875743.1
+  },
+  "US.BRK.B": {
+    "name": "伯克希尔-B",
+    "total_market_val": 1092554244869.57
+  },
+  "US.LLY": {
+    "name": "礼来",
+    "total_market_val": 1050272077420.5
+  },
+  "US.LULU": {
+    "name": "Lululemon Athletica",
+    "total_market_val": 10956971174.25
+  },
+  "US.NFLX": {
+    "name": "奈飞",
+    "total_market_val": 322288930922.4
+  },
+  "US.PANW": {
+    "name": "Palo Alto Networks",
+    "total_market_val": 270471700000.0
+  },
+  "US.OXY": {
+    "name": "西方石油",
+    "total_market_val": 61437712821.66
+  },
+  "US.STX": {
+    "name": "希捷科技",
+    "total_market_val": 188774858432.38
+  },
+  "US.AMAT": {
+    "name": "应用材料",
+    "total_market_val": 362269296755.07
+  },
+  "US.NET": {
+    "name": "Cloudflare",
+    "total_market_val": 109149115038.95
+  },
+  "US.CRM": {
+    "name": "赛富时",
+    "total_market_val": 203873560000.0
+  },
+  "US.SNOW": {
+    "name": "Snowflake",
+    "total_market_val": 116067672000.0
+  },
+  "US.JPM": {
+    "name": "摩根大通",
+    "total_market_val": 946925668244.85
+  },
+  "US.FCX": {
+    "name": "麦克莫兰铜金",
+    "total_market_val": 102057765359.61
+  },
+  "US.CSCO": {
+    "name": "思科",
+    "total_market_val": 442082266069.49
+  },
+  "US.SWKS": {
+    "name": "思佳讯",
+    "total_market_val": 13294270289.7
+  },
+  "US.ON": {
+    "name": "安森美半导体",
+    "total_market_val": 29642719193.82
+  },
+  "US.ANET": {
+    "name": "Arista Networks",
+    "total_market_val": 251727827494.32
+  },
+  "US.ISRG": {
+    "name": "直觉外科公司",
+    "total_market_val": 130412587727.7
+  },
+  "US.RBLX": {
+    "name": "Roblox",
+    "total_market_val": 32504105315.5
+  },
+  "US.TER": {
+    "name": "泰瑞达",
+    "total_market_val": 59365709590.0
+  },
+  "US.BMNR": {
+    "name": "Bitmine Immersion Technologies",
+    "total_market_val": 15098756641.82
+  },
+  "US.APP": {
+    "name": "Applovin",
+    "total_market_val": 108413537960.0
+  },
+  "US.IREN": {
+    "name": "IREN Ltd",
+    "total_market_val": 17271590541.84
+  },
+  "US.NVO": {
+    "name": "诺和诺德",
+    "total_market_val": 192307550000.0
+  },
+  "US.XPEV": {
+    "name": "小鹏集团",
+    "total_market_val": 10098059581.26
+  },
+  "US.VST": {
+    "name": "Vistra Energy",
+    "total_market_val": 49801550234.1
+  },
+  "US.HPQ": {
+    "name": "惠普",
+    "total_market_val": 31995543580.12
+  },
+  "US.FIG": {
+    "name": "Figma Inc",
+    "total_market_val": 12365828914.4
+  },
+  "US.IONQ": {
+    "name": "IonQ Inc",
+    "total_market_val": 14001835039.5
+  },
+  "US.ASTS": {
+    "name": "AST SpaceMobile",
+    "total_market_val": 17945387797.3
   }
 }

@@ -1,3 +1,11 @@
-﻿date,strategy,topk,picks,exec_day
-2026-09-11,动量-1月反转,3,"MU,LITE,COHR",2026-09-14
-2026-09-11,Vortex,2,"META,BE",2026-09-14
+﻿date,strategy,topk,pool_size,picks,exec_day,variant
+2026-09-11,Vortex,2,37,"META, BE",2026-09-14,-
+2026-09-11,动量-1月反转,2,37,"MU, LITE",2026-09-14,-
+2026-09-11,动量-1月反转,2,81,"SNDK, CRDO",2026-09-14,-
+2026-09-11,Vortex,2,81,"SWKS,META",2026-09-14,-
+2026-09-11,动量-1月反转,2,81,"SNDK,CRDO",2026-09-14,nogate
+2026-09-11,Vortex,2,81,"SWKS,META",2026-09-14,gate10M
+2026-09-11,Vortex,2,81,"SWKS,META",2026-09-14,gate1M
+2026-09-11,Vortex,2,81,"SWKS,META",2026-09-14,nogate
+2026-09-11,动量-1月反转,2,81,"SNDK,CRDO",2026-09-14,gate5M
+2026-09-11,Vortex,2,81,"SWKS,META",2026-09-14,gate5M

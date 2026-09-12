@@ -19,8 +19,15 @@ portfolio.json.bak
 futulog/
 *.log.bak
 
+# ---- 运行输出 / 日志 (v26 起: 之前 82 个 .log 被误提交, 已 git rm --cached 退出版本控制) ----
+*.log
+_gcm_*.log
+# 跑批中间产物 (可随时重跑, 不必进库; 正式结果文件保留)
+_rank_all_fast.txt
+
 # ---- 一次性工具脚本 (仅用于探测 GitHub / 推送 / 清理, 用完即删) ----
 _gh_probe*.py
+_gh_state.json
 _push_*.py
 _cleanup_*.py
 _cred_*.py

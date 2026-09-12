@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-美股因子策略 · 一键下单助手 (v22 完整版)
+美股因子策略 · 一键下单助手 (v25.1 审计修复版)
 
 用法:
     python _update_signal.py                     # 刷新行情 + 出完整下单清单
@@ -10,8 +10,54 @@
     python _update_signal.py --cny 10000 --fx 6.71
     python _update_signal.py --topk 3 --strategy 动量-1月反转
     python _update_signal.py --positions META:1,BE:2   # 告知实际持仓, 算真实盈亏
+    python _update_signal.py --min-dv 1e7        # 放宽/收紧流动性闸门(美元)
+    python _update_signal.py --no-gate           # 关闭闸门(复现旧口径, 仅用于对比)
 
 退出码: 0 正常 / 2 数据不可用(勿下单)
+
+v25.1 审计修复 —— 三处"不报错但算错"的缺陷(详见 美股回测深度审计_v25.1.md):
+  F1 [严重] 【成交量被 ffill】是语义错误: 停牌日没有成交, 成交量应当是空的, 旧写法却把它
+     填成前一天的值 -> 闸门 (收盘价 x 成交量) 在停牌后的 10 个交易日里看到的是
+     "前一天的成交额" -> 把停牌票判成"可交易"。实测后果: 2022-03 买入了已停牌的 NBIS。
+     修法: volume 不再 ffill; 新增 REAL 掩码("该格当天是否真有 bar"), 无 bar 的日子
+     因子一律置 NaN。(闸门开启时 REAL 是冗余的 —— trade 为 True 必然 REAL 也为 True,
+     它保护的是 --no-gate 这条对比路径, 以及将来放宽阈值后的边界。)
+  F2 [严重] 【回测引擎卖不出去的持仓被凭空抹掉】: 调仓时若某持仓当日开盘价不可得,
+     旧引擎跳过入账却仍然清空持仓表 -> 仓位价值既不进现金也不进净值, 直接消失。
+     实测后果: 反转策略在 2022-04-05 出现【假的 -34.6% 单日暴跌】, 终值被低估 61%
+     (CAGR 45.4% -> 54.7%)。修法: 卖不掉的持仓保留, 下个调仓日再试。
+  F3 [严重] 【买入侧佣金从未扣除】: bud=(cash-topk*comm)/topk 只把佣金"预留"出来,
+     真下单时写的是 cash -= sh*pr, 少扣了那笔 comm -> 每次调仓账上恰好残留 topk*$2,
+     等于只收了卖出那一半。实测: 93/93 次调仓各少扣 $4; 本金 $500 时终值虚高 34.5%。
+  (F2/F3 位于独立回测引擎 _liquidity_gate_v25.py / _verify_gate.py; 本脚本的 [4]/[5] 段
+   佣金计算与下单清单本身正确, 不受影响 —— 但历史回测结论必须用修正后的引擎重算。)
+
+v25 变更 —— 流动性闸门(堵住"假价格"污染):
+  E1 新增 tradable_mask(): 只有【滚动 60 个交易日的中位成交额 >= $5M】的标的
+     才认为"该日可交易", 否则该日因子值置 NaN, 不参与横截面排名。
+     动机: 池子里存在三类"价格是假的"标的 —— 粉单壳股(BMNR, 685 天里 349 天
+     中位成交额 < $1M)、长期停牌(Yandex 系 NBIS 缺 664 个交易日)、
+     SPAC 躺平期(7 只贴在 $10 不动)。它们的共同后果是【波动率 ≈ 0】,
+     而反转类因子的 pct(close,21) 在横盘时恰好 = 0 -> 横截面 z-score 反而偏高
+     -> 策略会主动去选这些根本没法成交的票。这类错误不抛异常, 只让回测悄悄变好看。
+  E2 闸门只用到【当日及之前】的滚动窗口, 无前视; 有 min_periods=60 的预热期,
+     停牌复牌后要重新攒满 60 个有效日才恢复可交易。
+  E3 横截面 z-score 在闸门【之后】计算 -> 均值/标准差只由可真成交的标的决定,
+     不会被躺平票的低波动稀释。
+  E4 新增 variant 标识并计入历史去重键 —— 闸门开关会改信号, 若去重键不含它,
+     就会重演 v24 那个"静默覆盖旧记录"的坑。键 =
+     (日期, 策略, TopK, 池子规模, 变体)。
+  E5 自检新增 7 条闸门断言(合成僵尸票必被挡 / 无前视 / 阈值单调 /
+     闸门关=复现旧口径 / 变体变更不覆盖历史 / 无 variant 列的旧表兼容)。
+
+v24 变更 —— 股票池扩容后的可追溯性:
+  D1 signal_snapshot.json 新增 pool_size / pool_codes: 池子变了信号就会变,
+     不记录池子成分, 事后无法解释"同一天为什么算出两个不同结果"。
+  D2 signal_history.csv 的去重键从 (日期,策略,TopK) 改为
+     (日期,策略,TopK,池子规模), 并抽出 hist_merge() 单独测试。
+     旧行为会把"扩池前"的记录静默覆盖 —— 实测发生过: 37 只池的 META,BE
+     被 81 只池的 SWKS,META 顶掉, 历史里查不到旧信号了。
+  D3 自检新增 4 条历史表断言(同池去重 / 跨池共存 / 旧记录可查 / 旧格式兼容)。
 
 v22 变更 (相对 v19) —— 选股层与资金层结构性隔离:
   C1 选股逻辑抽成 select() 函数, 只接受 (信号, 行号, 合格池, 持股数) 四个参数,
@@ -49,6 +95,8 @@ COMM = 2.0          # 富途: 买 $2/笔 + 卖 $2/笔
 MIN_HIST = 253      # 参与排名所需最少真实历史(252日动量)
 MAX_FFILL = 10      # 面板最多向前填充 10 根(防止上市前被假价格补齐)
 STALE_DAYS = 4      # 数据超过几个日历日未更新即告警
+GATE_WIN = 60       # v25 流动性闸门: 滚动窗口(交易日)
+GATE_DV = 5e6       # v25 流动性闸门: 中位成交额门槛(美元)
 
 # ==================== 参数 ====================
 def arg(name, default=None, cast=str):
@@ -65,6 +113,11 @@ if CAP0 is None:
     CAP0 = (CNY or 10000.0) / FX
 TOPK = arg("--topk", 2, int)
 STRAT = arg("--strategy", "Vortex", str)
+# v25 流动性闸门: 默认开启。变体标识会写进快照与历史表 —— 闸门开关会改信号,
+# 不记录"这份信号是用哪套口径算的", 事后就没法解释同一天为什么有两个结果。
+MIN_DV = arg("--min-dv", GATE_DV, float)
+USE_GATE = ("--no-gate" not in sys.argv) and MIN_DV > 0
+VARIANT = f"gate{MIN_DV/1e6:g}M" if USE_GATE else "nogate"
 def parse_positions(s):
     """CODE:股数[,CODE:股数] -> dict, 带格式校验"""
     out = {}
@@ -187,7 +240,15 @@ UNI = [c for c in fetched if not is_etf(mi.get(c, {}).get("name", ""))
        and (mi.get(c, {}).get("total_market_val", 0) or 0) >= 10e9]
 
 def load(codes, limit=MAX_FFILL):
-    """limit=有限向前填充: 只补临时停牌, 不把上市前补成假价格"""
+    """limit=有限向前填充: 只补临时停牌, 不把上市前补成假价格。
+
+    v25.1 修复: 成交量【不做】ffill, 并额外返回 REAL 掩码(该格当天是否真有 bar)。
+
+    为什么成交量的 ffill 是错的: 停牌日的成交量是"没有成交", 不是"前一天的成交量"。
+    旧写法把它填成前一天的值, 于是闸门算 close x volume 时在停牌后的 10 个交易日里
+    看到的是"前一天的成交额" -> 把停牌票判成可交易。实测: 2022-03 买入了已停牌的 NBIS,
+    随后那个仓位在净值上砸出一根假的 -34.6% 断崖(见 _audit_v25.py 的 C3/C11)。
+    """
     p = {}
     for c in codes:
         d = pd.read_csv(os.path.join(LONGDIR, c.replace(".", "_") + ".csv"))
@@ -197,8 +258,10 @@ def load(codes, limit=MAX_FFILL):
     out = {}
     for k in ["open","high","low","close","volume"]:
         m = pd.DataFrame({c: p[c][k].reindex(dt) for c in codes})
-        out[k] = m.ffill(limit=limit)
-    return dt, out
+        # volume: 没有 bar 就是没有成交 -> 保持空值, 不填充
+        out[k] = m if k == "volume" else m.ffill(limit=limit)
+    REAL = pd.DataFrame({c: p[c]["close"].reindex(dt).notna() for c in codes})
+    return dt, out, REAL
 
 # ==================== 拉取 ====================
 def fetch_latest():
@@ -247,13 +310,56 @@ def vortex(h, lo, cl, n=14):
     return ((h - lo.shift()).abs().rolling(n).sum() / tr.rolling(n).sum()
             - (lo - h.shift()).abs().rolling(n).sum() / tr.rolling(n).sum())
 
-def build_signals(PX):
+def build_signals(PX, trade=None, real=None):
+    """trade: bool 面板, True 表示该标的该日可交易; None 表示不启用闸门。
+    real : bool 面板, True 表示该日该标的有【真实 bar】; None 表示不做这层检查。
+
+    闸门必须在【横截面标准化之前】施加: zs() 的均值/标准差是按行(横截面)算的,
+    若把躺平壳股留在里面, 它们"恰好为 0"的收益会拉低标准差、垫高别人,
+    等于让僵尸票参与了"什么算好"的定义。先置 NaN, 它们就被彻底移出横截面。
+
+    v25.1: 再叠一层 REAL —— 没有 bar 的日子不可能成交, 因子在那里没有意义。
+    自检里有一条断言证明"闸门开启时 trade ⊆ REAL", 所以这层在默认口径下不改变结果;
+    它的作用是保护 --no-gate 对比路径不被假数据污染。
+    """
     C, O, H, L = PX["close"], PX["open"], PX["high"], PX["low"]
     mom = C.shift(21) / C.shift(252) - 1.0
     rev = C / C.shift(21) - 1.0
     V = vortex(H, L, C)
+    valid = trade
+    if real is not None:
+        valid = real if valid is None else (valid & real)
+    if valid is not None:
+        V, mom, rev = V.where(valid), mom.where(valid), rev.where(valid)
     return {"Vortex": V, "动量-1月反转": (zs(mom) - zs(rev)) / 2.0,
             "动量12-1": mom}
+
+def tradable_mask(PX, min_dv=None, win=GATE_WIN):
+    """v25 流动性闸门 —— 判断"某标的在某日到底能不能真的买卖"。
+
+    判据: 该日【及之前】win 个交易日的成交额(收盘价 x 成交量)中位数 >= min_dv。
+
+    为什么用"成交额"而不是"成交量":
+      一只 $10 的壳股成交 1 万股(= $10 万) 与一只 $500 的票成交 1 万股(= $500 万)
+      流动性天差地别, 只有金额可比。成交量大小本身说明不了问题。
+
+    为什么用"中位数"而不是"均值":
+      均值会被单日天量拉高 —— 壳股偶尔放量一天就能骗过均值;
+      中位数要求"半数以上的日子都活跃", 这才叫"能进能出"。
+
+    为什么 min_periods=win 强制预热:
+      停牌复牌后必须重新攒满 win 个有效日, 否则复牌首日就会被当成"可交易",
+      而它的前 win 日窗口里全是停牌空洞。
+
+    无前视: rolling 默认只用【当日及之前】的窗口, 不含未来。
+
+    v25.1 修复: 成交量取自【未填充】的原始面板。旧写法对 volume 也做 ffill(limit=10),
+    于是停牌开始后的 10 个交易日里 dv 仍等于"停牌前那天的成交额" -> 闸门看不见停牌。
+    实测后果: 2022-03 买入已停牌的 NBIS, 在净值上砸出假的 -34.6% 断崖。
+    """
+    dv = PX["close"] * PX["volume"]
+    med = dv.rolling(win, min_periods=win).median()
+    return med >= (GATE_DV if min_dv is None else min_dv), med
 
 # ==================== 选股层（与资金完全无关）====================
 def select(A, i, good, topk):
@@ -294,10 +400,13 @@ def main():
             print(f"  拉取异常(用本地数据继续): {type(e).__name__}: {e}")
             ok = False
 
-    dates, PX = load(UNI)
+    dates, PX, REAL = load(UNI)
     C, O, V_, VOL = PX["close"], PX["open"], PX["volume"], PX["volume"]
     N, S = C.shape; dp = pd.to_datetime(dates)
-    SIG = build_signals(PX)
+    TRADE = MED = None
+    if USE_GATE:
+        TRADE, MED = tradable_mask(PX, MIN_DV)
+    SIG = build_signals(PX, TRADE, REAL)
 
     print("\n" + "=" * 116); print("[2] 数据体检"); print("=" * 116)
     today = datetime.date.today()
@@ -315,11 +424,29 @@ def main():
         ok = False
     elif phase in ("pre", "post"):
         print(f"  [!] 当前处于美股{'盘前' if phase=='pre' else '盘后'}时段, 最新完整收盘为 {last_d}")
-    # 覆盖度闸门
-    cover = {c.replace("US.",""): int(C[c].notna().sum()) for c in UNI}
-    good = [c for c in UNI if C[c].notna().sum() >= MIN_HIST]
-    short = [c.replace("US.","") for c in UNI if C[c].notna().sum() < MIN_HIST]
+    # 覆盖度闸门 —— v25.1: 按【真实 bar 数】算, 不再把 ffill 出来的幽灵日算作历史
+    cover = {c.replace("US.",""): int(REAL[c].sum()) for c in UNI}
+    good = [c for c in UNI if REAL[c].sum() >= MIN_HIST]
+    short = [c.replace("US.","") for c in UNI if REAL[c].sum() < MIN_HIST]
+    _ghost = int((~REAL.values).sum())
     print(f"  候选池: 合格 {len(good)}/{S} 只; 历史不足被剔除: {short if short else '无'}")
+    print(f"  真实 bar 覆盖率: {REAL.values.mean()*100:.1f}% (缺失 {_ghost} 格 = 停牌/未上市, "
+          f"已按 NaN 处理, 不参与排名)")
+    # v25 流动性闸门体检 —— 必须显式打印: "因子被悄悄置 NaN" 是看不见的变化
+    if USE_GATE:
+        blk = 1.0 - TRADE.mean()
+        t_ok = int(TRADE.values[-1].sum())
+        t_blk = [UNI[j].replace("US.", "") for j in range(S) if not TRADE.values[-1, j]]
+        print(f"  流动性闸门: 滚动{GATE_WIN}日中位成交额 >= ${MIN_DV/1e6:.0f}M  [变体 {VARIANT}]")
+        print(f"    本日可交易 {t_ok}/{S} 只" + (f"; 被挡下: {t_blk}" if t_blk else " (全部可交易)"))
+        _w = blk.sort_values(ascending=False).head(6)
+        _w = _w[_w > 0]
+        if len(_w):
+            print("    历史被挡比例最高: "
+                  + ", ".join(f"{c.replace('US.','')} {v*100:.0f}%" for c, v in _w.items())
+                  + "  <- 早期是壳股/停牌, 已移出排名")
+    else:
+        print("  流动性闸门: 【已关闭 --no-gate】壳股/停牌期会重新进入排名, 仅供对比")
     # 极端跳变标记
     prev = C.shift().where(lambda x: x.abs() > 1e-9)
     ret = C / prev - 1.0
@@ -475,6 +602,14 @@ def main():
             "exec_day": str(exec_d) if exec_d else None,
             "open_time_cn": open_time(exec_d) if exec_d else None,
             "strategy": STRAT, "topk": TOPK, "capital_usd": round(CAP0, 2), "fx": FX,
+            # v24: 记录池子规模与成分。池子变了信号就会变, 不记录会造成
+            # "同一天两个不同结果, 却说不清哪个是哪次"的审计黑洞。
+            "pool_size": len(good), "pool_codes": sorted(c.replace("US.", "") for c in good),
+            # v25: 变体标识(闸门口径)。与 pool_size 是同一件事 ——
+            # 让"这份信号出自哪套口径"可追溯, 否则事后无法解释同一天的两个结果。
+            "variant": VARIANT,
+            "min_dv": (MIN_DV if USE_GATE else None),
+            "tradable_n": (int(TRADE.values[-1].sum()) if USE_GATE else None),
             "picks": names, "prices": {n: round(float(C.values[N-1, UNI.index("US."+n)]), 2) for n in names},
             "budget_each": round(bud, 2), "commission": round(fee, 2),
             "target_shares": {n: round(float(bud / float(C.values[N-1, UNI.index("US."+n)])), 4) for n in names},
@@ -484,14 +619,10 @@ def main():
     json.dump(snap, open(SNAP, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
     try:
         row = pd.DataFrame([{"date": str(last_d), "strategy": STRAT, "topk": TOPK,
+                             "pool_size": len(good), "variant": VARIANT,
                              "picks": ",".join(names), "exec_day": str(exec_d) if exec_d else ""}])
         if os.path.exists(HIST):
-            h = pd.read_csv(HIST)
-            # 去重: 同一(日期,策略,TopK)只保留最新一条, 避免同日重复运行写多行
-            m = ~((h["date"].astype(str) == str(last_d)) &
-                  (h["strategy"].astype(str) == STRAT) &
-                  (h["topk"].astype(int) == TOPK))
-            h = pd.concat([h[m], row], ignore_index=True)
+            h = hist_merge(pd.read_csv(HIST), row)
         else:
             h = row
         h.to_csv(HIST, index=False, encoding="utf-8-sig")
@@ -499,6 +630,31 @@ def main():
         print(f"  历史写入失败: {e}")
     print(f"\n  已保存: {os.path.basename(SNAP)} | 历史(去重更新): {os.path.basename(HIST)}")
     return 0 if ok else 2
+
+def hist_merge(h, row):
+    """把一行信号并入历史表。
+
+    去重键 = (date, strategy, topk, pool_size, variant)。
+    v24: 把 pool_size 计入键 —— 扩大股票池后同一天的信号会变,
+    若不区分, 旧记录会被静默覆盖, 事后无法解释"信号为什么变了"。
+    v25: 再把 variant(闸门口径)计入键 —— 同一个池子、同一天,
+    开闸门与关闸门是两个不同结果, 同样不能互相覆盖。
+    """
+    if h is None:
+        return row.copy()
+    h = h.copy()
+    if "pool_size" not in h.columns:
+        h["pool_size"] = -1
+    if "variant" not in h.columns:
+        h["variant"] = "-"
+    rv = str(row["variant"].iloc[0]) if "variant" in row.columns else "-"
+    key = (h["date"].astype(str) == str(row["date"].iloc[0])) & \
+          (h["strategy"].astype(str) == str(row["strategy"].iloc[0])) & \
+          (h["topk"].astype(int) == int(row["topk"].iloc[0])) & \
+          (h["pool_size"].astype(int) == int(row["pool_size"].iloc[0])) & \
+          (h["variant"].astype(str) == rv)
+    return pd.concat([h[~key], row], ignore_index=True)
+
 
 def self_test():
     print("=" * 116); print("SELF-TEST"); print("=" * 116)
@@ -530,27 +686,116 @@ def self_test():
     chk("下次调仓推算: 9/11 + 21 交易日 = 2026-10-12",
         str(project_trading_days(datetime.date(2026,9,11), REBAL)) == "2026-10-12")
     # 数据
-    dates, PX = load(UNI)
+    dates, PX, REAL = load(UNI)
     C = PX["close"]; N, S = C.shape
     raw = {c: pd.read_csv(os.path.join(LONGDIR, c.replace(".","_")+".csv")) for c in UNI[:5]}
     chk("无重复日期", all(not pd.to_datetime(d["time_key"]).duplicated().any() for d in raw.values()))
     chk("面板列数 = 标的数", S == len(UNI), f"({S})")
-    good = [c for c in UNI if C[c].notna().sum() >= MIN_HIST]
+    good = [c for c in UNI if REAL[c].sum() >= MIN_HIST]
     chk("合格候选 >= 25 只", len(good) >= 25, f"({len(good)})")
     chk("最后一根全部有效", C.values[-1][np.isfinite(C.values[-1])].size >= len(UNI) - 2)
-    # 无未来函数
-    SIG = build_signals(PX)
+    # 无未来函数 —— 闸门口径 / 无闸门口径 都要过。
+    # 注意: 只比数值不够。闸门会把"不可交易"处置 NaN, 若截断前后 NaN 的【位置】
+    # 变了, 说明闸门偷看了未来, 而 nanmax 会把 NaN 差异静默吃掉 -> 必须单独比 NaN 图案。
+    TR, _MED = tradable_mask(PX, MIN_DV)
+    SIG = build_signals(PX, TR, REAL)
     A_full = SIG["Vortex"].values
     sub = {k: v.iloc[:N-21] for k, v in PX.items()}
-    V2 = vortex(sub["high"], sub["low"], sub["close"])
-    d = np.nanmax(np.abs(A_full[:N-21] - V2.values[:N-21]))
-    chk("Vortex 无未来函数(截断后前段不变)", d < 1e-9, f"(maxdiff {d:.2e})")
+    R2 = REAL.iloc[:N-21]
+    TR2, _ = tradable_mask(sub, MIN_DV)
+    V2 = vortex(sub["high"], sub["low"], sub["close"]).where(TR2 & R2).values
+    _z = slice(0, N - 21)
+    _same = bool((np.isnan(A_full[_z]) == np.isnan(V2[_z])).all())
+    d = np.nanmax(np.abs(A_full[_z] - V2[_z])) if np.isfinite(A_full[_z]).any() else np.inf
+    chk("Vortex 无未来函数(含闸门 NaN 位置一致)", _same and d < 1e-9,
+        f"(maxdiff {d:.2e}, NaN位置一致={_same})")
+    A_offgen = build_signals(PX, None)["Vortex"].values
+    d2 = np.nanmax(np.abs(A_offgen[_z] - vortex(sub["high"], sub["low"], sub["close"]).values[_z]))
+    chk("Vortex 无未来函数(无闸门口径)", d2 < 1e-9, f"(maxdiff {d2:.2e})")
     # 调仓序列稳定
     rb1 = [i for i in range(N) if i >= START and (i-START) % REBAL == 0]
     rb2 = [i for i in range(N-21) if i >= START and (i-START) % REBAL == 0]
     chk("调仓序列不因追加数据而漂移", rb2 == [i for i in rb1 if i < N-21])
     # 佣金
     chk("佣金: Top2 换仓 = $8", 2*COMM*2 == 8.0)
+    # ---- v24 历史表去重键必须含 pool_size ----
+    _h = pd.DataFrame([{"date": "2026-09-11", "strategy": "Vortex", "topk": 2,
+                        "pool_size": 37, "picks": "META,BE", "exec_day": "2026-09-14"}])
+    _r37 = pd.DataFrame([{"date": "2026-09-11", "strategy": "Vortex", "topk": 2,
+                          "pool_size": 37, "picks": "META,BE", "exec_day": "2026-09-14"}])
+    _r81 = pd.DataFrame([{"date": "2026-09-11", "strategy": "Vortex", "topk": 2,
+                          "pool_size": 81, "picks": "SWKS,META", "exec_day": "2026-09-14"}])
+    chk("历史表: 同池子重跑只留 1 行", len(hist_merge(_h, _r37)) == 1)
+    _m = hist_merge(_h, _r81)
+    chk("历史表: 池子变大后新旧两条都保留", len(_m) == 2,
+        f"({len(_m)} 行)")
+    chk("历史表: 旧池子的选票 META,BE 仍可查",
+        _m.loc[_m.pool_size == 37, "picks"].iloc[0] == "META,BE")
+    chk("历史表: 无 pool_size 列的旧表也能合并不报错",
+        len(hist_merge(_h.drop(columns=["pool_size"]), _r81)) == 2)
+    # ---- v25 历史表去重键必须含 variant(闸门口径) ----
+    _g = pd.DataFrame([{"date": "2026-09-11", "strategy": "Vortex", "topk": 2,
+                        "pool_size": 81, "variant": "gate5M",
+                        "picks": "SWKS,META", "exec_day": "2026-09-14"}])
+    _n = pd.DataFrame([{"date": "2026-09-11", "strategy": "Vortex", "topk": 2,
+                        "pool_size": 81, "variant": "nogate",
+                        "picks": "META,BE", "exec_day": "2026-09-14"}])
+    chk("历史表: 同池同变体重跑只留 1 行", len(hist_merge(_g, _g)) == 1)
+    _m2 = hist_merge(_g, _n)
+    chk("历史表: 开/关闸门两种变体都保留", len(_m2) == 2, f"({len(_m2)} 行)")
+    chk("历史表: 关闸门那条的选票仍可查",
+        _m2.loc[_m2.variant == "nogate", "picks"].iloc[0] == "META,BE")
+    chk("历史表: 无 variant 列的旧表兼容",
+        len(hist_merge(_g.drop(columns=["variant"]), _n)) == 2)
+    # ---- v25 流动性闸门 ----
+    chk("闸门: 输出 bool 面板且与价格面板同形",
+        TR.shape == C.shape and bool(TR.dtypes.eq(bool).all()))
+    chk("闸门: 阈值单调(门槛越高可交易日绝不增加)",
+        all(tradable_mask(PX, hi)[0].values.sum() <= tradable_mask(PX, lo)[0].values.sum()
+            for lo, hi in [(1e6, 5e6), (5e6, 2e7), (2e7, 1e9)]))
+    # 合成僵尸票: 价格恒 $10, 每日成交 5 股 -> 必须被挡
+    _fk = {k: v.copy() for k, v in PX.items()}
+    _fk["close"].loc[:, "US.AAPL"] = 10.0
+    _fk["volume"].loc[:, "US.AAPL"] = 5.0
+    chk("闸门: 合成僵尸票($10 x 5股)全期被挡",
+        not bool(tradable_mask(_fk, MIN_DV)[0]["US.AAPL"].any()))
+    if "US.BMNR" in list(C.columns):
+        _r = 1 - TR["US.BMNR"].mean()
+        chk("闸门: BMNR 历史被挡 >= 40%", _r >= 0.40, f"(实测 {_r*100:.0f}%)")
+    # 全 True 掩码必须等价于关闭闸门 -> 保证掩码本身不引入任何副作用
+    _ones = pd.DataFrame(True, index=C.index, columns=C.columns)
+    _a, _b = build_signals(PX, _ones)["Vortex"].values, build_signals(PX, None)["Vortex"].values
+    chk("闸门: 全 True 掩码 == 关闭闸门",
+        bool(np.allclose(np.nan_to_num(_a, nan=-9e9), np.nan_to_num(_b, nan=-9e9))))
+    _a2 = build_signals(PX, _ones, REAL)["Vortex"].values
+    _b2 = build_signals(PX, None, REAL)["Vortex"].values
+    chk("闸门: 全 True 掩码 + REAL == 只加 REAL(两层职责可分离)",
+        bool(np.allclose(np.nan_to_num(_a2, nan=-9e9), np.nan_to_num(_b2, nan=-9e9))))
+    # ---- v25.1 F1 断言: 成交量不得被 ffill / 闸门不得采信伪造成交量 ----
+    _fab = int(((~REAL.values) & PX["volume"].notna().values).sum())
+    chk("F1: 缺 bar 处没有伪造成交量", _fab == 0,
+        f"({_fab} 格 有量无 bar; 全样本缺失 {int((~REAL.values).sum())} 格)")
+    chk("F1: 闸门为 True 处必有真实 bar (trade 含于 REAL)",
+        int((TR.values & ~REAL.values).sum()) == 0,
+        f"({int((TR.values & ~REAL.values).sum())} 处越界)")
+    _fk3 = {k: v.copy() for k, v in PX.items()}
+    _fk3["volume"].loc[:, "US.AAPL"] = np.nan        # 有价无量
+    chk("F1: 有价无量(停牌)的日子不得判为可交易",
+        not bool(tradable_mask(_fk3, MIN_DV)[0]["US.AAPL"].any()))
+    _leak_r = int(((~REAL.values) & ~np.isnan(build_signals(PX, TR, REAL)["Vortex"].values)).sum())
+    chk("F1: 无 bar 日的因子必为 NaN(REAL 未静默失效)", _leak_r == 0, f"({_leak_r} 处泄漏)")
+    if "US.NBIS" in list(C.columns):
+        _nb = TR["US.NBIS"]
+        _pin = _nb.loc["2022-03-01":"2022-03-31"]
+        chk("F1: NBIS 停牌期间(2022-03)已被挡下", not bool(_pin.any()),
+            f"(该月 {int(_pin.sum())}/{len(_pin)} 天可交易)")
+    # 闸门必须真的改动因子, 否则等于没接线(静默失效)
+    _on = build_signals(PX, TR)["Vortex"].values
+    _diff = int((~((_on == _b) | (np.isnan(_on) & np.isnan(_b)))).sum())
+    chk("闸门: 确实改变了因子值(已接线, 非静默失效)", _diff > 0, f"({_diff} 个格子被改动)")
+    chk("闸门: 不可交易处因子必为 NaN(无泄漏)",
+        int(((~TR.values) & ~np.isnan(_on)).sum()) == 0,
+        f"({int(((~TR.values) & ~np.isnan(_on)).sum())} 处泄漏)")
     # ---- v22 选股层 × 资金 解耦 (铁律) ----
     import inspect as _ins, ast as _ast
     _full = _ins.getsource(select)
@@ -568,7 +813,7 @@ def self_test():
     chk("选股层未读取任何资金全局量",
         not (_names & {"CAP0", "NET", "CNY", "FX", "COMM", "POSITIONS", "COSTBASIS", "BOUGHT"}),
         f"({sorted(_names)})")
-    good_s = [c for c in UNI if C[c].notna().sum() >= MIN_HIST]
+    good_s = [c for c in UNI if REAL[c].sum() >= MIN_HIST]
     A_s = SIG[STRAT]
     base_s = select(A_s, N-1, good_s, TOPK)
     _saved = globals()["CAP0"]

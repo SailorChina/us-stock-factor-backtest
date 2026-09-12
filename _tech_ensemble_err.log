@@ -1,6 +1,0 @@
-C:\Users\sailor\WorkBuddy\2026-09-11-09-02-22\_tech_ensemble_test.py:188: RuntimeWarning: Mean of empty slice
-  m = np.nanmean(arr, axis=0)
-C:\Users\sailor\WorkBuddy\2026-09-11-09-02-22\_tech_ensemble_test.py:188: RuntimeWarning: Mean of empty slice
-  m = np.nanmean(arr, axis=0)
-C:\Users\sailor\WorkBuddy\2026-09-11-09-02-22\_tech_ensemble_test.py:188: RuntimeWarning: Mean of empty slice
-  m = np.nanmean(arr, axis=0)

@@ -2,6 +2,11 @@
 """
 验证 B1 修复的影响: 面板 ffill 策略(无限 vs limit=10) 对历史信号与回测结果的影响
 若差异显著 -> 之前所有回测结论需按新面板重算
+
+【已归档 · 不要拿它的数字当结论】
+本脚本是 v19 时期的一次性对比, 面板没有 v25.1 的 REAL 掩码, 且曾复制了 F2/F3 两处
+缺陷(已于 v25.1 就地修好)。任何【回测收益】结论请以 _liquidity_gate_v25.py(已修复)
+与 美股回测深度审计_v25.1.md 为准。
 """
 import os, json, warnings
 import numpy as np, pandas as pd
@@ -55,11 +60,15 @@ def backtest(C, O, A, topk=2, comm=COMM, cap=CAP0, frac=True):
         if i in set(RB):
             k = topk
             # 全部卖出: 按今日开盘价成交, 每笔扣佣金
+            # v25.1 修复(F2): 卖不掉的持仓必须保留, 不得凭空清空(见 美股回测深度审计_v25.1.md)
+            keep = {}
             for j, sh in pos.items():
                 pr = O[i, j]
                 if np.isfinite(pr) and pr > 0:
                     cash += sh * pr - comm
-            pos = {}
+                else:
+                    keep[j] = sh
+            pos = keep
             row = A[i-1] if isinstance(A, np.ndarray) else A.values[i-1]
             ok = np.isfinite(row); idx = np.where(ok)[0]
             if len(idx) >= k:
@@ -68,9 +77,10 @@ def backtest(C, O, A, topk=2, comm=COMM, cap=CAP0, frac=True):
                 for j in pk:
                     pr = O[i, j]
                     if not np.isfinite(pr) or pr <= 0: continue
+                    if j in pos: continue            # 卡住的仓位不重复买
                     sh = bud / pr if frac else int(bud // pr)
                     if sh > 0:
-                        pos[j] = sh; cash -= sh * pr
+                        pos[j] = sh; cash -= sh * pr + comm   # v25.1 修复(F3): 补上买入佣金
     return eq
 
 print("=" * 116)

@@ -1,0 +1,200 @@
+{
+  "ok": 72,
+  "problems": [
+    [
+      "US.BE",
+      "极端涨跌"
+    ],
+    [
+      "US.NBIS",
+      "缺口大于5天"
+    ],
+    [
+      "US.HOOD",
+      "极端涨跌"
+    ],
+    [
+      "US.PDD",
+      "极端涨跌"
+    ],
+    [
+      "US.MRNA",
+      "极端涨跌"
+    ],
+    [
+      "US.BMNR",
+      "缺口大于5天 | 极端涨跌"
+    ],
+    [
+      "US.IREN",
+      "极端涨跌"
+    ],
+    [
+      "US.OXY",
+      "极端涨跌"
+    ],
+    [
+      "US.ASTS",
+      "极端涨跌"
+    ],
+    [
+      "US.NTAP",
+      "文件缺失"
+    ],
+    [
+      "US.GEV",
+      "文件缺失"
+    ],
+    [
+      "US.ALAB",
+      "文件缺失"
+    ],
+    [
+      "US.GME",
+      "文件缺失"
+    ],
+    [
+      "US.BIDU",
+      "文件缺失"
+    ],
+    [
+      "US.LI",
+      "文件缺失"
+    ],
+    [
+      "US.JD",
+      "文件缺失"
+    ],
+    [
+      "US.ASML",
+      "文件缺失"
+    ],
+    [
+      "US.SANM",
+      "文件缺失"
+    ],
+    [
+      "US.GRAB",
+      "文件缺失"
+    ],
+    [
+      "US.RDDT",
+      "文件缺失"
+    ],
+    [
+      "US.OKTA",
+      "文件缺失"
+    ],
+    [
+      "US.ASX",
+      "文件缺失"
+    ],
+    [
+      "US.SOFI",
+      "文件缺失"
+    ],
+    [
+      "US.TME",
+      "文件缺失"
+    ],
+    [
+      "US.AMKR",
+      "文件缺失"
+    ],
+    [
+      "US.TCOM",
+      "文件缺失"
+    ],
+    [
+      "US.CLS",
+      "文件缺失"
+    ],
+    [
+      "US.TTMI",
+      "文件缺失"
+    ]
+  ],
+  "rows": {
+    "US.ORCL": 2185,
+    "US.MU": 2185,
+    "US.SNDK": 396,
+    "US.NVDA": 2185,
+    "US.DELL": 1936,
+    "US.AAPL": 2185,
+    "US.TSLA": 2185,
+    "US.INTC": 2185,
+    "US.GOOG": 2185,
+    "US.CRCL": 319,
+    "US.BE": 2044,
+    "US.GOOGL": 2185,
+    "US.MRVL": 2185,
+    "US.MSTR": 2185,
+    "US.AVGO": 2185,
+    "US.LITE": 2185,
+    "US.TSM": 2185,
+    "US.NBIS": 1521,
+    "US.AMD": 2185,
+    "US.META": 2185,
+    "US.HOOD": 1286,
+    "US.RKLB": 1455,
+    "US.PLTR": 1494,
+    "US.NOK": 2185,
+    "US.GLW": 2185,
+    "US.MSFT": 2185,
+    "US.BABA": 2185,
+    "US.ADBE": 2185,
+    "US.QCOM": 2185,
+    "US.PDD": 2043,
+    "US.CRWV": 366,
+    "US.MRNA": 1950,
+    "US.BMNR": 685,
+    "US.AMZN": 2185,
+    "US.COHR": 2185,
+    "US.HPE": 2185,
+    "US.COIN": 1360,
+    "US.SMCI": 2185,
+    "US.FUTU": 1889,
+    "US.MCD": 2185,
+    "US.CRWD": 1823,
+    "US.UNH": 2185,
+    "US.ARM": 751,
+    "US.WDC": 2185,
+    "US.NOW": 2185,
+    "US.KO": 2185,
+    "US.UBER": 1845,
+    "US.APP": 1359,
+    "US.IREN": 1208,
+    "US.IBM": 2185,
+    "US.NVO": 2185,
+    "US.CRDO": 1160,
+    "US.VRT": 2041,
+    "US.BRK.B": 2185,
+    "US.TEM": 562,
+    "US.XPEV": 1517,
+    "US.NKE": 2185,
+    "US.LLY": 2185,
+    "US.LULU": 2185,
+    "US.NFLX": 2185,
+    "US.PANW": 2185,
+    "US.VST": 2185,
+    "US.OXY": 2185,
+    "US.STX": 2185,
+    "US.AMAT": 2185,
+    "US.HPQ": 2185,
+    "US.FIG": 281,
+    "US.IONQ": 1429,
+    "US.NET": 1758,
+    "US.ASTS": 1723,
+    "US.CRM": 2185,
+    "US.SNOW": 1504,
+    "US.JPM": 2185,
+    "US.FCX": 2185,
+    "US.CSCO": 2185,
+    "US.SWKS": 2185,
+    "US.ON": 2185,
+    "US.ANET": 2185,
+    "US.ISRG": 2185,
+    "US.RBLX": 1384,
+    "US.TER": 2185
+  }
+}
