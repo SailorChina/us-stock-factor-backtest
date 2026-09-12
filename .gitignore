@@ -23,6 +23,7 @@ futulog/
 _gh_probe*.py
 _push_*.py
 _cleanup_*.py
+_cred_*.py
 
 # ---- 编辑器 / 系统 ----
 .vscode/
