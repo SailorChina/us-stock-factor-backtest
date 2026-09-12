@@ -1,0 +1,204 @@
+[
+  {
+    "final": 32292.0,
+    "total": 976.4,
+    "cagr_full": 120.3,
+    "cagr_active": 226.7,
+    "sharpe": 1.79,
+    "mdd": -36.5,
+    "name": "A1 多周期动量 top2 月频 无止损",
+    "config": {
+      "uni": "large",
+      "score": "A1",
+      "topk": 2,
+      "stop": 0.0,
+      "recover": false,
+      "reclaim": 0.9,
+      "rebal": 21
+    }
+  },
+  {
+    "final": 16050.0,
+    "total": 435.0,
+    "cagr_full": 74.6,
+    "cagr_active": 130.7,
+    "sharpe": 1.35,
+    "mdd": -36.3,
+    "name": "A1 多周期动量 top2 周频 无止损",
+    "config": {
+      "uni": "large",
+      "score": "A1",
+      "topk": 2,
+      "stop": 0.0,
+      "recover": false,
+      "reclaim": 0.9,
+      "rebal": 5
+    }
+  },
+  {
+    "final": 24147.0,
+    "total": 704.9,
+    "cagr_full": 100.0,
+    "cagr_active": 182.8,
+    "sharpe": 1.84,
+    "mdd": -31.8,
+    "name": "A1 多周期动量 top3 月频 无止损",
+    "config": {
+      "uni": "large",
+      "score": "A1",
+      "topk": 3,
+      "stop": 0.0,
+      "recover": false,
+      "reclaim": 0.9,
+      "rebal": 21
+    }
+  },
+  {
+    "final": 13765.0,
+    "total": 358.8,
+    "cagr_full": 65.9,
+    "cagr_active": 113.7,
+    "sharpe": 1.41,
+    "mdd": -35.8,
+    "name": "A1 多周期动量 top2 月频 +15%止损(无回补)",
+    "config": {
+      "uni": "large",
+      "score": "A1",
+      "topk": 2,
+      "stop": 0.15,
+      "recover": false,
+      "reclaim": 0.9,
+      "rebal": 21
+    }
+  },
+  {
+    "final": 18713.0,
+    "total": 523.8,
+    "cagr_full": 83.8,
+    "cagr_active": 149.0,
+    "sharpe": 1.58,
+    "mdd": -32.3,
+    "name": "A1 多周期动量 top2 月频 +15%止损+回收0.90",
+    "config": {
+      "uni": "large",
+      "score": "A1",
+      "topk": 2,
+      "stop": 0.15,
+      "recover": true,
+      "reclaim": 0.9,
+      "rebal": 21
+    }
+  },
+  {
+    "final": 16090.0,
+    "total": 436.3,
+    "cagr_full": 74.8,
+    "cagr_active": 130.9,
+    "sharpe": 1.5,
+    "mdd": -33.4,
+    "name": "A1 多周期动量 top2 月频 +15%止损+回收0.95",
+    "config": {
+      "uni": "large",
+      "score": "A1",
+      "topk": 2,
+      "stop": 0.15,
+      "recover": true,
+      "reclaim": 0.95,
+      "rebal": 21
+    }
+  },
+  {
+    "final": 15879.0,
+    "total": 429.3,
+    "cagr_full": 74.0,
+    "cagr_active": 129.4,
+    "sharpe": 1.5,
+    "mdd": -35.0,
+    "name": "A1 多周期动量 top2 月频 +15%止损+回收1.00",
+    "config": {
+      "uni": "large",
+      "score": "A1",
+      "topk": 2,
+      "stop": 0.15,
+      "recover": true,
+      "reclaim": 1.0,
+      "rebal": 21
+    }
+  },
+  {
+    "final": 14252.0,
+    "total": 375.1,
+    "cagr_full": 67.9,
+    "cagr_active": 117.4,
+    "sharpe": 1.3,
+    "mdd": -40.5,
+    "name": "经典12-1 top2 月频 无止损 (对照)",
+    "config": {
+      "uni": "large",
+      "score": "mom12",
+      "topk": 2,
+      "stop": 0.0,
+      "recover": false,
+      "reclaim": 0.9,
+      "rebal": 21
+    }
+  },
+  {
+    "final": 8642.0,
+    "total": 188.1,
+    "cagr_full": 42.2,
+    "cagr_active": 69.5,
+    "sharpe": 1.04,
+    "mdd": -38.6,
+    "name": "经典12-1 top2 月频 +15%止损+回收0.90",
+    "config": {
+      "uni": "large",
+      "score": "mom12",
+      "topk": 2,
+      "stop": 0.15,
+      "recover": true,
+      "reclaim": 0.9,
+      "rebal": 21
+    }
+  },
+  {
+    "final": 59900.0,
+    "total": 1896.7,
+    "cagr_full": 170.6,
+    "cagr_active": 344.4,
+    "sharpe": 1.88,
+    "mdd": -55.5,
+    "name": "A1 top2 月频 无止损 (53热门池)",
+    "config": {
+      "uni": "hot",
+      "score": "A1",
+      "topk": 2,
+      "stop": 0.0,
+      "recover": false,
+      "reclaim": 0.9,
+      "rebal": 21
+    }
+  },
+  {
+    "name": "VOO 买入持有 (基准)",
+    "final": 5241.0,
+    "total": 74.7,
+    "cagr_full": 20.4,
+    "cagr_active": 20.4,
+    "sharpe": 1.32,
+    "mdd": -18.7
+  },
+  {
+    "name": "__robustness__",
+    "A1": {
+      "2024": 141.6,
+      "2025": 108.7,
+      "2026": 100.9
+    },
+    "mom12": {
+      "2024": 66.7,
+      "2025": 36.6,
+      "2026": 91.9
+    }
+  }
+]

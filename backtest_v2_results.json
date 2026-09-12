@@ -1,0 +1,120 @@
+{
+  "capital": 3000,
+  "topk": [
+    2,
+    3
+  ],
+  "rebalance": "monthly",
+  "commission": "max(shares*0.01, 1.5) USD per trade",
+  "start": "2024-09-06",
+  "end": "2026-09-10",
+  "universe": 44,
+  "strategies": {
+    "top3_Momentum": {
+      "final": 43192.859063383,
+      "total_return": 13.419248560635287,
+      "cagr": 2.7972685657766276,
+      "sharpe": 2.0611768985278687,
+      "max_dd": -0.5374024391785409
+    },
+    "top2_Momentum": {
+      "final": 77308.24310460102,
+      "total_return": 24.795209577778117,
+      "cagr": 4.078898461062016,
+      "sharpe": 2.220318836543061,
+      "max_dd": -0.5875161357053058
+    },
+    "top3_WQ_Alpha1": {
+      "final": 8335.196299759997,
+      "total_return": 1.7825726255249532,
+      "cagr": 0.6681045007807374,
+      "sharpe": 1.561268393224593,
+      "max_dd": -0.28235968865343153
+    },
+    "top3_LowVol_BAB": {
+      "final": 3711.5373698549993,
+      "total_return": 0.23903767980470692,
+      "cagr": 0.11312069417682946,
+      "sharpe": 0.9321425029691338,
+      "max_dd": -0.16230692958907622
+    }
+  },
+  "VOO_BH": {
+    "final": 4270.941425081999,
+    "total_return": 0.424359321354677,
+    "cagr": 0.19346525770743606,
+    "sharpe": 1.222686248635806,
+    "max_dd": -0.1819066199947923
+  },
+  "current_signal": {
+    "Momentum": {
+      "US.AXTI": {
+        "price": 64.7,
+        "top3_shares": 15,
+        "top3_cost": 970.5,
+        "top2_shares": 23,
+        "top2_cost": 1488.1
+      },
+      "US.MU": {
+        "price": 977.41,
+        "top3_shares": 1,
+        "top3_cost": 977.41,
+        "top2_shares": 1,
+        "top2_cost": 977.41
+      },
+      "US.AAOI": {
+        "price": 103.29,
+        "top3_shares": 9,
+        "top3_cost": 929.61,
+        "top2_shares": 14,
+        "top2_cost": 1446.06
+      }
+    },
+    "WQ_Alpha1": {
+      "US.AVGO": {
+        "price": 360.83,
+        "top3_shares": 2,
+        "top3_cost": 721.66,
+        "top2_shares": 4,
+        "top2_cost": 1443.32
+      },
+      "US.ADBE": {
+        "price": 248.83,
+        "top3_shares": 4,
+        "top3_cost": 995.32,
+        "top2_shares": 6,
+        "top2_cost": 1492.98
+      },
+      "US.VOO": {
+        "price": 696.65,
+        "top3_shares": 1,
+        "top3_cost": 696.65,
+        "top2_shares": 2,
+        "top2_cost": 1393.3
+      }
+    },
+    "LowVol_BAB": {
+      "US.VOO": {
+        "price": 696.65,
+        "top3_shares": 1,
+        "top3_cost": 696.65,
+        "top2_shares": 2,
+        "top2_cost": 1393.3
+      },
+      "US.SPY": {
+        "price": 757.83,
+        "top3_shares": 1,
+        "top3_cost": 757.83,
+        "top2_shares": 1,
+        "top2_cost": 757.83
+      },
+      "US.QQQM": {
+        "price": 291.8,
+        "top3_shares": 3,
+        "top3_cost": 875.4,
+        "top2_shares": 5,
+        "top2_cost": 1459.0
+      }
+    }
+  }
+}

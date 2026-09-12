@@ -1,0 +1,17 @@
+A) 未完成 bar 检测
+   北京 09-12 03:02 末bar=2026-09-11 -> partial=1     phase=regular
+   北京 09-12 11:07 末bar=2026-09-11 -> partial=0     phase=closed
+   北京 09-14 22:00 末bar=2026-09-14 -> partial=1     phase=regular
+   北京 09-15 09:00 末bar=2026-09-14 -> partial=0     phase=closed
+
+B) 半日市/休市日历
+   2026 半日市: ['11-27', '12-24'] | 2026 休市数: 10
+
+C) 输入校验
+   parse_positions('META:1.15') -> OK {'META': 1.15}
+   parse_positions('META-1.15') -> 友好报错: 格式错误: 'META-1.15' —— 应为 CODE:股数 (如 META:1.15,BE:2.70)
+   parse_positions('META:abc') -> 友好报错: 股数不是数字: 'abc' (来自 'META:abc')
+   parse_positions('META:1.15,BE:2.70') -> OK {'META': 1.15, 'BE': 2.7}
+   parse_bought('META:1.15@648.03') -> OK {'META': {'shares': 1.15, 'price': 648.03}}
+   parse_bought('META:1.15') -> 友好报错: 格式错误: 'META:1.15' —— 应为 CODE:股数@成交价 (如 META:1.15@648.03)
+   parse_bought('META:1.15@') -> 友好报错: 成交记录数值不合法: 'META:1.15@'

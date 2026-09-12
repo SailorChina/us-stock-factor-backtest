@@ -1,0 +1,131 @@
+[
+  {
+    "final": 14252.0,
+    "total": 375.1,
+    "cagr": 67.9,
+    "sharpe": 1.3,
+    "mdd": -40.5,
+    "name": "CTRL 无止损 (Mom12-1 top2, 控制组)"
+  },
+  {
+    "final": 7904.0,
+    "total": 163.5,
+    "cagr": 38.0,
+    "sharpe": 0.96,
+    "mdd": -40.5,
+    "name": "BASE (Mom12-1 top2, 15%止损+恢复)"
+  },
+  {
+    "final": 19458.0,
+    "total": 548.6,
+    "cagr": 86.2,
+    "sharpe": 1.58,
+    "mdd": -36.4,
+    "name": "A1 多周期动量融合 top2"
+  },
+  {
+    "final": 7901.0,
+    "total": 163.4,
+    "cagr": 38.0,
+    "sharpe": 0.96,
+    "mdd": -40.5,
+    "name": "A2 动量+1周反转 top2"
+  },
+  {
+    "final": 4254.0,
+    "total": 41.8,
+    "cagr": 12.3,
+    "sharpe": 0.49,
+    "mdd": -39.0,
+    "name": "A3 IC加权集成 top2"
+  },
+  {
+    "final": 7369.0,
+    "total": 145.6,
+    "cagr": 34.8,
+    "sharpe": 0.93,
+    "mdd": -37.5,
+    "name": "B1 风险平价加权 (替代等权)"
+  },
+  {
+    "final": 7752.0,
+    "total": 158.4,
+    "cagr": 37.1,
+    "sharpe": 0.94,
+    "mdd": -39.2,
+    "name": "B2 市值分层排名 top2"
+  },
+  {
+    "final": 6275.0,
+    "total": 109.2,
+    "cagr": 27.8,
+    "sharpe": 0.79,
+    "mdd": -41.8,
+    "name": "C1 市场择时过滤 (QQQ>MA200)"
+  },
+  {
+    "final": 9283.0,
+    "total": 209.4,
+    "cagr": 45.6,
+    "sharpe": 1.05,
+    "mdd": -34.7,
+    "name": "C2 低波动预筛 (剔除高波1/3)"
+  },
+  {
+    "final": 15351.0,
+    "total": 411.7,
+    "cagr": 72.1,
+    "sharpe": 1.37,
+    "mdd": -42.0,
+    "name": "D1 周度调仓 (替代月度)"
+  },
+  {
+    "final": 7904.0,
+    "total": 163.5,
+    "cagr": 38.0,
+    "sharpe": 0.96,
+    "mdd": -40.5,
+    "name": "D2 移动止盈 +25% (对称)"
+  },
+  {
+    "final": 5226.0,
+    "total": 74.2,
+    "cagr": 20.3,
+    "sharpe": 0.68,
+    "mdd": -39.5,
+    "name": "E1 多空组合 (多top2/空bottom2)"
+  },
+  {
+    "final": 5737.0,
+    "total": 91.2,
+    "cagr": 24.0,
+    "sharpe": 0.74,
+    "mdd": -37.8,
+    "name": "F1 BASE+风险平价+择时 (组合最优)"
+  },
+  {
+    "final": 19015.0,
+    "total": 533.8,
+    "cagr": 84.8,
+    "sharpe": 1.58,
+    "mdd": -35.6,
+    "name": "F2 BASE+多周期+风险平价"
+  },
+  {
+    "name": "VOO 买入持有 (基准)",
+    "final": 5241.0,
+    "total": 74.7,
+    "cagr": 20.4,
+    "sharpe": 1.32,
+    "mdd": -18.7
+  },
+  {
+    "name": "__factor_decay__",
+    "decay": {
+      "2023": NaN,
+      "2024": 0.316,
+      "2025": 0.064,
+      "2026": 0.102
+    }
+  }
+]

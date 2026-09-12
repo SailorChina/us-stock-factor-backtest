@@ -1,0 +1,14 @@
+# 本项目的第三方依赖
+# 安装: pip install -r requirements.txt
+#
+# 版本为开发环境实测可用版本 (2026-09), 未严格锁死 —— 用更新的版本通常也没问题。
+# 唯一的硬要求是 Python 3.12+。
+
+pandas>=2.0          # 面板数据、因子计算 (开发环境 3.0.5)
+numpy>=1.24          # 向量化运算 (开发环境 2.5.2)
+
+# ---- 以下为可选依赖, 只在特定脚本里用到 ----
+matplotlib>=3.7      # 画权益曲线图 (_build_long_chart.py 等)
+scikit-learn>=1.3    # 部分深度指标实验 (_deep_indicators_v11.py)
+futu-api>=9.0        # 连 Futu OpenD 拉行情 (_update_signal.py / _fetch_*.py)
+                     # 不装也能跑回测: 仓库已包含全部行情 CSV

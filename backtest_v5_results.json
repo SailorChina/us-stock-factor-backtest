@@ -1,0 +1,160 @@
+{
+  "capital": 3000,
+  "rebalance": "monthly",
+  "universe": 36,
+  "start": "2024-09-06",
+  "end": "2026-09-10",
+  "variants": {
+    "top2": {
+      "none": {
+        "final": 54327.35810460099,
+        "total_return": 17.127246614815146,
+        "cagr": 3.2576104348349144,
+        "sharpe": 2.2289127068730656,
+        "max_dd": -0.4383493598814958,
+        "single_stops": 0,
+        "portfolio_stops": 0,
+        "pct_days_invested": 66.5
+      },
+      "fixed15": {
+        "final": 18937.778104601006,
+        "total_return": 5.318911613146815,
+        "cagr": 1.5137445401525618,
+        "sharpe": 1.8203343459419492,
+        "max_dd": -0.37937073250429876,
+        "single_stops": 23,
+        "portfolio_stops": 0,
+        "pct_days_invested": 55.9
+      },
+      "fixed15_rec": {
+        "final": 53161.24810460098,
+        "total_return": 16.738154189056047,
+        "cagr": 3.2116688128408253,
+        "sharpe": 2.386555630334279,
+        "max_dd": -0.3958062669758893,
+        "single_stops": 34,
+        "portfolio_stops": 0,
+        "pct_days_invested": 66.5
+      },
+      "atr": {
+        "final": 45859.77810460099,
+        "total_return": 14.301894596129793,
+        "cagr": 2.911763617107991,
+        "sharpe": 2.177726900983513,
+        "max_dd": -0.44466269661425406,
+        "single_stops": 4,
+        "portfolio_stops": 0,
+        "pct_days_invested": 66.5
+      },
+      "atr_rec": {
+        "final": 50175.79810460099,
+        "total_return": 15.742008042909905,
+        "cagr": 3.0916998964867775,
+        "sharpe": 2.2128079715098994,
+        "max_dd": -0.4437081940613238,
+        "single_stops": 4,
+        "portfolio_stops": 0,
+        "pct_days_invested": 66.5
+      },
+      "pstop15": {
+        "final": 16442.352764848016,
+        "total_return": 4.486270525474813,
+        "cagr": 1.3422789170965128,
+        "sharpe": 1.6128723090713326,
+        "max_dd": -0.37301433352323454,
+        "single_stops": 0,
+        "portfolio_stops": 11,
+        "pct_days_invested": 53.7
+      },
+      "pstop15_fixed15": {
+        "final": 18970.901565301,
+        "total_return": 5.329963818919253,
+        "cagr": 1.5159419347272807,
+        "sharpe": 1.824406897466177,
+        "max_dd": -0.3622203700755461,
+        "single_stops": 11,
+        "portfolio_stops": 8,
+        "pct_days_invested": 53.6
+      }
+    },
+    "top3": {
+      "none": {
+        "final": 30630.915535053995,
+        "total_return": 9.225643643817056,
+        "cagr": 2.1977560325667524,
+        "sharpe": 2.0339095905400306,
+        "max_dd": -0.4248071423090861,
+        "single_stops": 0,
+        "portfolio_stops": 0,
+        "pct_days_invested": 66.5
+      },
+      "fixed15": {
+        "final": 11412.221125863003,
+        "total_return": 2.809788391207813,
+        "cagr": 0.9518679236074896,
+        "sharpe": 1.5640042763871074,
+        "max_dd": -0.3707716285910959,
+        "single_stops": 36,
+        "portfolio_stops": 0,
+        "pct_days_invested": 56.7
+      },
+      "fixed15_rec": {
+        "final": 29131.05454167301,
+        "total_return": 8.724938922274415,
+        "cagr": 2.1184834330607587,
+        "sharpe": 2.183892362415229,
+        "max_dd": -0.38277703529504503,
+        "single_stops": 52,
+        "portfolio_stops": 0,
+        "pct_days_invested": 66.5
+      },
+      "atr": {
+        "final": 25270.822470965002,
+        "total_return": 7.436261883146386,
+        "cagr": 1.9045243815720303,
+        "sharpe": 1.9747398727665768,
+        "max_dd": -0.41387552852833487,
+        "single_stops": 8,
+        "portfolio_stops": 0,
+        "pct_days_invested": 66.5
+      },
+      "atr_rec": {
+        "final": 26807.161932524992,
+        "total_return": 7.949144360716071,
+        "cagr": 1.9915120525774372,
+        "sharpe": 1.990551395893282,
+        "max_dd": -0.416272686656853,
+        "single_stops": 8,
+        "portfolio_stops": 0,
+        "pct_days_invested": 66.5
+      },
+      "pstop15": {
+        "final": 10423.768425739003,
+        "total_return": 2.4798091890298792,
+        "cagr": 0.8654246672084829,
+        "sharpe": 1.3846372434055056,
+        "max_dd": -0.4158525234154079,
+        "single_stops": 0,
+        "portfolio_stops": 10,
+        "pct_days_invested": 53.2
+      },
+      "pstop15_fixed15": {
+        "final": 7800.147742780997,
+        "total_return": 1.603955180364212,
+        "cagr": 0.6136775329551478,
+        "sharpe": 1.231966684352113,
+        "max_dd": -0.3499380983221638,
+        "single_stops": 23,
+        "portfolio_stops": 7,
+        "pct_days_invested": 51.5
+      }
+    }
+  },
+  "VOO_BH": {
+    "final": 4270.941425081999,
+    "total_return": 0.424359321354677,
+    "cagr": 0.19346525770743606,
+    "sharpe": 1.222686248635806,
+    "max_dd": -0.1819066199947923
+  }
+}

@@ -1,0 +1,402 @@
+[
+  {
+    "code": "US.SPCX",
+    "name": "SpaceX"
+  },
+  {
+    "code": "US.AAPL",
+    "name": "苹果"
+  },
+  {
+    "code": "US.MU",
+    "name": "美光科技"
+  },
+  {
+    "code": "US.ORCL",
+    "name": "甲骨文"
+  },
+  {
+    "code": "US.NVDA",
+    "name": "英伟达"
+  },
+  {
+    "code": "US.SKHY",
+    "name": "SK海力士"
+  },
+  {
+    "code": "US.SNDK",
+    "name": "闪迪"
+  },
+  {
+    "code": "US.VOO",
+    "name": "标普500ETF-Vanguard"
+  },
+  {
+    "code": "US.QQQ",
+    "name": "纳指100ETF-Invesco QQQ Trust"
+  },
+  {
+    "code": "US.TSLA",
+    "name": "特斯拉"
+  },
+  {
+    "code": "US.INTC",
+    "name": "英特尔"
+  },
+  {
+    "code": "US.TSM",
+    "name": "台积电"
+  },
+  {
+    "code": "US.META",
+    "name": "Meta Platforms"
+  },
+  {
+    "code": "US.GOOG",
+    "name": "谷歌-C"
+  },
+  {
+    "code": "US.SOXL",
+    "name": "三倍做多半导体ETF-Direxion"
+  },
+  {
+    "code": "US.AVGO",
+    "name": "博通"
+  },
+  {
+    "code": "US.CRCL",
+    "name": "Circle"
+  },
+  {
+    "code": "US.LITE",
+    "name": "Lumentum"
+  },
+  {
+    "code": "US.BE",
+    "name": "Bloom Energy"
+  },
+  {
+    "code": "US.SNXX",
+    "name": "2倍做多SNDK ETF-Tradr"
+  },
+  {
+    "code": "US.NBIS",
+    "name": "NEBIUS"
+  },
+  {
+    "code": "US.TQQQ",
+    "name": "三倍做多纳指ETF-ProShares"
+  },
+  {
+    "code": "US.AMD",
+    "name": "美国超微公司"
+  },
+  {
+    "code": "US.GOOGL",
+    "name": "谷歌-A"
+  },
+  {
+    "code": "US.MRVL",
+    "name": "迈威尔科技"
+  },
+  {
+    "code": "US.ADBE",
+    "name": "Adobe"
+  },
+  {
+    "code": "US.BABA",
+    "name": "阿里巴巴"
+  },
+  {
+    "code": "US.SNDQ",
+    "name": "2倍做空SNDK ETF-Tradr"
+  },
+  {
+    "code": "US.SOXS",
+    "name": "三倍做空半导体ETF-Direxion"
+  },
+  {
+    "code": "US.GLD",
+    "name": "黄金ETF-SPDR"
+  },
+  {
+    "code": "US.PLTR",
+    "name": "Palantir"
+  },
+  {
+    "code": "US.RKLB",
+    "name": "Rocket Lab"
+  },
+  {
+    "code": "US.SKDD",
+    "name": "2倍做空海力士ETF-GraniteShares"
+  },
+  {
+    "code": "US.PDD",
+    "name": "拼多多"
+  },
+  {
+    "code": "US.MSTR",
+    "name": "Strategy"
+  },
+  {
+    "code": "US.SQQQ",
+    "name": "三倍做空纳指ETF-ProShares"
+  },
+  {
+    "code": "US.HOOD",
+    "name": "Robinhood"
+  },
+  {
+    "code": "US.CRWV",
+    "name": "CoreWeave"
+  },
+  {
+    "code": "US.SPCH",
+    "name": "2倍做多SpaceX ETF-Leverage Shares"
+  },
+  {
+    "code": "US.SPY",
+    "name": "标普500ETF-SPDR"
+  },
+  {
+    "code": "US.DRAM",
+    "name": "Roundhill Memory ETF"
+  },
+  {
+    "code": "US.DELL",
+    "name": "戴尔科技"
+  },
+  {
+    "code": "US.MSFT",
+    "name": "微软"
+  },
+  {
+    "code": "US.AAOI",
+    "name": "Applied Optoelectronics"
+  },
+  {
+    "code": "US.SOXX",
+    "name": "半导体ETF-iShares"
+  },
+  {
+    "code": "US.USO",
+    "name": "美国原油ETF"
+  },
+  {
+    "code": "US.MUU",
+    "name": "2倍做多MU ETF-Direxion"
+  },
+  {
+    "code": "US.AVAV",
+    "name": "AeroVironment"
+  },
+  {
+    "code": "US.GLW",
+    "name": "康宁"
+  },
+  {
+    "code": "US.AMZN",
+    "name": "亚马逊"
+  },
+  {
+    "code": "US.TLT",
+    "name": "20+年以上美国国债ETF-iShares"
+  },
+  {
+    "code": "US.COHR",
+    "name": "Coherent"
+  },
+  {
+    "code": "US.QCOM",
+    "name": "高通"
+  },
+  {
+    "code": "US.COIN",
+    "name": "Coinbase"
+  },
+  {
+    "code": "US.QQQM",
+    "name": "NASDAQ100指数ETF-Invesco"
+  },
+  {
+    "code": "US.GDXU",
+    "name": "三倍做多黄金矿业ETN-MicroSectors"
+  },
+  {
+    "code": "US.VRT",
+    "name": "Vertiv Holdings"
+  },
+  {
+    "code": "US.AXTI",
+    "name": "AXT Inc"
+  },
+  {
+    "code": "US.NKE",
+    "name": "耐克"
+  },
+  {
+    "code": "US.NOK",
+    "name": "诺基亚"
+  },
+  {
+    "code": "US.SCO",
+    "name": "2倍做空彭博原油ETF-Proshares"
+  },
+  {
+    "code": "US.CRDO",
+    "name": "Credo Technology"
+  },
+  {
+    "code": "US.FUTU",
+    "name": "富途控股"
+  },
+  {
+    "code": "US.MRNA",
+    "name": "Moderna"
+  },
+  {
+    "code": "US.SKUU",
+    "name": "2倍做多海力士ETF-GraniteShares"
+  },
+  {
+    "code": "US.TSLL",
+    "name": "2倍做多TSLA ETF-Direxion"
+  },
+  {
+    "code": "US.NOW",
+    "name": "ServiceNow"
+  },
+  {
+    "code": "US.TEM",
+    "name": "Tempus AI"
+  },
+  {
+    "code": "US.SLV",
+    "name": "白银ETF-iShares"
+  },
+  {
+    "code": "US.FCX",
+    "name": "麦克莫兰铜金"
+  },
+  {
+    "code": "US.SMH",
+    "name": "半导体指数ETF-VanEck"
+  },
+  {
+    "code": "US.ARM",
+    "name": "Arm Holdings"
+  },
+  {
+    "code": "US.MCD",
+    "name": "麦当劳"
+  },
+  {
+    "code": "US.WDC",
+    "name": "西部数据"
+  },
+  {
+    "code": "US.KO",
+    "name": "可口可乐"
+  },
+  {
+    "code": "US.NIO",
+    "name": "蔚来"
+  },
+  {
+    "code": "US.OXY",
+    "name": "西方石油"
+  },
+  {
+    "code": "US.SMCI",
+    "name": "超微电脑"
+  },
+  {
+    "code": "US.AAPU",
+    "name": "2倍做多AAPL ETF-Direxion"
+  },
+  {
+    "code": "US.IREN",
+    "name": "IREN Ltd"
+  },
+  {
+    "code": "US.SSPC",
+    "name": "2倍做空SpaceX ETF-Leverage Shares"
+  },
+  {
+    "code": "US.VST",
+    "name": "Vistra Energy"
+  },
+  {
+    "code": "US.OKLO",
+    "name": "Oklo Inc"
+  },
+  {
+    "code": "US.KORU",
+    "name": "3倍做多韩国ETF-Direxion"
+  },
+  {
+    "code": "US.APP",
+    "name": "Applovin"
+  },
+  {
+    "code": "US.CRWD",
+    "name": "CrowdStrike"
+  },
+  {
+    "code": "US.CBRS",
+    "name": "Cerebras Systems"
+  },
+  {
+    "code": "US.AGQ",
+    "name": "2倍做多白银ETF-ProShares"
+  },
+  {
+    "code": "US.ONDS",
+    "name": "Ondas"
+  },
+  {
+    "code": "US.UBER",
+    "name": "优步"
+  },
+  {
+    "code": "US.LULU",
+    "name": "Lululemon Athletica"
+  },
+  {
+    "code": "US.NVDL",
+    "name": "2倍做多NVDA ETF-GraniteShares"
+  },
+  {
+    "code": "US.AAOX",
+    "name": "2倍做多AAOI ETF-Tradr"
+  },
+  {
+    "code": "US.IBM",
+    "name": "IBM Corp"
+  },
+  {
+    "code": "US.ORCX",
+    "name": "2倍做多ORCL ETF-Defiance"
+  },
+  {
+    "code": "US.MULL",
+    "name": "2倍做多MU ETF-GraniteShares"
+  },
+  {
+    "code": "US.GPRO",
+    "name": "GoPro"
+  },
+  {
+    "code": "US.MUZ",
+    "name": "2倍做空MU ETF-Defiance"
+  },
+  {
+    "code": "US.AEHR",
+    "name": "Aehr Test Systems"
+  },
+  {
+    "code": "US.LKNCY",
+    "name": "瑞幸咖啡"
+  }
+]

@@ -1,0 +1,112 @@
+{
+  "capital": 3000,
+  "rebalance": "monthly",
+  "stop_type": "trailing_from_peak",
+  "commission": "max(shares*0.01,1.5) USD",
+  "start": "2024-09-06",
+  "end": "2026-09-10",
+  "universe": 36,
+  "stop_sweep": {
+    "top2_Momentum": {
+      "no-stop": {
+        "final": 54327.35810460099,
+        "total_return": 17.127246614815146,
+        "cagr": 3.2576104348349144,
+        "sharpe": 2.2289127068730656,
+        "max_dd": -0.4383493598814958,
+        "num_stops": 0,
+        "pct_days_invested": 66.5
+      },
+      "stop10": {
+        "final": 11940.969559732,
+        "total_return": 2.984307494071405,
+        "cagr": 0.9960730182213788,
+        "sharpe": 1.6060730119884925,
+        "max_dd": -0.3406163809521857,
+        "num_stops": 39,
+        "pct_days_invested": 42.5
+      },
+      "stop15": {
+        "final": 18937.778104601006,
+        "total_return": 5.318911613146815,
+        "cagr": 1.5137445401525618,
+        "sharpe": 1.8203343459419492,
+        "max_dd": -0.37937073250429876,
+        "num_stops": 23,
+        "pct_days_invested": 55.9
+      },
+      "stop20": {
+        "final": 17224.740276282006,
+        "total_return": 4.747327419513516,
+        "cagr": 1.3973584253326652,
+        "sharpe": 1.6291345591201287,
+        "max_dd": -0.46087929481210865,
+        "num_stops": 17,
+        "pct_days_invested": 60.6
+      },
+      "stop25": {
+        "final": 20872.92027628199,
+        "total_return": 5.964604696790788,
+        "cagr": 1.6390537502655738,
+        "sharpe": 1.7319691941877227,
+        "max_dd": -0.4875380231199886,
+        "num_stops": 12,
+        "pct_days_invested": 63.2
+      }
+    },
+    "top3_Momentum": {
+      "no-stop": {
+        "final": 30630.915535053995,
+        "total_return": 9.225643643817056,
+        "cagr": 2.1977560325667524,
+        "sharpe": 2.0339095905400306,
+        "max_dd": -0.4248071423090861,
+        "num_stops": 0,
+        "pct_days_invested": 66.5
+      },
+      "stop10": {
+        "final": 9070.019583122998,
+        "total_return": 2.0278816835663487,
+        "cagr": 0.740080941670918,
+        "sharpe": 1.5138843905612165,
+        "max_dd": -0.3209090643046467,
+        "num_stops": 55,
+        "pct_days_invested": 45.6
+      },
+      "stop15": {
+        "final": 11412.221125863003,
+        "total_return": 2.809788391207813,
+        "cagr": 0.9518679236074896,
+        "sharpe": 1.5640042763871074,
+        "max_dd": -0.3707716285910959,
+        "num_stops": 36,
+        "pct_days_invested": 56.7
+      },
+      "stop20": {
+        "final": 12549.631485453996,
+        "total_return": 3.1894947372572178,
+        "cagr": 1.0468255268237248,
+        "sharpe": 1.5317209614226548,
+        "max_dd": -0.44497598022545704,
+        "num_stops": 24,
+        "pct_days_invested": 61.6
+      },
+      "stop25": {
+        "final": 14883.183753984998,
+        "total_return": 3.968514022361876,
+        "cagr": 1.2290163800120166,
+        "sharpe": 1.6319786070851623,
+        "max_dd": -0.46689419293280265,
+        "num_stops": 17,
+        "pct_days_invested": 63.9
+      }
+    }
+  },
+  "VOO_BH": {
+    "final": 4270.941425081999,
+    "total_return": 0.424359321354677,
+    "cagr": 0.19346525770743606,
+    "sharpe": 1.222686248635806,
+    "max_dd": -0.1819066199947923
+  }
+}

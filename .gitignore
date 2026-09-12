@@ -1,0 +1,27 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# ---- 个人实盘状态 (会随你的交易变化, 不该进版本库) ----
+portfolio.json
+portfolio.json.bak
+*.bak
+*.py.bak
+
+# ---- WorkBuddy 工作区元数据 (含内部工作日志与自动化配置) ----
+.workbuddy/
+
+# ---- 富途 SDK 运行日志 ----
+futulog/
+*.log.bak
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

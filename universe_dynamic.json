@@ -1,0 +1,804 @@
+{
+  "stocks": {
+    "US.SPCX": {
+      "name": "SpaceX",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.AAPL": {
+      "name": "苹果",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.MU": {
+      "name": "美光科技",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.ORCL": {
+      "name": "甲骨文",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.NVDA": {
+      "name": "英伟达",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.SKHY": {
+      "name": "SK海力士",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.SNDK": {
+      "name": "闪迪",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.VOO": {
+      "name": "标普500ETF-Vanguard",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.QQQ": {
+      "name": "纳指100ETF-Invesco QQQ Trust",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.TSLA": {
+      "name": "特斯拉",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.INTC": {
+      "name": "英特尔",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.TSM": {
+      "name": "台积电",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.META": {
+      "name": "Meta Platforms",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.GOOG": {
+      "name": "谷歌-C",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.SOXL": {
+      "name": "三倍做多半导体ETF-Direxion",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.AVGO": {
+      "name": "博通",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.CRCL": {
+      "name": "Circle",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.LITE": {
+      "name": "Lumentum",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.BE": {
+      "name": "Bloom Energy",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.SNXX": {
+      "name": "2倍做多SNDK ETF-Tradr",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.NBIS": {
+      "name": "NEBIUS",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.TQQQ": {
+      "name": "三倍做多纳指ETF-ProShares",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.AMD": {
+      "name": "美国超微公司",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.GOOGL": {
+      "name": "谷歌-A",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.MRVL": {
+      "name": "迈威尔科技",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.ADBE": {
+      "name": "Adobe",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.BABA": {
+      "name": "阿里巴巴",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.SNDQ": {
+      "name": "2倍做空SNDK ETF-Tradr",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.SOXS": {
+      "name": "三倍做空半导体ETF-Direxion",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.GLD": {
+      "name": "黄金ETF-SPDR",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.PLTR": {
+      "name": "Palantir",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.RKLB": {
+      "name": "Rocket Lab",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.SKDD": {
+      "name": "2倍做空海力士ETF-GraniteShares",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.PDD": {
+      "name": "拼多多",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.MSTR": {
+      "name": "Strategy",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.SQQQ": {
+      "name": "三倍做空纳指ETF-ProShares",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.HOOD": {
+      "name": "Robinhood",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.CRWV": {
+      "name": "CoreWeave",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.SPCH": {
+      "name": "2倍做多SpaceX ETF-Leverage Shares",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.SPY": {
+      "name": "标普500ETF-SPDR",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.DRAM": {
+      "name": "Roundhill Memory ETF",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.DELL": {
+      "name": "戴尔科技",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.MSFT": {
+      "name": "微软",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.AAOI": {
+      "name": "Applied Optoelectronics",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.SOXX": {
+      "name": "半导体ETF-iShares",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.USO": {
+      "name": "美国原油ETF",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.MUU": {
+      "name": "2倍做多MU ETF-Direxion",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.AVAV": {
+      "name": "AeroVironment",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.GLW": {
+      "name": "康宁",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.AMZN": {
+      "name": "亚马逊",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.TLT": {
+      "name": "20+年以上美国国债ETF-iShares",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.COHR": {
+      "name": "Coherent",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.QCOM": {
+      "name": "高通",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.COIN": {
+      "name": "Coinbase",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.QQQM": {
+      "name": "NASDAQ100指数ETF-Invesco",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.GDXU": {
+      "name": "三倍做多黄金矿业ETN-MicroSectors",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.VRT": {
+      "name": "Vertiv Holdings",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.AXTI": {
+      "name": "AXT Inc",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.NKE": {
+      "name": "耐克",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.NOK": {
+      "name": "诺基亚",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.SCO": {
+      "name": "2倍做空彭博原油ETF-Proshares",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.CRDO": {
+      "name": "Credo Technology",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.FUTU": {
+      "name": "富途控股",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.MRNA": {
+      "name": "Moderna",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.SKUU": {
+      "name": "2倍做多海力士ETF-GraniteShares",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.TSLL": {
+      "name": "2倍做多TSLA ETF-Direxion",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.NOW": {
+      "name": "ServiceNow",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.TEM": {
+      "name": "Tempus AI",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.SLV": {
+      "name": "白银ETF-iShares",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.FCX": {
+      "name": "麦克莫兰铜金",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-11",
+      "miss_streak": 2,
+      "times_seen": 2
+    },
+    "US.SMH": {
+      "name": "半导体指数ETF-VanEck",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.ARM": {
+      "name": "Arm Holdings",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.MCD": {
+      "name": "麦当劳",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.WDC": {
+      "name": "西部数据",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.KO": {
+      "name": "可口可乐",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.NIO": {
+      "name": "蔚来",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.OXY": {
+      "name": "西方石油",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-11",
+      "miss_streak": 2,
+      "times_seen": 2
+    },
+    "US.SMCI": {
+      "name": "超微电脑",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.AAPU": {
+      "name": "2倍做多AAPL ETF-Direxion",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-11",
+      "miss_streak": 2,
+      "times_seen": 2
+    },
+    "US.IREN": {
+      "name": "IREN Ltd",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.SSPC": {
+      "name": "2倍做空SpaceX ETF-Leverage Shares",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-11",
+      "miss_streak": 2,
+      "times_seen": 2
+    },
+    "US.VST": {
+      "name": "Vistra Energy",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-11",
+      "miss_streak": 2,
+      "times_seen": 2
+    },
+    "US.OKLO": {
+      "name": "Oklo Inc",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.KORU": {
+      "name": "3倍做多韩国ETF-Direxion",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.APP": {
+      "name": "Applovin",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.CRWD": {
+      "name": "CrowdStrike",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.CBRS": {
+      "name": "Cerebras Systems",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-11",
+      "miss_streak": 2,
+      "times_seen": 2
+    },
+    "US.AGQ": {
+      "name": "2倍做多白银ETF-ProShares",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.ONDS": {
+      "name": "Ondas",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.UBER": {
+      "name": "优步",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.LULU": {
+      "name": "Lululemon Athletica",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-11",
+      "miss_streak": 2,
+      "times_seen": 2
+    },
+    "US.NVDL": {
+      "name": "2倍做多NVDA ETF-GraniteShares",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-11",
+      "miss_streak": 2,
+      "times_seen": 2
+    },
+    "US.AAOX": {
+      "name": "2倍做多AAOI ETF-Tradr",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.IBM": {
+      "name": "IBM Corp",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 3
+    },
+    "US.ORCX": {
+      "name": "2倍做多ORCL ETF-Defiance",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 4
+    },
+    "US.MULL": {
+      "name": "2倍做多MU ETF-GraniteShares",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-11",
+      "miss_streak": 2,
+      "times_seen": 2
+    },
+    "US.GPRO": {
+      "name": "GoPro",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-11",
+      "miss_streak": 2,
+      "times_seen": 2
+    },
+    "US.MUZ": {
+      "name": "2倍做空MU ETF-Defiance",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-11",
+      "miss_streak": 2,
+      "times_seen": 2
+    },
+    "US.AEHR": {
+      "name": "Aehr Test Systems",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-11",
+      "miss_streak": 2,
+      "times_seen": 2
+    },
+    "US.LKNCY": {
+      "name": "瑞幸咖啡",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-11",
+      "miss_streak": 3,
+      "times_seen": 1
+    },
+    "US.UGL": {
+      "name": "2倍做多黄金ETF-ProShares",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 3
+    },
+    "US.VT": {
+      "name": "全球股市指数ETF-Vanguard",
+      "first_seen": "2026-09-11",
+      "last_seen": "2026-09-11",
+      "miss_streak": 2,
+      "times_seen": 1
+    },
+    "US.BMNR": {
+      "name": "Bitmine Immersion Technologies",
+      "first_seen": "2026-09-12",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 2
+    },
+    "US.SMR": {
+      "name": "NuScale Power",
+      "first_seen": "2026-09-12",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 2
+    },
+    "US.HPE": {
+      "name": "慧与科技",
+      "first_seen": "2026-09-12",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 2
+    },
+    "US.MSTU": {
+      "name": "2倍做多MSTR ETF-T-Rex",
+      "first_seen": "2026-09-12",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 2
+    },
+    "US.UNH": {
+      "name": "联合健康",
+      "first_seen": "2026-09-12",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 2
+    },
+    "US.XE": {
+      "name": "X-Energy",
+      "first_seen": "2026-09-12",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 2
+    },
+    "US.AXTX": {
+      "name": "2倍做多AXTI ETF-Tradr",
+      "first_seen": "2026-09-12",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 2
+    },
+    "US.MVLL": {
+      "name": "2倍做多MRVL ETF-GraniteShares",
+      "first_seen": "2026-09-12",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 2
+    },
+    "US.NVO": {
+      "name": "诺和诺德",
+      "first_seen": "2026-09-12",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 2
+    },
+    "US.OKLL": {
+      "name": "2倍做多OKLO ETF-Defiance",
+      "first_seen": "2026-09-12",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 2
+    },
+    "US.BEX": {
+      "name": "2倍做多BE ETF-Tradr",
+      "first_seen": "2026-09-12",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 2
+    },
+    "US.BRK.B": {
+      "name": "伯克希尔-B",
+      "first_seen": "2026-09-12",
+      "last_seen": "2026-09-12",
+      "miss_streak": 0,
+      "times_seen": 2
+    }
+  },
+  "updated": "2026-09-12",
+  "max_miss_days": 5
+}

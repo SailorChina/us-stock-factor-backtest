@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>美股最优策略 · 权益曲线</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>body{font-family:-apple-system,'Microsoft YaHei',sans-serif;background:#fafafa;margin:0;padding:24px;color:#222}
+.card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:20px}
+h1{font-size:20px;margin:0 0 4px}h2{font-size:16px;margin:18px 0 8px}
+.legend span{display:inline-block;margin-right:14px;font-size:13px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:middle}
+table{border-collapse:collapse;width:100%;font-size:13px}th,td{border:1px solid #eee;padding:6px 8px;text-align:left}
+th{background:#f5f7fa}tr:nth-child(even){background:#fafbfc}
+.up{color:#e23} .note{color:#888;font-size:12px}</style></head>
+<body>
+<div class="card">
+<h1>美股最优策略 · 权益曲线 ($3000 起点, 近3年回测)</h1>
+<div class="legend">
+<span><i class="dot" style="background:#e23"></i>A1多周期动量 top2 月频 无止损</span>
+<span><i class="dot" style="background:#d97706"></i>A1 top3 月频 无止损</span>
+<span><i class="dot" style="background:#2563eb"></i>A1 top2 +15%止损回收0.90</span>
+<span><i class="dot" style="background:#16a34a"></i>经典12-1 top2 无止损</span>
+<span><i class="dot" style="background:#888"></i>VOO 基准</span>
+</div>
+<canvas id="eq" height="340"></canvas>
+<div class="note">注: 前252个交易日(约1年)为动量因子预热期, 资金闲置, 故曲线前段走平。</div>
+</div>
+<div class="card">
+<h2>推荐配置 A1 top2 月频 · 历史月度选股 (节选)</h2>
+<table><tr><th>调仓日</th><th>入选标的 (动量分%)</th></tr>
+<tr><td>2024-09-04</td><td>US.MSTR (102.5), US.PLTR (59.5)</td></tr><tr><td>2024-12-03</td><td>US.RKLB (360.4), US.MSTR (327.5)</td></tr><tr><td>2025-03-07</td><td>US.RKLB (189.2), US.PLTR (158.2)</td></tr><tr><td>2025-06-06</td><td>US.RKLB (251.7), US.PLTR (226.8)</td></tr><tr><td>2025-09-08</td><td>US.RKLB (321.1), US.HOOD (266.6)</td></tr><tr><td>2025-12-05</td><td>US.BE (299.6), US.LITE (230.1)</td></tr><tr><td>2026-03-10</td><td>US.LITE (520.4), US.BE (290.0)</td></tr><tr><td>2026-06-09</td><td>US.BE (485.8), US.MU (423.1)</td></tr><tr><td>2026-09-09</td><td>US.MU (323.7), US.MRNA (272.0)</td></tr>
+</table>
+</div>
+<div class="card">
+<h2>当前信号 (2026-09-10) · A1 动量前5</h2>
+<table><tr><th>代码</th><th>名称</th><th>动量分%</th></tr>
+<tr><td>US.MU</td><td>292.8</td><td class='up'>美光科技</td></tr><tr><td>US.MRNA</td><td>278.5</td><td class='up'>Moderna</td></tr><tr><td>US.LITE</td><td>221.8</td><td class='up'>Lumentum</td></tr><tr><td>US.DELL</td><td>211.8</td><td class='up'>戴尔科技</td></tr><tr><td>US.BE</td><td>171.0</td><td class='up'>Bloom Energy</td></tr>
+</table>
+<div class="note">当前信号仅供参考, 实际以平台调仓日计算为准。</div>
+</div>
+<script>
+const labels=["2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09"];
+const series={"A1 \u591a\u5468\u671f\u52a8\u91cf top2 \u6708\u9891 \u65e0\u6b62\u635f": [3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3680.64, 4698.31, 7765.220000000001, 7240.280000000001, 7962.990000000002, 6472.9000000000015, 6072.3600000000015, 7336.860000000001, 8345.75, 9780.23, 11554.240000000002, 11923.46, 12462.500000000004, 17997.72, 16094.300000000005, 15034.440000000002, 18467.210000000003, 24808.900000000005, 24021.94000000001, 34212.990000000005, 34272.56, 36786.701354024, 28038.7012046, 31269.3912046, 32291.8612046], "A1 \u591a\u5468\u671f\u52a8\u91cf top3 \u6708\u9891 \u65e0\u6b62\u635f": [3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3477.3099999999995, 4051.946409284, 6232.652564791999, 6155.422564791999, 6679.532564791998, 5730.752564791997, 5529.312564791997, 6611.882564791997, 7223.902564791997, 8348.382564791995, 9531.412564791994, 9763.132564791997, 10314.532564791996, 13231.242564791995, 12127.552564792, 11417.872564791996, 13868.766516846994, 16862.883715576994, 15920.305952877992, 22485.73052156799, 24607.94077439999, 26085.944464437, 20936.211871047, 23073.571871047003, 24146.951871047], "A1 \u591a\u5468\u671f\u52a8\u91cf top2 \u6708\u9891 +15%\u6b62\u635f+\u56de\u65360.90": [3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3680.64, 4698.31, 7861.820000000001, 7729.610000000001, 7338.65, 6952.28, 6769.459999999999, 7853.519999999999, 8922.68, 10462.14, 12366.49, 12777.05, 13372.069999999998, 17186.739999999998, 14538.509999999997, 13153.949999999992, 14732.819999999992, 18785.439999999995, 15948.359999999995, 21549.72, 21247.28, 20829.492096265, 16698.879502099997, 18143.3195021, 18712.8995021]};
+const colors={"A1 多周期动量 top2 月频 无止损":"#e23","A1 多周期动量 top3 月频 无止损":"#d97706",
+"A1 多周期动量 top2 月频 +15%止损+回收0.90":"#2563eb","经典12-1 top2 月频 无止损":"#16a34a","VOO 买入持有 (基准)":"#888"};
+const ds=Object.keys(series).map(k=>({label:k,data:series[k],borderColor:colors[k],backgroundColor:colors[k],borderWidth:2,pointRadius:0,tension:.15}));
+new Chart(document.getElementById('eq'),{type:'line',data:{labels,datasets:ds},
+options:{responsive:true,interaction:{mode:'index',intersect:false},
+plugins:{legend:{display:false}},scales:{y:{title:{display:true,text:'账户权益 ($)'}},x:{ticks:{maxTicksLimit:12}}}}});
+</script></body></html>

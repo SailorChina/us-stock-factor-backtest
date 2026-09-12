@@ -1,0 +1,214 @@
+{
+  "US.AAPL": {
+    "name": "苹果",
+    "total_market_val": 4766021362600.0
+  },
+  "US.MU": {
+    "name": "美光科技",
+    "total_market_val": 1103880159718.91
+  },
+  "US.ORCL": {
+    "name": "甲骨文",
+    "total_market_val": 440539234740.0
+  },
+  "US.NVDA": {
+    "name": "英伟达",
+    "total_market_val": 5262476000000.0
+  },
+  "US.VOO": {
+    "name": "标普500ETF-Vanguard",
+    "total_market_val": NaN
+  },
+  "US.QQQ": {
+    "name": "纳指100ETF-Invesco QQQ Trust",
+    "total_market_val": NaN
+  },
+  "US.TSLA": {
+    "name": "特斯拉",
+    "total_market_val": 1435897450562.64
+  },
+  "US.INTC": {
+    "name": "英特尔",
+    "total_market_val": 527030173380.48
+  },
+  "US.TSM": {
+    "name": "台积电",
+    "total_market_val": 2219979694059.12
+  },
+  "US.META": {
+    "name": "Meta Platforms",
+    "total_market_val": 1641562061265.5
+  },
+  "US.GOOG": {
+    "name": "谷歌-C",
+    "total_market_val": 4040669700000.0
+  },
+  "US.SOXL": {
+    "name": "三倍做多半导体ETF-Direxion",
+    "total_market_val": NaN
+  },
+  "US.AVGO": {
+    "name": "博通",
+    "total_market_val": 1716677662844.34
+  },
+  "US.LITE": {
+    "name": "Lumentum",
+    "total_market_val": 83932290000.0
+  },
+  "US.BE": {
+    "name": "Bloom Energy",
+    "total_market_val": 76132373667.54
+  },
+  "US.AMD": {
+    "name": "美国超微公司",
+    "total_market_val": 822114431151.2
+  },
+  "US.GOOGL": {
+    "name": "谷歌-A",
+    "total_market_val": 4067698000000.0
+  },
+  "US.MRVL": {
+    "name": "迈威尔科技",
+    "total_market_val": 199021224000.0
+  },
+  "US.ADBE": {
+    "name": "Adobe",
+    "total_market_val": 98909925000.0
+  },
+  "US.BABA": {
+    "name": "阿里巴巴",
+    "total_market_val": 269839299535.84
+  },
+  "US.SOXS": {
+    "name": "三倍做空半导体ETF-Direxion",
+    "total_market_val": NaN
+  },
+  "US.GLD": {
+    "name": "黄金ETF-SPDR",
+    "total_market_val": NaN
+  },
+  "US.PLTR": {
+    "name": "Palantir",
+    "total_market_val": 398571279492.8
+  },
+  "US.RKLB": {
+    "name": "Rocket Lab",
+    "total_market_val": 37080565428.44
+  },
+  "US.PDD": {
+    "name": "拼多多",
+    "total_market_val": 110797180602.08
+  },
+  "US.MSTR": {
+    "name": "Strategy",
+    "total_market_val": 49396062548.56
+  },
+  "US.HOOD": {
+    "name": "Robinhood",
+    "total_market_val": 101892993999.09
+  },
+  "US.SPY": {
+    "name": "标普500ETF-SPDR",
+    "total_market_val": NaN
+  },
+  "US.DELL": {
+    "name": "戴尔科技",
+    "total_market_val": 322115455405.0
+  },
+  "US.MSFT": {
+    "name": "微软",
+    "total_market_val": 3656635621588.04
+  },
+  "US.AAOI": {
+    "name": "Applied Optoelectronics",
+    "total_market_val": 8769970590.81
+  },
+  "US.SOXX": {
+    "name": "半导体ETF-iShares",
+    "total_market_val": NaN
+  },
+  "US.USO": {
+    "name": "美国原油ETF",
+    "total_market_val": NaN
+  },
+  "US.AVAV": {
+    "name": "AeroVironment",
+    "total_market_val": 7474227874.975
+  },
+  "US.GLW": {
+    "name": "康宁",
+    "total_market_val": 140509664552.72
+  },
+  "US.AMZN": {
+    "name": "亚马逊",
+    "total_market_val": 2716964525651.08
+  },
+  "US.TLT": {
+    "name": "20+年以上美国国债ETF-iShares",
+    "total_market_val": NaN
+  },
+  "US.COHR": {
+    "name": "Coherent",
+    "total_market_val": 57412139559.82
+  },
+  "US.QCOM": {
+    "name": "高通",
+    "total_market_val": 185724000000.0
+  },
+  "US.COIN": {
+    "name": "Coinbase",
+    "total_market_val": 45453825094.44
+  },
+  "US.QQQM": {
+    "name": "NASDAQ100指数ETF-Invesco",
+    "total_market_val": NaN
+  },
+  "US.GDXU": {
+    "name": "三倍做多黄金矿业ETN-MicroSectors",
+    "total_market_val": NaN
+  },
+  "US.VRT": {
+    "name": "Vertiv Holdings",
+    "total_market_val": 95527115366.49
+  },
+  "US.AXTI": {
+    "name": "AXT Inc",
+    "total_market_val": 4242586816.4
+  },
+  "US.NKE": {
+    "name": "耐克",
+    "total_market_val": 54325722503.86
+  },
+  "US.NOK": {
+    "name": "诺基亚",
+    "total_market_val": 59457609900.0
+  },
+  "US.CRDO": {
+    "name": "Credo Technology",
+    "total_market_val": 30130571974.58
+  },
+  "US.FUTU": {
+    "name": "富途控股",
+    "total_market_val": 15913476219.37
+  },
+  "US.MRNA": {
+    "name": "Moderna",
+    "total_market_val": 54543607155.18
+  },
+  "US.TSLL": {
+    "name": "2倍做多TSLA ETF-Direxion",
+    "total_market_val": NaN
+  },
+  "US.NOW": {
+    "name": "ServiceNow",
+    "total_market_val": 135611678540.0
+  },
+  "US.TEM": {
+    "name": "Tempus AI",
+    "total_market_val": 10598737567.44
+  },
+  "US.SLV": {
+    "name": "白银ETF-iShares",
+    "total_market_val": NaN
+  }
+}

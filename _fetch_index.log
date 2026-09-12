@@ -1,0 +1,47 @@
+2026-09-12 01:14:26,308 | 12804 | 16772 | [open_context_base.py:411] _init_connect_sync: New connect ready: conn=7504225857938065304(1) context=<futu.quote.open_quote_context.OpenQuoteContext object at 0x00000177FA51C500>
+QUOTA_REMAINING 12
+2026-09-12 01:14:26,311 | 12804 | 16252 | [open_context_base.py:521] on_disconnect: Disconnected: conn=0(1) reason=CallClose
+2026-09-12 01:14:26,314 | 12804 | 16772 | [open_context_base.py:411] _init_connect_sync: New connect ready: conn=7504225857965410296(2) context=<futu.quote.open_quote_context.OpenQuoteContext object at 0x00000177FA51C6E0>
+   page1 rows=1000 last=2010-08-26 00:00:00
+   page2 rows=1000 last=2014-09-10 00:00:00
+   page3 rows=1000 last=2018-08-29 00:00:00
+   page4 rows=1000 last=2022-08-19 00:00:00
+   page5 rows=1000 last=2026-08-17 00:00:00
+   page6 rows=18 last=2026-09-11 00:00:00
+OK US.SPY rows=5018 2006-08-28 00:00:00..2026-09-11 00:00:00
+   page1 rows=1000 last=2010-08-17 00:00:00
+   page2 rows=1000 last=2014-08-07 00:00:00
+   page3 rows=1000 last=2018-07-27 00:00:00
+   page4 rows=1000 last=2022-07-19 00:00:00
+   page5 rows=1000 last=2026-07-15 00:00:00
+   page6 rows=41 last=2026-09-11 00:00:00
+OK US.TLT rows=5041 2006-08-28 00:00:00..2026-09-11 00:00:00
+   page1 rows=1000 last=2010-08-26 00:00:00
+   page2 rows=1000 last=2014-08-28 00:00:00
+   page3 rows=1000 last=2018-08-17 00:00:00
+   page4 rows=1000 last=2022-08-09 00:00:00
+   page5 rows=1000 last=2026-08-05 00:00:00
+   page6 rows=26 last=2026-09-11 00:00:00
+OK US.GLD rows=5026 2006-08-28 00:00:00..2026-09-11 00:00:00
+   page1 rows=1000 last=2010-08-17 00:00:00
+   page2 rows=1000 last=2014-08-07 00:00:00
+   page3 rows=1000 last=2018-07-27 00:00:00
+   page4 rows=1000 last=2022-07-19 00:00:00
+   page5 rows=1000 last=2026-07-15 00:00:00
+   page6 rows=41 last=2026-09-11 00:00:00
+OK US.SHY rows=5041 2006-08-28 00:00:00..2026-09-11 00:00:00
+   page1 rows=1000 last=2010-08-17 00:00:00
+   page2 rows=1000 last=2014-08-07 00:00:00
+   page3 rows=1000 last=2018-07-27 00:00:00
+   page4 rows=1000 last=2022-07-19 00:00:00
+   page5 rows=1000 last=2026-07-15 00:00:00
+   page6 rows=41 last=2026-09-11 00:00:00
+OK US.IEF rows=5041 2006-08-28 00:00:00..2026-09-11 00:00:00
+   page1 rows=1000 last=2015-12-24 00:00:00
+   page2 rows=1000 last=2019-12-16 00:00:00
+   page3 rows=1000 last=2023-12-06 00:00:00
+   page4 rows=692 last=2026-09-11 00:00:00
+OK US.VOO rows=3692 2012-01-03 00:00:00..2026-09-11 00:00:00
+2026-09-12 01:15:12,672 | 12804 | 16252 | [open_context_base.py:521] on_disconnect: Disconnected: conn=0(2) reason=CallClose
+FETCHED 6
+FETCH_DONE
