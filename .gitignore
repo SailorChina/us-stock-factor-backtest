@@ -24,6 +24,8 @@ _gh_probe*.py
 _push_*.py
 _cleanup_*.py
 _cred_*.py
+_acct_*.py
+_gcm_*.log
 
 # ---- 编辑器 / 系统 ----
 .vscode/
