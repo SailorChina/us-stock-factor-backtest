@@ -31,6 +31,10 @@ futulog/
 _gcm_*.log
 # 跑批中间产物 (可随时重跑, 不必进库; 正式结果文件保留)
 _rank_all_fast.txt
+# scratch 输出转储 (如 _gen_compare_out.txt: 只是把 stdout 存下来看一眼, 用完即删)
+_*_out.txt
+# 临时诊断脚本 (用完即删, 与智能体仓同规则)
+_diag_*.py
 
 # ---- 一次性工具脚本 (仅用于探测 GitHub / 推送 / 清理, 用完即删) ----
 _gh_probe*.py
