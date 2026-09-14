@@ -36,6 +36,15 @@ _*_out.txt
 # 临时诊断脚本 (用完即删, 与智能体仓同规则)
 _diag_*.py
 
+# ---- 取数台账 (运行态, 每日重写) ----
+# universe_dynamic.json 由 universe_manager.py 每日重写 (last_seen / times_seen /
+# miss_streak 天天变), 而【全仓没有任何读方】—— 回测的标的池实际来自已入库的
+# data_kline_long/*.csv。跟踪它只等于每天往无关提交里塞几百行 churn -> 退出版本控制。
+# 文件仍保留在本地磁盘上, 不会删。
+# ⚠️ 与 signal_snapshot.json 同理: 退出版本控制只阻止【以后】继续新增暴露,
+#    历史里的旧值仍在(最后一次是 ac6cd2a, 137 只)。
+universe_dynamic.json
+
 # ---- 一次性工具脚本 (仅用于探测 GitHub / 推送 / 清理, 用完即删) ----
 _gh_probe*.py
 _gh_state.json
