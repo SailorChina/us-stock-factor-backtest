@@ -348,6 +348,28 @@ def pad(s, w, align="l"):
         return s
     return (" " * n + s) if align == "r" else (s + " " * n)
 
+
+def floor_shares(x, nd=4):
+    """目标股数**向下取整**到 nd 位小数 —— 碎股预算必须 floor, 不能 round。
+
+    预算 `bud` 是【已扣佣金】的可投金额, 所以 Σ(股数×价) 只要向上溢出 1 美分,
+    加上佣金就 > 净值 ⇒ 智能体侧风控以「留现金 < 0」把**整个建仓**拒绝
+    (不是少买一点, 是整单不做)。
+
+    2026-09-14 实测 (v27.1 快照, 本金 $1500 Top2):
+      round 口径 → META 1.1543×648.03 = $748.0210 ⇒ 合计 $1496.0186 + $4 = $1500.0186
+                   ⇒ 超 1.9 美分 ⇒ 建仓被风控整单拒绝
+      floor 口径 → META 1.1542×648.03 = $747.9562 ⇒ 合计 $1495.9600 + $4 = $1499.9600 ✓
+
+    注意同文件的整股口径早已是 `int(bud // p)`(就是 floor) —— 这里与它对齐,
+    不再让"整股用 floor、碎股用 round"两种口径并存。
+
+    `round(..., 6)` 只为消掉浮点噪声 (1.1542*1e4 可能算成 11541.999999),
+    否则会把本来精确的值无故降一档。股数非负 ⇒ int() 截断即向下取整。
+    """
+    f = float(10 ** nd)
+    return int(round(float(x) * f, 6)) / f
+
 def open_time(d):
     """返回常规时段开盘的北京时间字符串"""
     return "21:30" if is_dst(d) else "22:30"
@@ -1118,8 +1140,17 @@ def main():
             "tradable_n": (int(TRADE.values[-1].sum()) if USE_GATE else None),
             "picks": names, "prices": {n: round(float(C.values[N-1, UNI.index("US."+n)]), 2) for n in names},
             "budget_each": round(bud, 2), "commission": round(fee, 2),
-            "target_shares": {n: round(float(bud / float(C.values[N-1, UNI.index("US."+n)])), 4) for n in names},
-            "orders": [{"code": c, "side": s, "shares": round(sh, 4), "amount": round(amt, 2)}
+            # 【2026-09-14】目标股数**向下取整**：bud 已经是"扣掉佣金"的可投金额,
+            # 四舍五入向上会让 Σ(股数×价)+佣金 > 净值 ⇒ 智能体侧风控以「留现金 < 0」
+            # 把整个建仓**整单拒绝**(实测超 1.9 美分, 推导见 floor_shares 的 docstring)。
+            "target_shares": {n: floor_shares(bud / float(C.values[N-1, UNI.index("US."+n)]))
+                              for n in names},
+            # orders 只作展示/留档。买入与 target_shares 同口径(floor);
+            # 卖出保持 round —— 卖出向上取整只会多卖一点点, 用 floor 反而留残渣,
+            # 而残渣要等下一个调仓日才清得掉。
+            "orders": [{"code": c, "side": s,
+                        "shares": (floor_shares(sh) if sh > 0 else round(sh, 4)),
+                        "amount": round(amt, 2)}
                        for c, s, sh, amt, _, _ in orders],
             "shock": shock, "data_ok": ok}
     json.dump(snap, open(SNAP, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
@@ -1573,14 +1604,30 @@ def self_test():
     chk("v35: pad() 按显示宽度补齐, 与数字列同宽 (f-string 按字符数会对不齐)",
         dw(_hdr) == 11 and dw(pad("$88.35", 11, "r")) == 11,
         f"(标头宽={dw(_hdr)} 数据宽={dw(pad('$88.35', 11, 'r'))})")
-    # 佣金预留: 目标金额必须扣掉佣金, 否则碎股方案合计 > 净值
-    for _net, _topk, _comm in ((1500.0, 2, 2.0), (3000.0, 2, 2.0), (500.0, 3, 2.0)):
+    # 佣金预留: 目标金额必须扣掉佣金, 否则碎股方案合计 > 净值。
+    # 【2026-09-14 修正】旧断言用**连续金额** `_bud*_topk + _fee <= _net` 验证 ——
+    #   但运行时落盘的是 `floor(_bud/价, 4)` 这样的**离散股数**, 两个口径不同 ⇒ 断言恒真
+    #   ⇒ 真缺陷从它眼皮底下走过去。实测就漏掉了: 本金 $1500 满仓建仓时
+    #   Σ(round(股数×价)) = $1496.02, 加 $4 佣金 = $1500.02, 超 2 美分,
+    #   被智能体侧风控以「留现金 < 0」**整单拒绝**(不是少买一点, 是整个建仓不做)。
+    #   现在按**真实落盘口径**断言(含 round(股数×价, 2) —— 风控与券商都按分收钱)。
+    for _net, _topk, _comm, _px in ((1500.0, 2, 2.0, (88.35, 648.03)),
+                                    (3000.0, 2, 2.0, (88.35, 648.03)),
+                                    (500.0, 3, 2.0, (12.34, 56.78, 9.99))):
         _fee = (0 + _topk) * _comm
-        _avail = max(0.0, _net - _fee)
-        _bud = _avail / _topk
+        _bud = max(0.0, _net - _fee) / _topk
+        _amt = sum(round(floor_shares(_bud / p) * p, 2) for p in _px)
         chk(f"v35: 碎股方案不超支 (净值 ${_net:.0f} Top{_topk})",
-            _bud * _topk + _fee <= _net + 1e-9,
-            f"({_bud*_topk:.0f} + {_fee:.0f} vs {_net:.0f})")
+            _amt + _fee <= _net + 1e-9,
+            f"({_amt:.4f} + {_fee:.0f} vs {_net:.0f})")
+    # 判别力前置: 上面那组用例若"本来就没事", 断言等于没测 —— 必须证明
+    #   $1500 Top2(2026-09-14 真实场景)的**旧 round 口径确实超支**。
+    _net, _topk, _comm, _px = 1500.0, 2, 2.0, (88.35, 648.03)
+    _bud = max(0.0, _net - _topk * _comm) / _topk
+    _old = sum(round(round(_bud / p, 4) * p, 2) for p in _px)
+    chk("v35: 用例有判别力 ($1500 Top2 的旧 round 口径确实超支, 即建仓被拒的真实成因)",
+        _old + _topk * _comm > _net + 1e-9,
+        f"({_old:.4f} + {_topk*_comm:.0f} = {_old+_topk*_comm:.4f} vs {_net:.0f})")
     print("\n" + "=" * 116)
     print(f"  结果: {'✅ 全部通过' if not fails else '❌ 失败: ' + ', '.join(fails)}")
     return 0 if not fails else 1
